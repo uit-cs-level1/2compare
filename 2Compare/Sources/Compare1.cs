@@ -10,25 +10,18 @@ using System.Windows.Forms;
 
 namespace _2Compare
 {
-	public partial class Form1 : Form
-	{
-		public Form1()
-		{
-			InitializeComponent();
-		}
-
-        private void Form1_Load(object sender, EventArgs e)
+    public partial class Compare1 : Form
+    {
+        public Compare1()
         {
-            
-            
-           
+            InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Compare1 a = new Compare1();
-            a.Show();
+            Compare2 c = new Compare2();
+            c.Show();
             this.Hide();
         }
-	}
+    }
 }
