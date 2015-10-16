@@ -65,33 +65,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Sources\Form1.cs">
+    <Compile Include="Sources\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\Sources\Form1.Designer.cs">
+    <Compile Include="Sources\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="..\Sources\Program.cs" />
-    <Compile Include="Compare1.cs">
+    <Compile Include="Sources\Program.cs" />
+    <Compile Include="Sources\Compare1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compare1.Designer.cs">
+    <Compile Include="Sources\Compare1.Designer.cs">
       <DependentUpon>Compare1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compare2.cs">
+    <Compile Include="Sources\Compare2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compare2.Designer.cs">
+    <Compile Include="Sources\Compare2.Designer.cs">
       <DependentUpon>Compare2.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Compare1.resx">
+    <EmbeddedResource Include="Sources\Compare1.resx">
       <DependentUpon>Compare1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Compare2.resx">
+    <EmbeddedResource Include="Sources\Compare2.resx">
       <DependentUpon>Compare2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Sources\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
