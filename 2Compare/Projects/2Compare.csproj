@@ -49,9 +49,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>_2Compare.Program</StartupObject>
+    <StartupObject>_2Compare.Sources.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevComponents.DotNetBar2">
+      <HintPath>..\..\..\..\..\Downloads\New folder\ss\DevComponents.DotNetBar2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -65,35 +68,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sources\Form1.cs">
+    <Compile Include="Sources\aboutform.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sources\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Sources\aboutform.Designer.cs">
+      <DependentUpon>aboutform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\mainform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sources\mainform.Designer.cs">
+      <DependentUpon>mainform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\helpform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sources\helpform.Designer.cs">
+      <DependentUpon>helpform.cs</DependentUpon>
     </Compile>
     <Compile Include="Sources\Program.cs" />
-    <Compile Include="Sources\Compare1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sources\Compare1.Designer.cs">
-      <DependentUpon>Compare1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Sources\Compare2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sources\Compare2.Designer.cs">
-      <DependentUpon>Compare2.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Sources\Compare1.resx">
-      <DependentUpon>Compare1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sources\Compare2.resx">
-      <DependentUpon>Compare2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sources\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -104,6 +98,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Sources\helpform.resx">
+      <DependentUpon>helpform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sources\mainform.resx">
+      <DependentUpon>mainform.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

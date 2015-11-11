@@ -8,20 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace _2Compare
+namespace _2Compare.Sources
 {
-    public partial class Compare1 : Form
+    public partial class helpform : Form
     {
-        public Compare1()
+        public helpform()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void helpform_Load(object sender, EventArgs e)
         {
-            Compare2 c = new Compare2();
-            c.Show();
-            this.Hide();
+
         }
     }
 }

@@ -5,24 +5,24 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevComponents.DotNetBar;
 
-namespace _2Compare
+namespace _2Compare.Sources
 {
-    public partial class Compare2 : Form
+    public partial class aboutform : Office2007RibbonForm
     {
-        public Compare2()
+        public aboutform()
         {
             InitializeComponent();
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void aboutform_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void labelX1_Click(object sender, EventArgs e)
         {
 
         }
