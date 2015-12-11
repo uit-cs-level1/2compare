@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.IO;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
-using DifferenceEngine;
 
 namespace _2Compare.Sources
 {
     public partial class mainform : Office2007RibbonForm
     {
-		public mainform()
+        public mainform()
         {
             InitializeComponent();
         }
@@ -114,80 +111,10 @@ namespace _2Compare.Sources
             MessageBox.Show("button \"Print\" Clicked. ");
         }
 
-		private bool ValidFile(string fname)
-		{
-			if (fname != string.Empty)
-			{
-				if (File.Exists(fname))
-				{
-					return true;
-				}
-			}
-			return false;
-		}
 
-		private void TextDiff(string _first, string _second)
-		{
-			this.Cursor = Cursors.WaitCursor;
 
-			DiffList_TextFile sLF = null;
-			DiffList_TextFile dLF = null;
-			try
-			{
-				sLF = new DiffList_TextFile(_first);
-				dLF = new DiffList_TextFile(_second);
-			}
-			catch (Exception ex)
-			{
-				this.Cursor = Cursors.Default;
-				MessageBox.Show(ex.Message, "File Error");
-				return;
-			}
 
-			try
-			{
-				double time = 0;
-				DiffEngine de = new DiffEngine();
-				time = de.ProcessDiff(sLF, dLF, 0);
 
-				ArrayList rep = de.DiffReport();
-				Results dlg = new Results(sLF, dLF, rep, time);
-				dlg.ShowDialog();
-				dlg.Dispose();
-			}
-			catch (Exception ex)
-			{
-				this.Cursor = Cursors.Default;
-				string tmp = string.Format("{0}{1}{1}***STACK***{1}{2}",
-					ex.Message,
-					Environment.NewLine,
-					ex.StackTrace);
-				MessageBox.Show(tmp, "Compare Error");
-				return;
-			}
-			this.Cursor = Cursors.Default;
-		}
 
-		private void button1_Click(object sender, EventArgs e)
-		{
-			string _first = file_1.Text.Trim();
-			string _second = file_2.Text.Trim();
-
-			if (!ValidFile(_first))
-			{
-				MessageBox.Show("Source file name is invalid.", "Invalid File");
-				file_1.Focus();
-				return;
-			}
-
-			if (!ValidFile(_second))
-			{
-				MessageBox.Show("Destination file name is invalid.", "Invalid File");
-				file_2.Focus();
-				return;
-			}
-
-			TextDiff(_first, _second);
-		}
-	}
+    }
 }

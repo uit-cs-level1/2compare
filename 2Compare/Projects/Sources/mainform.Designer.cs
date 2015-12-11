@@ -75,17 +75,16 @@ namespace _2Compare.Sources
 			this.group_fileleft = new DevComponents.DotNetBar.Controls.GroupPanel();
 			this.button_back1 = new DevComponents.DotNetBar.ButtonX();
 			this.button_open1 = new DevComponents.DotNetBar.ButtonX();
-			this.file_1 = new DevComponents.DotNetBar.Controls.TextBoxX();
+			this.text_diachi1 = new DevComponents.DotNetBar.Controls.TextBoxX();
 			this.label_path1 = new DevComponents.DotNetBar.LabelX();
 			this.text_vungsosanh1 = new DevComponents.DotNetBar.Controls.TextBoxX();
 			this.buttonX3 = new DevComponents.DotNetBar.ButtonX();
 			this.group_fileright = new DevComponents.DotNetBar.Controls.GroupPanel();
 			this.button_back2 = new DevComponents.DotNetBar.ButtonX();
 			this.button_open2 = new DevComponents.DotNetBar.ButtonX();
-			this.file_2 = new DevComponents.DotNetBar.Controls.TextBoxX();
+			this.text_diachi2 = new DevComponents.DotNetBar.Controls.TextBoxX();
 			this.label_path2 = new DevComponents.DotNetBar.LabelX();
 			this.text_vungsosanh2 = new DevComponents.DotNetBar.Controls.TextBoxX();
-			this.button1 = new System.Windows.Forms.Button();
 			this.panel_folder.SuspendLayout();
 			this.ribbonControl.SuspendLayout();
 			this.group_fileleft.SuspendLayout();
@@ -392,7 +391,7 @@ namespace _2Compare.Sources
 			this.group_fileleft.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
 			this.group_fileleft.Controls.Add(this.button_back1);
 			this.group_fileleft.Controls.Add(this.button_open1);
-			this.group_fileleft.Controls.Add(this.file_1);
+			this.group_fileleft.Controls.Add(this.text_diachi1);
 			this.group_fileleft.Controls.Add(this.label_path1);
 			this.group_fileleft.Controls.Add(this.text_vungsosanh1);
 			this.group_fileleft.Controls.Add(this.buttonX3);
@@ -442,16 +441,16 @@ namespace _2Compare.Sources
 			this.button_open1.TabIndex = 2;
 			this.button_open1.Text = "...";
 			// 
-			// file_1
+			// text_diachi1
 			// 
 			// 
 			// 
 			// 
-			this.file_1.Border.Class = "TextBoxBorder";
-			this.file_1.Location = new System.Drawing.Point(63, 14);
-			this.file_1.Name = "file_1";
-			this.file_1.Size = new System.Drawing.Size(159, 30);
-			this.file_1.TabIndex = 1;
+			this.text_diachi1.Border.Class = "TextBoxBorder";
+			this.text_diachi1.Location = new System.Drawing.Point(63, 14);
+			this.text_diachi1.Name = "text_diachi1";
+			this.text_diachi1.Size = new System.Drawing.Size(159, 30);
+			this.text_diachi1.TabIndex = 1;
 			// 
 			// label_path1
 			// 
@@ -490,7 +489,7 @@ namespace _2Compare.Sources
 			this.group_fileright.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
 			this.group_fileright.Controls.Add(this.button_back2);
 			this.group_fileright.Controls.Add(this.button_open2);
-			this.group_fileright.Controls.Add(this.file_2);
+			this.group_fileright.Controls.Add(this.text_diachi2);
 			this.group_fileright.Controls.Add(this.label_path2);
 			this.group_fileright.Controls.Add(this.text_vungsosanh2);
 			this.group_fileright.Location = new System.Drawing.Point(343, 193);
@@ -542,17 +541,17 @@ namespace _2Compare.Sources
 			this.button_open2.Text = "...";
 			this.button_open2.UseWaitCursor = true;
 			// 
-			// file_2
+			// text_diachi2
 			// 
 			// 
 			// 
 			// 
-			this.file_2.Border.Class = "TextBoxBorder";
-			this.file_2.Location = new System.Drawing.Point(63, 14);
-			this.file_2.Name = "file_2";
-			this.file_2.Size = new System.Drawing.Size(159, 30);
-			this.file_2.TabIndex = 1;
-			this.file_2.UseWaitCursor = true;
+			this.text_diachi2.Border.Class = "TextBoxBorder";
+			this.text_diachi2.Location = new System.Drawing.Point(63, 14);
+			this.text_diachi2.Name = "text_diachi2";
+			this.text_diachi2.Size = new System.Drawing.Size(159, 30);
+			this.text_diachi2.TabIndex = 1;
+			this.text_diachi2.UseWaitCursor = true;
 			// 
 			// label_path2
 			// 
@@ -576,22 +575,11 @@ namespace _2Compare.Sources
 			this.text_vungsosanh2.TabIndex = 3;
 			this.text_vungsosanh2.UseWaitCursor = true;
 			// 
-			// button1
-			// 
-			this.button1.Location = new System.Drawing.Point(602, 97);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 2;
-			this.button1.Text = "Compare";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
-			// 
 			// mainform
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(689, 561);
-			this.Controls.Add(this.button1);
 			this.Controls.Add(this.ribbonControl);
 			this.Controls.Add(this.group_fileleft);
 			this.Controls.Add(this.group_fileright);
@@ -645,15 +633,16 @@ namespace _2Compare.Sources
         private DevComponents.DotNetBar.Controls.TextBoxX text_vungsosanh1;
         private DevComponents.DotNetBar.ButtonX button_back1;
         private DevComponents.DotNetBar.ButtonX button_open1;
-        private DevComponents.DotNetBar.Controls.TextBoxX file_1;
+        private DevComponents.DotNetBar.Controls.TextBoxX text_diachi1;
         private DevComponents.DotNetBar.LabelX label_path1;
         private DevComponents.DotNetBar.Controls.GroupPanel group_fileright;
         private DevComponents.DotNetBar.Controls.TextBoxX text_vungsosanh2;
         private DevComponents.DotNetBar.ButtonX button_back2;
         private DevComponents.DotNetBar.ButtonX button_open2;
-        private DevComponents.DotNetBar.Controls.TextBoxX file_2;
+        private DevComponents.DotNetBar.Controls.TextBoxX text_diachi2;
         private DevComponents.DotNetBar.LabelX label_path2;
         private ButtonX buttonX3;
-		private Button button1;
-	}
+
+
+    }
 }
