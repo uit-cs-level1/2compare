@@ -16,7 +16,7 @@ namespace _2Compare.Sources
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new mainform());
+			Application.Run(new aboutform());
 		}
 	}
 }

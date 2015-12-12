@@ -41,7 +41,7 @@ namespace _2Compare.Sources
         {
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.ribbonControl1 = new DevComponents.DotNetBar.RibbonControl();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelX1
@@ -74,32 +74,30 @@ namespace _2Compare.Sources
             this.textBoxX1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxX1.WatermarkColor = System.Drawing.Color.Green;
             // 
-            // ribbonControl1
+            // button1
             // 
-            this.ribbonControl1.CaptionVisible = true;
-            this.ribbonControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ribbonControl1.KeyTipsFont = new System.Drawing.Font("Tahoma", 7F);
-            this.ribbonControl1.Location = new System.Drawing.Point(4, 1);
-            this.ribbonControl1.Name = "ribbonControl1";
-            this.ribbonControl1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
-            this.ribbonControl1.Size = new System.Drawing.Size(526, 30);
-            this.ribbonControl1.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.ribbonControl1.TabGroupHeight = 14;
-            this.ribbonControl1.TabIndex = 3;
-            this.ribbonControl1.Text = "ribbonControl1";
+            this.button1.Location = new System.Drawing.Point(459, 349);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "NEXT";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // helpform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(534, 369);
-            this.Controls.Add(this.ribbonControl1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.textBoxX1);
             this.Controls.Add(this.labelX1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "helpform";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HỖ TRỢ";
             this.Load += new System.EventHandler(this.helpform_Load);
@@ -111,6 +109,6 @@ namespace _2Compare.Sources
 
         private DevComponents.DotNetBar.LabelX labelX1;
         private DevComponents.DotNetBar.Controls.TextBoxX textBoxX1;
-        private RibbonControl ribbonControl1;
+        private Button button1;
     }
 }

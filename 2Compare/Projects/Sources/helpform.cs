@@ -21,5 +21,13 @@ namespace _2Compare.Sources
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            mainform main = new mainform();
+            this.Hide();
+            main.Show();
+           
+        }
     }
 }

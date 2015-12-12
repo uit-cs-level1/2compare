@@ -75,6 +75,8 @@
     <Compile Include="Sources\aboutform.Designer.cs">
       <DependentUpon>aboutform.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sources\Core\Engine.cs" />
+    <Compile Include="Sources\Core\Structures.cs" />
     <Compile Include="Sources\mainform.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +91,10 @@
     </Compile>
     <Compile Include="Sources\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sources\Core\TextFile.cs" />
+    <Compile Include="Sources\Results.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -99,11 +105,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Sources\aboutform.resx">
+      <DependentUpon>aboutform.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sources\helpform.resx">
       <DependentUpon>helpform.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sources\mainform.resx">
       <DependentUpon>mainform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sources\Results.resx">
+      <DependentUpon>Results.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

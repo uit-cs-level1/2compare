@@ -43,6 +43,7 @@ namespace _2Compare.Sources
             this.nameprogram = new DevComponents.DotNetBar.LabelX();
             this.devoloper = new DevComponents.DotNetBar.LabelX();
             this.ribbonControl1 = new DevComponents.DotNetBar.RibbonControl();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // nameprogram
@@ -83,18 +84,32 @@ namespace _2Compare.Sources
             this.ribbonControl1.TabIndex = 2;
             this.ribbonControl1.Text = "ribbonControl1";
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Aquamarine;
+            this.button1.Location = new System.Drawing.Point(328, 267);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 43);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "NEXT";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // aboutform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(407, 324);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.ribbonControl1);
             this.Controls.Add(this.devoloper);
             this.Controls.Add(this.nameprogram);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Location = new System.Drawing.Point(120, 150);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "aboutform";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.RightToLeftLayout = true;
@@ -110,5 +125,6 @@ namespace _2Compare.Sources
         private DevComponents.DotNetBar.LabelX nameprogram;
         private DevComponents.DotNetBar.LabelX devoloper;
         private RibbonControl ribbonControl1;
+        private Button button1;
     }
 }

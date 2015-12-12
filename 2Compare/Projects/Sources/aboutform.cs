@@ -26,5 +26,13 @@ namespace _2Compare.Sources
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            helpform help = new helpform();
+        
+            this.Hide();
+            help.Show();
+        }
     }
 }
