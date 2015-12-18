@@ -434,7 +434,7 @@ namespace doan2compare
         }
         private void compareToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if ((treeView1.Nodes.Count == 0) || (treeView1.Nodes.Count == 0))
+            if ((treeView1.Nodes.Count == 0) || (treeView2.Nodes.Count == 0))
             {
                 MetroMessageBox.Show(this, "Please Add Folder first.", "Folder Not Found", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
             }
