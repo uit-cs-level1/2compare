@@ -394,11 +394,14 @@ namespace doan2compare
                 knode = x.Nodes[0];
                 while (j != 1)
                 {
-
-                    string t = knode.Text;
+                    
                     TreeNode knodes = y.Nodes[0];
-                    if (listname(knodes).Contains(t) == false)
+                    string t1 = '\\' + knode.Text;
+                    string t2 = knode.Text + '\\';
+                    if ((listname(knodes).Contains(t1) == false) || (listname(knodes).Contains(t2) == false))
+                    {
                         knode.ForeColor = Color.Blue;
+                    }
                     else
                     {
                         string te;
@@ -411,7 +414,7 @@ namespace doan2compare
                         //detect whether its a directory or file
                         if (attr.HasFlag(FileAttributes.Directory))
                         {
-                            kiemtradisc(knode,x,y);
+                            kiemtradisc(knode, x, y);
                         }
                         else
                         {
