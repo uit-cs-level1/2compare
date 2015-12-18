@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("2Compare")]
+[assembly: AssemblyTitle("doan2compare")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("2Compare")]
+[assembly: AssemblyProduct("doan2compare")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d9216230-5cbe-4d84-9b19-629d70ccd9d6")]
+[assembly: Guid("ada19b30-37f7-4220-8dc0-3b0e1b4f72e8")]
 
 // Version information for an assembly consists of the following four values:
 //
