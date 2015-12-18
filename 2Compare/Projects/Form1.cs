@@ -83,7 +83,7 @@ namespace doan2compare
 
         private void metroButton2_Click(object sender, EventArgs e)
         {
-            metroContextMenu2.Show(metroButton1, new Point(0, metroButton2.Height));
+            metroContextMenu2.Show(metroButton2, new Point(0, metroButton2.Height));
         }
 
         private void metroButton3_Click(object sender, EventArgs e)
@@ -178,9 +178,260 @@ namespace doan2compare
 
         }
 
-        private void addFolderToolStripMenuItem_Click(object sender, EventArgs e)
+       
+
+        private void addFolderToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
 
+        }
+        private void show_folder(string path,TreeNode node)//ham liet ket dic
+        {
+            DirectoryInfo direcinfo = new DirectoryInfo(path);
+            DirectoryInfo[] dics = direcinfo.GetDirectories();
+            int i = 0;
+            foreach (DirectoryInfo dic in dics)
+            {
+
+                node.Nodes.Add(dic.Name);
+                TreeNode nodes = node.Nodes[i];
+                show_folder(path + '/' + dic.Name, nodes);
+                i++;
+
+            }
+            FileInfo[] files = direcinfo.GetFiles();
+            foreach (FileInfo file in files)
+            {
+                node.Nodes.Add(file.Name);
+            }
+        }
+        private void show_treenode(TreeView x)
+        {
+            try
+            {
+                FolderBrowserDialog fd = new FolderBrowserDialog();
+                if (fd.ShowDialog() == DialogResult.OK)
+                {
+                    x.Nodes.Clear();
+                    if (x == treeView1)
+                    {
+                        metroLabel3.Text = fd.SelectedPath;
+                    }
+                    else { metroLabel4.Text = fd.SelectedPath; }
+                    DirectoryInfo direcinfo = new DirectoryInfo(fd.SelectedPath);
+                    DirectoryInfo[] dics = direcinfo.GetDirectories();
+                    int i = 0;
+                    foreach (DirectoryInfo dic in dics)
+                    {
+                        x.Nodes.Add(dic.Name);
+                        TreeNode node = x.Nodes[i];
+                        show_folder(fd.SelectedPath + '/' + dic.Name, node);
+                        i++;
+
+                    }
+                    FileInfo[] files = direcinfo.GetFiles();
+                    foreach (FileInfo file in files)
+                    {
+                        x.Nodes.Add(file.Name);
+                    }
+                }
+            }
+            catch
+            {
+                
+            }
+        }
+        private void addFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (treeView1.Nodes.Count == 0)
+            {
+                show_treenode(treeView1);
+            }
+            else
+                show_treenode(treeView2);
+        }
+
+        private void metroLabel4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void metroContextMenu2_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+        int checkfile(string path)
+        {
+            int kq = 1;
+            return kq;
+        }
+        private string listname(TreeNode node)
+        {
+
+            int k = 0;
+            string name = "";
+        nhaylai:
+            try
+            {
+
+                while (k != 1)
+                {
+                    name = '\\' + name + node.Text + "\\";
+                    node = node.NextNode;
+
+                }
+            }
+            catch
+            {
+                k = 1;
+                goto nhaylai;
+            }
+            return name;
+        }
+        private void tomau(TreeNode Node, TreeView xx)
+        {
+            string[] arrListStr = Node.FullPath.Split('\\');
+            string t = arrListStr[0];
+            TreeNode X;
+            X = xx.Nodes[0];
+            while (X.Text != t)
+            {
+                X = X.NextNode;
+            }
+            for (int i = 1; i <= arrListStr.Length - 1; i++)
+            {
+                X.ForeColor = Color.Red;
+                X = X.Nodes[0];
+                while (X.Text != arrListStr[i])
+                {
+                    X = X.NextNode;
+                }
+            }
+        }
+        private void kiemtradisc(TreeNode Node,TreeView x,TreeView y)
+        {
+            string[] arrListStr = Node.FullPath.Split('\\');
+            string firstnode;
+            firstnode = arrListStr[0];
+
+            TreeNode Node2 = y.Nodes[0];
+            while (firstnode != Node2.Text)
+            {
+                Node2 = Node2.NextNode;
+            }
+            Node = Node.Nodes[0];
+            string nodetxt = Node.FullPath;
+
+
+            int j = 0;
+        trl:
+            try
+            {
+                while (j != 1)
+                {
+                    for (int i = 0; i <= nodetxt.Length - 1; i++)
+                    {
+                        if (nodetxt[i] == '\\')
+                        {
+                            Node2 = Node2.Nodes[0];
+                        }
+
+                    }
+                repeat:
+                    string t1 = '\\' + Node.Text;
+                    string t2 = Node.Text + '\\';
+                    if ((listname(Node2).Contains(t1) == false) || (listname(Node2).Contains(t2) == false))
+                    {
+                        tomau(Node,x);
+                        Node.ForeColor = Color.Blue;
+                    }
+                    else
+                    {
+                        string te;
+                        if (x == treeView1)
+                            te = metroLabel3.Text;
+                        else
+                            te = metroLabel4.Text;
+                        FileAttributes attr = File.GetAttributes(te + '\\' + Node.FullPath);
+
+                        //detect whether its a directory or file
+                        if (attr.HasFlag(FileAttributes.Directory))
+                        {
+                            kiemtradisc(Node,x,y);
+                        }
+                        else
+                        {
+
+                            if (checkfile(Node.FullPath) == 1)
+                            {
+                                tomau(Node,x);
+                                Node.ForeColor = Color.Red;
+                            }
+                        }
+
+                    }
+                    Node = Node.NextNode;
+                    goto repeat;
+                }
+            }
+            catch
+            {
+                j = 1;
+                goto trl;
+            }
+
+        }
+        private void compare(TreeView x,TreeView y)
+        {
+            int j = 0;
+        trolai:
+            try
+            {
+                TreeNode knode;
+                knode = x.Nodes[0];
+                while (j != 1)
+                {
+
+                    string t = knode.Text;
+                    TreeNode knodes = y.Nodes[0];
+                    if (listname(knodes).Contains(t) == false)
+                        knode.ForeColor = Color.Blue;
+                    else
+                    {
+                        string te;
+                        if (x == treeView1)
+                            te = metroLabel3.Text;
+                        else
+                            te = metroLabel4.Text;
+                        FileAttributes attr = File.GetAttributes(te + '\\' + knode.FullPath);
+
+                        //detect whether its a directory or file
+                        if (attr.HasFlag(FileAttributes.Directory))
+                        {
+                            kiemtradisc(knode,x,y);
+                        }
+                        else
+                        {
+
+                            if (checkfile(knode.FullPath) == 1)
+                            {
+                                knode.ForeColor = Color.Red;
+                            }
+                        }
+                    }
+
+                    knode = knode.NextNode;
+                }
+            }
+            catch
+            {
+                j = 1;
+                goto trolai;
+            }
+        }
+        private void compareToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            compare(treeView1, treeView2);
+            compare(treeView2, treeView1);
         }
     }
 }

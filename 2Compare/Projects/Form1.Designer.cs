@@ -58,7 +58,10 @@
             this.metroContextMenu2 = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.addFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compareToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+            this.treeView2 = new System.Windows.Forms.TreeView();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
@@ -194,6 +197,10 @@
             // 
             // metroTabPage3
             // 
+            this.metroTabPage3.Controls.Add(this.treeView2);
+            this.metroTabPage3.Controls.Add(this.metroLabel4);
+            this.metroTabPage3.Controls.Add(this.metroLabel3);
+            this.metroTabPage3.Controls.Add(this.treeView1);
             this.metroTabPage3.Controls.Add(this.metroButton2);
             this.metroTabPage3.HorizontalScrollbarBarColor = true;
             this.metroTabPage3.HorizontalScrollbarHighlightOnWheel = false;
@@ -371,7 +378,7 @@
             this.compareToolStripMenuItem1});
             this.metroContextMenu2.Name = "metroContextMenu2";
             this.metroContextMenu2.Size = new System.Drawing.Size(153, 70);
-            this.metroContextMenu2.UseStyleColors = true;
+            this.metroContextMenu2.Opening += new System.ComponentModel.CancelEventHandler(this.metroContextMenu2_Opening);
             // 
             // addFolderToolStripMenuItem
             // 
@@ -385,6 +392,40 @@
             this.compareToolStripMenuItem1.Name = "compareToolStripMenuItem1";
             this.compareToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.compareToolStripMenuItem1.Text = "Compare";
+            this.compareToolStripMenuItem1.Click += new System.EventHandler(this.compareToolStripMenuItem1_Click);
+            // 
+            // treeView1
+            // 
+            this.treeView1.Location = new System.Drawing.Point(19, 63);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(378, 376);
+            this.treeView1.TabIndex = 3;
+            // 
+            // metroLabel3
+            // 
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.Location = new System.Drawing.Point(19, 37);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(56, 19);
+            this.metroLabel3.TabIndex = 5;
+            this.metroLabel3.Text = "Folder 1";
+            // 
+            // metroLabel4
+            // 
+            this.metroLabel4.AutoSize = true;
+            this.metroLabel4.Location = new System.Drawing.Point(447, 34);
+            this.metroLabel4.Name = "metroLabel4";
+            this.metroLabel4.Size = new System.Drawing.Size(58, 19);
+            this.metroLabel4.TabIndex = 6;
+            this.metroLabel4.Text = "Folder 2";
+            this.metroLabel4.Click += new System.EventHandler(this.metroLabel4_Click);
+            // 
+            // treeView2
+            // 
+            this.treeView2.Location = new System.Drawing.Point(444, 63);
+            this.treeView2.Name = "treeView2";
+            this.treeView2.Size = new System.Drawing.Size(378, 376);
+            this.treeView2.TabIndex = 7;
             // 
             // Form1
             // 
@@ -406,6 +447,7 @@
             this.metroTabPage1.PerformLayout();
             this.metroTabPage2.ResumeLayout(false);
             this.metroTabPage3.ResumeLayout(false);
+            this.metroTabPage3.PerformLayout();
             this.metroTabPage4.ResumeLayout(false);
             this.metroTabPage4.PerformLayout();
             this.metroTabPage5.ResumeLayout(false);
@@ -438,16 +480,19 @@
         private MetroFramework.Controls.MetroButton metroButton1;
         private MetroFramework.Controls.MetroButton metroButton2;
         private System.Windows.Forms.ToolStripMenuItem compareToolStripMenuItem;
-        private MetroFramework.Controls.MetroContextMenu metroContextMenu2;
-        private System.Windows.Forms.ToolStripMenuItem addFolderToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem compareToolStripMenuItem1;
         private MetroFramework.Controls.MetroTrackBar metroTrackBar2;
         private MetroFramework.Controls.MetroButton metroButton4;
         private MetroFramework.Controls.MetroButton metroButton3;
         private MetroFramework.Controls.MetroRadioButton metroRadioButton2;
         private MetroFramework.Controls.MetroRadioButton White;
-        private System.Windows.Forms.ColorDialog colorDialog1;
         private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroContextMenu metroContextMenu2;
+        private System.Windows.Forms.ToolStripMenuItem addFolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem compareToolStripMenuItem1;
+        private System.Windows.Forms.TreeView treeView2;
+        private MetroFramework.Controls.MetroLabel metroLabel4;
+        private MetroFramework.Controls.MetroLabel metroLabel3;
+        private System.Windows.Forms.TreeView treeView1;
     }
 }
 
