@@ -94,6 +94,8 @@ namespace doan2compare
                 metroStyleManager.Theme = MetroThemeStyle.Light;
                 metroUserControl1.BackColor = this.BackColor;
                 metroTrackBar2.BackColor = this.BackColor;
+                treeView1.BackColor = this.BackColor;
+                treeView2.BackColor = this.BackColor;
 
             }
             else
@@ -102,6 +104,8 @@ namespace doan2compare
                 metroStyleManager.Theme = MetroThemeStyle.Dark;
                 metroUserControl1.BackColor = this.BackColor;
                 metroTrackBar2.BackColor = this.BackColor;
+                treeView1.BackColor = this.BackColor;
+                treeView2.BackColor = this.BackColor;
 
             }
         }
@@ -430,8 +434,20 @@ namespace doan2compare
         }
         private void compareToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            compare(treeView1, treeView2);
-            compare(treeView2, treeView1);
+            if ((treeView1.Nodes.Count == 0) || (treeView1.Nodes.Count == 0))
+            {
+                MetroMessageBox.Show(this, "Please Add Folder first.", "Folder Not Found", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                compare(treeView1, treeView2);
+                compare(treeView2, treeView1);
+            }
+        }
+
+        private void compareToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

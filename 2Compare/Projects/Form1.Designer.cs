@@ -368,8 +368,9 @@
             // compareToolStripMenuItem
             // 
             this.compareToolStripMenuItem.Name = "compareToolStripMenuItem";
-            this.compareToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.compareToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.compareToolStripMenuItem.Text = "Compare";
+            this.compareToolStripMenuItem.Click += new System.EventHandler(this.compareToolStripMenuItem_Click);
             // 
             // metroContextMenu2
             // 
@@ -377,7 +378,7 @@
             this.addFolderToolStripMenuItem,
             this.compareToolStripMenuItem1});
             this.metroContextMenu2.Name = "metroContextMenu2";
-            this.metroContextMenu2.Size = new System.Drawing.Size(153, 70);
+            this.metroContextMenu2.Size = new System.Drawing.Size(133, 48);
             this.metroContextMenu2.Opening += new System.ComponentModel.CancelEventHandler(this.metroContextMenu2_Opening);
             // 
             // addFolderToolStripMenuItem
@@ -396,6 +397,7 @@
             // 
             // treeView1
             // 
+            this.treeView1.ForeColor = System.Drawing.Color.Magenta;
             this.treeView1.Location = new System.Drawing.Point(19, 63);
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(378, 376);
@@ -409,6 +411,7 @@
             this.metroLabel3.Size = new System.Drawing.Size(56, 19);
             this.metroLabel3.TabIndex = 5;
             this.metroLabel3.Text = "Folder 1";
+            this.metroLabel3.UseStyleColors = true;
             // 
             // metroLabel4
             // 
@@ -418,10 +421,12 @@
             this.metroLabel4.Size = new System.Drawing.Size(58, 19);
             this.metroLabel4.TabIndex = 6;
             this.metroLabel4.Text = "Folder 2";
+            this.metroLabel4.UseStyleColors = true;
             this.metroLabel4.Click += new System.EventHandler(this.metroLabel4_Click);
             // 
             // treeView2
             // 
+            this.treeView2.ForeColor = System.Drawing.Color.Magenta;
             this.treeView2.Location = new System.Drawing.Point(444, 63);
             this.treeView2.Name = "treeView2";
             this.treeView2.Size = new System.Drawing.Size(378, 376);
