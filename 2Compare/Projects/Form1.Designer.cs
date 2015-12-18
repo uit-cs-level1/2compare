@@ -62,6 +62,7 @@
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.treeView2 = new System.Windows.Forms.TreeView();
+            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
@@ -376,9 +377,10 @@
             // 
             this.metroContextMenu2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addFolderToolStripMenuItem,
-            this.compareToolStripMenuItem1});
+            this.compareToolStripMenuItem1,
+            this.refreshToolStripMenuItem});
             this.metroContextMenu2.Name = "metroContextMenu2";
-            this.metroContextMenu2.Size = new System.Drawing.Size(133, 48);
+            this.metroContextMenu2.Size = new System.Drawing.Size(153, 92);
             this.metroContextMenu2.Opening += new System.ComponentModel.CancelEventHandler(this.metroContextMenu2_Opening);
             // 
             // addFolderToolStripMenuItem
@@ -431,6 +433,13 @@
             this.treeView2.Name = "treeView2";
             this.treeView2.Size = new System.Drawing.Size(378, 376);
             this.treeView2.TabIndex = 7;
+            // 
+            // refreshToolStripMenuItem
+            // 
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.refreshToolStripMenuItem.Text = "Refresh";
+            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -498,6 +507,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
     }
 }
 

@@ -449,5 +449,11 @@ namespace doan2compare
         {
 
         }
+
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            treeView1.Nodes.Clear();
+            treeView2.Nodes.Clear();
+        }
     }
 }
