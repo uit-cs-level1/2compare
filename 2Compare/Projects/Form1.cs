@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework.Forms;
 using MetroFramework;
+using System.IO;
 
 namespace doan2compare
 {
@@ -173,6 +174,11 @@ namespace doan2compare
         }
 
         private void metroLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
