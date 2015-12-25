@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace doan2compare.Properties {
+namespace cs511.Properties {
     using System;
     
     

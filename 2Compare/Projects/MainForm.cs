@@ -11,11 +11,11 @@ using MetroFramework.Forms;
 using MetroFramework;
 using System.IO;
 
-namespace doan2compare
+namespace cs511_g11
 {
-    public partial class Form1 : MetroForm
+    public partial class MainForm : MetroForm
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
@@ -73,7 +73,7 @@ namespace doan2compare
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
-            metroContextMenu1.Show(metroButton1, new Point(0, metroButton1.Height));
+            TextCompareMenu.Show(metroButton1, new Point(0, metroButton1.Height));
         }
 
         private void metroContextMenu1_Opening(object sender, CancelEventArgs e)
@@ -445,9 +445,76 @@ namespace doan2compare
             }
         }
 
-        private void compareToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+		private void TextCompare_Save_Click(object sender, EventArgs e)
+		{
 
+		}
+
+		private void TextCompare_Compare_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void Add_LeftFile_Click(object sender, EventArgs e)
+		{
+			OpenFileDialog _dialog = new OpenFileDialog();
+			Stream _readStream = null;
+
+			if (_dialog.ShowDialog() == DialogResult.OK)
+			{
+				if (Textbox_right.Text == null)
+				{
+					try
+					{
+						if ((_readStream = _dialog.OpenFile()) != null)
+						{
+							using (_readStream)
+							{
+								// Insert code to read the stream here.
+							}
+						}
+					}
+					catch (Exception ex)
+					{
+						MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+					}
+				}
+				else
+				{
+
+				}
+			}
         }
-    }
+
+		private void Add_RightFile_Click(object sender, EventArgs e)
+		{
+			OpenFileDialog _dialog = new OpenFileDialog();
+			Stream _readStream = null;
+
+			if (_dialog.ShowDialog() == DialogResult.OK)
+			{
+				if (Textbox_left.Text == null)
+				{
+					try
+					{
+						if ((_readStream = _dialog.OpenFile()) != null)
+						{
+							using (_readStream)
+							{
+								// Insert code to read the stream here.
+							}
+						}
+					}
+					catch (Exception ex)
+					{
+						MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+					}
+				}
+				else
+				{
+
+				}
+			}
+		}
+	}
 }
