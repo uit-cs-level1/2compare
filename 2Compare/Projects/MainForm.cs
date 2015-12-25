@@ -71,11 +71,6 @@ namespace cs511_g11
             metroTile2.Style = (MetroColorStyle)5;
         }
 
-        private void metroButton1_Click(object sender, EventArgs e)
-        {
-            TextCompareMenu.Show(metroButton1, new Point(0, metroButton1.Height));
-        }
-
         private void metroContextMenu1_Opening(object sender, CancelEventArgs e)
         {
 
@@ -394,11 +389,14 @@ namespace cs511_g11
                 knode = x.Nodes[0];
                 while (j != 1)
                 {
-
-                    string t = knode.Text;
+                    
                     TreeNode knodes = y.Nodes[0];
-                    if (listname(knodes).Contains(t) == false)
+                    string t1 = '\\' + knode.Text;
+                    string t2 = knode.Text + '\\';
+                    if ((listname(knodes).Contains(t1) == false) || (listname(knodes).Contains(t2) == false))
+                    {
                         knode.ForeColor = Color.Blue;
+                    }
                     else
                     {
                         string te;
@@ -411,7 +409,7 @@ namespace cs511_g11
                         //detect whether its a directory or file
                         if (attr.HasFlag(FileAttributes.Directory))
                         {
-                            kiemtradisc(knode,x,y);
+                            kiemtradisc(knode, x, y);
                         }
                         else
                         {
@@ -434,7 +432,7 @@ namespace cs511_g11
         }
         private void compareToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if ((treeView1.Nodes.Count == 0) || (treeView1.Nodes.Count == 0))
+            if ((treeView1.Nodes.Count == 0) || (treeView2.Nodes.Count == 0))
             {
                 MetroMessageBox.Show(this, "Please Add Folder first.", "Folder Not Found", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
             }
@@ -515,6 +513,11 @@ namespace cs511_g11
 
 				}
 			}
+		}
+
+		private void FileCompareToolbox_Click(object sender, EventArgs e)
+		{
+			TextCompareMenu.Show(FileCompareToolbox, new Point(0, FileCompareToolbox.Height));
 		}
 	}
 }
