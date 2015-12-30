@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace cs511_g11
 {
-	class FileCompareUtils
+	public static class FileCompareUtils
 	{
-		public void CompareFile(string file1, string file2)
+		public static void CompareFile(string file1, string file2)
 		{
-
+			MessageBox.Show("CompareFile");
 		}
 	}
 }

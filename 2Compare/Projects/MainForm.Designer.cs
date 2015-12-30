@@ -196,6 +196,7 @@
 			// 
 			// Textbox_right
 			// 
+			this.Textbox_right.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.Textbox_right.Location = new System.Drawing.Point(436, 60);
 			this.Textbox_right.Multiline = true;
 			this.Textbox_right.Name = "Textbox_right";
@@ -204,6 +205,7 @@
 			// 
 			// Textbox_left
 			// 
+			this.Textbox_left.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.Textbox_left.Location = new System.Drawing.Point(3, 60);
 			this.Textbox_left.Multiline = true;
 			this.Textbox_left.Name = "Textbox_left";
