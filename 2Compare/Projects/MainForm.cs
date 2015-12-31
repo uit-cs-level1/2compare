@@ -446,6 +446,7 @@ namespace cs511_g11
             }
         }
 
+<<<<<<< HEAD
 		private void TextCompare_Save_Click(object sender, EventArgs e)
 		{
 
@@ -523,6 +524,13 @@ namespace cs511_g11
             TextDiff(_first, _second);
 
 
+=======
+		///////////////////////////////////////////////////////////////////////////////
+		// File Compare
+		private void FileCompareToolbox_Click(object sender, EventArgs e)
+		{
+			TextCompareMenu.Show(FileCompareToolbox, new Point(0, FileCompareToolbox.Height));
+>>>>>>> d0f77335c7ede5ebda39a2f864f71f6fbeecc493
 		}
 
         
@@ -530,6 +538,7 @@ namespace cs511_g11
 		private void Add_LeftFile_Click(object sender, EventArgs e)
 		{
 			OpenFileDialog _dialog = new OpenFileDialog();
+<<<<<<< HEAD
             if (_dialog.ShowDialog() == DialogResult.OK)
             {
                 File_1.Text = _dialog.FileName;
@@ -538,10 +547,35 @@ namespace cs511_g11
 
             }
         }
+=======
+			Stream _readStream = null;
+
+			if (_dialog.ShowDialog() == DialogResult.OK)
+			{
+				try
+				{
+					if ((_readStream = _dialog.OpenFile()) != null)
+					{
+						using (_readStream)
+						{
+							Textbox_left.Text = File.ReadAllText(_dialog.FileName);
+						}
+					}
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+				}
+
+				FileCompareUtils.CompareFile(Textbox_left.Text, Textbox_right.Text);
+			}
+		}
+>>>>>>> d0f77335c7ede5ebda39a2f864f71f6fbeecc493
 
 		private void Add_RightFile_Click(object sender, EventArgs e)
 		{
 			OpenFileDialog _dialog = new OpenFileDialog();
+<<<<<<< HEAD
             if (_dialog.ShowDialog() == DialogResult.OK)
             {
                 File_2.Text = _dialog.FileName;
@@ -549,11 +583,39 @@ namespace cs511_g11
 
             }
 				
+=======
+			Stream _readStream = null;
+
+			if (_dialog.ShowDialog() == DialogResult.OK)
+			{
+				try
+				{
+					if ((_readStream = _dialog.OpenFile()) != null)
+					{
+						using (_readStream)
+						{
+							Textbox_right.Text = File.ReadAllText(_dialog.FileName);
+						}
+					}
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+				}
+
+				FileCompareUtils.CompareFile(Textbox_left.Text, Textbox_right.Text);
+			}
+>>>>>>> d0f77335c7ede5ebda39a2f864f71f6fbeecc493
 		}
 
-		private void FileCompareToolbox_Click(object sender, EventArgs e)
+		private void TextCompare_Save_Click(object sender, EventArgs e)
 		{
-			TextCompareMenu.Show(FileCompareToolbox, new Point(0, FileCompareToolbox.Height));
+
+		}
+
+		private void TextCompare_Compare_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }
