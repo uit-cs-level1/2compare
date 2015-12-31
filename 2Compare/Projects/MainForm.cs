@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using MetroFramework.Forms;
 using MetroFramework;
 using System.IO;
+using DifferenceEngine;
+using cs511_g11;
+using System.Collections;
 
 namespace cs511_g11
 {
@@ -447,72 +450,105 @@ namespace cs511_g11
 		{
 
 		}
+        private bool ValidFile(string fname)
+        {
+            if (fname != string.Empty)
+            {
+                if (File.Exists(fname))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        private void TextDiff(string _first, string _second)
+        {
+            this.Cursor = Cursors.WaitCursor;
+
+            DiffList_TextFile sLF = null;
+            DiffList_TextFile dLF = null;
+            try
+            {
+                sLF = new DiffList_TextFile(_first);
+                dLF = new DiffList_TextFile(_second);
+            }
+            catch (Exception ex)
+            {
+                this.Cursor = Cursors.Default;
+                MessageBox.Show(ex.Message, "File Error");
+                return;
+            }
+
+            try
+            {
+                double time = 0;
+                DiffEngine de = new DiffEngine();
+                time = de.ProcessDiff(sLF, dLF, 0);
+
+                ArrayList rep = de.DiffReport();
+               //Results dlg = new Results(sLF, dLF, rep, time);
+
+               //dlg.ShowDialog();
+              //dlg.Dispose();
+            }
+            catch (Exception ex)
+            {
+                this.Cursor = Cursors.Default;
+                string tmp = string.Format("{0}{1}{1}***STACK***{1}{2}",
+                    ex.Message,
+                    Environment.NewLine,
+                    ex.StackTrace);
+                MessageBox.Show(tmp, "Compare Error");
+                return;
+            }
+            this.Cursor = Cursors.Default;
+        }
 
 		private void TextCompare_Compare_Click(object sender, EventArgs e)
 		{
+            string _first = File_1.Text.Trim();
+            string _second = File_2.Text.Trim();
+            if (!ValidFile(_first))
+            {
+                MessageBox.Show("Source file name is invalid.", "Invalid File");
+                File_1.Focus();
+                return;
+            }
+            if (!ValidFile(_second))
+            {
+                MessageBox.Show("Destination file name is invalid.", "Invalid File");
+                File_2.Focus();
+                return;
+            }
+            TextDiff(_first, _second);
+
 
 		}
+
+        
 
 		private void Add_LeftFile_Click(object sender, EventArgs e)
 		{
 			OpenFileDialog _dialog = new OpenFileDialog();
-			Stream _readStream = null;
+            if (_dialog.ShowDialog() == DialogResult.OK)
+            {
+                File_1.Text = _dialog.FileName;
+                Textbox_left.Text = File.ReadAllText(File_1.Text);
+                
 
-			if (_dialog.ShowDialog() == DialogResult.OK)
-			{
-				if (Textbox_right.Text == null)
-				{
-					try
-					{
-						if ((_readStream = _dialog.OpenFile()) != null)
-						{
-							using (_readStream)
-							{
-								// Insert code to read the stream here.
-							}
-						}
-					}
-					catch (Exception ex)
-					{
-						MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
-					}
-				}
-				else
-				{
-
-				}
-			}
+            }
         }
 
 		private void Add_RightFile_Click(object sender, EventArgs e)
 		{
 			OpenFileDialog _dialog = new OpenFileDialog();
-			Stream _readStream = null;
+            if (_dialog.ShowDialog() == DialogResult.OK)
+            {
+                File_2.Text = _dialog.FileName;
+                Textbox_right.Text = File.ReadAllText(File_2.Text); 
 
-			if (_dialog.ShowDialog() == DialogResult.OK)
-			{
-				if (Textbox_left.Text == null)
-				{
-					try
-					{
-						if ((_readStream = _dialog.OpenFile()) != null)
-						{
-							using (_readStream)
-							{
-								// Insert code to read the stream here.
-							}
-						}
-					}
-					catch (Exception ex)
-					{
-						MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
-					}
-				}
-				else
-				{
-
-				}
-			}
+            }
+				
 		}
 
 		private void FileCompareToolbox_Click(object sender, EventArgs e)
