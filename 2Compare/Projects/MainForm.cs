@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework.Forms;
 using MetroFramework;
@@ -13,7 +8,7 @@ using System.IO;
 
 namespace cs511_g11
 {
-    public partial class MainForm : MetroForm
+	public partial class MainForm : MetroForm
     {
         public MainForm()
         {
@@ -449,6 +444,8 @@ namespace cs511_g11
 		{
 			TextCompareMenu.Show(FileCompareToolbox, new Point(0, FileCompareToolbox.Height));
 		}
+
+        
 
 		private void Add_LeftFile_Click(object sender, EventArgs e)
 		{
