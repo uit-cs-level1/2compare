@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using MetroFramework.Forms;
 using MetroFramework;
 using System.IO;
+using System.Collections;
 
 namespace cs511_g11
 {
@@ -445,6 +446,55 @@ namespace cs511_g11
 			TextCompareMenu.Show(FileCompareToolbox, new Point(0, FileCompareToolbox.Height));
 		}
 
+		private void FileCompare()
+		{
+			ArrayList _result = FileCompareUtils.CompareFile(Textbox_left.Text, Textbox_right.Text);
+
+			FileController _leftController = FileCompareUtils.m_controllerFileLeft;
+			FileController _rightController = FileCompareUtils.m_controllerFileRight;
+
+			Textbox_left.Clear();
+			Textbox_right.Clear();
+
+			//FileCompareUtils.AppendText(Textbox_left, ((TextLine)_leftController.GetByIndex(0)).m_content, Color.Black, Color.White);
+			//FileCompareUtils.AppendText(Textbox_left, ((TextLine)_leftController.GetByIndex(1)).m_content, Color.Green, Color.LightGreen);
+			//FileCompareUtils.AppendText(Textbox_left, ((TextLine)_leftController.GetByIndex(2)).m_content, Color.Red, Color.LightPink);
+
+
+			for (int i = 0; i < _result.Count; i++)
+			{
+				DiffResultSpan _item = ((DiffResultSpan)_result[i]);
+
+				switch (_item.Status)
+				{
+					case DiffResultSpanStatus.NoChange:
+						for(int j = 0; j < _item.Length; j++)
+						{
+							string _contentLeft = ((TextLine)_leftController.GetByIndex(_item.SourceIndex + j)).m_content;
+							string _contentRight = ((TextLine)_leftController.GetByIndex(_item.DestIndex + j)).m_content;
+
+							FileCompareUtils.AppendText(Textbox_left, _contentLeft, Color.Black, Color.White);
+							FileCompareUtils.AppendText(Textbox_right, _contentRight, Color.Black, Color.White);
+						}
+						break;
+					case DiffResultSpanStatus.Replace:
+						for (int j = 0; j < _item.Length; j++)
+						{
+							string _contentLeft = ((TextLine)_leftController.GetByIndex(_item.SourceIndex + j)).m_content;
+							string _contentRight = ((TextLine)_leftController.GetByIndex(_item.DestIndex + j)).m_content;
+
+							FileCompareUtils.AppendText(Textbox_left, _contentLeft, Color.Red, Color.LightPink);
+							FileCompareUtils.AppendText(Textbox_right, _contentRight, Color.Red, Color.LightPink);
+						}
+						break;
+					case DiffResultSpanStatus.AddDestination:
+						break;
+					case DiffResultSpanStatus.DeleteSource:
+						break;
+				}
+			}
+		}
+
         
 
 		private void Add_LeftFile_Click(object sender, EventArgs e)
@@ -469,8 +519,8 @@ namespace cs511_g11
 					MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
 				}
 
-				if(Textbox_right.Text != "")
-					FileCompareUtils.CompareFile(Textbox_left.Text, Textbox_right.Text);
+				if (Textbox_right.Text != "")
+					FileCompare();
 			}
 		}
 
@@ -497,7 +547,7 @@ namespace cs511_g11
 				}
 
 				if(Textbox_left.Text != "")
-					FileCompareUtils.CompareFile(Textbox_left.Text, Textbox_right.Text);
+					FileCompare();
 			}
 		}
 
@@ -508,7 +558,7 @@ namespace cs511_g11
 
 		private void TextCompare_Compare_Click(object sender, EventArgs e)
 		{
-
+			FileCompare();
 		}
 	}
 }

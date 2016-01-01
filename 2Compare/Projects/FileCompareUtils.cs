@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -12,7 +13,7 @@ namespace cs511_g11
 
 		public TextLine(string str)
 		{
-			//m_content = str.Replace("\t", "    ");
+			m_content = str.Replace("\t", "    ");
 			m_hashCode = str.GetHashCode();
 		}
 
@@ -59,19 +60,20 @@ namespace cs511_g11
 
 	public static class FileCompareUtils
 	{
-		public static void CompareFile(string fileLeft, string fileRight)
+		public static FileController m_controllerFileLeft = null;
+		public static FileController m_controllerFileRight = null;
+
+		public static ArrayList CompareFile(string fileLeft, string fileRight)
 		{
-			FileController _controllerFileLeft = null;
-			FileController _controllerFileRight = null;
 			try
 			{
-				_controllerFileLeft = new FileController(fileLeft);
-				_controllerFileRight = new FileController(fileRight);
+				m_controllerFileLeft = new FileController(fileLeft);
+				m_controllerFileRight = new FileController(fileRight);
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.Message, "File Error");
-				return;
+				return null;
 			}
 
 			try
@@ -79,10 +81,10 @@ namespace cs511_g11
 				double time = 0;
 				FileCompareEngine _engine = new FileCompareEngine();
 
-				_engine.Setup(_controllerFileLeft, _controllerFileRight);
+				_engine.Setup(m_controllerFileLeft, m_controllerFileRight);
 				time = _engine.Execute();
 
-				ArrayList _result = _engine.GetResult();
+				return _engine.GetResult();
 			}
 			catch (Exception ex)
 			{
@@ -91,8 +93,20 @@ namespace cs511_g11
 					Environment.NewLine,
 					ex.StackTrace);
 				MessageBox.Show(tmp, "Compare Error");
-				return;
+				return null;
 			}
+		}
+
+		public static void AppendText(this RichTextBox box, string text, Color foreColor, Color backColor)
+		{
+			text += '\n';
+
+			box.SelectionStart = box.TextLength;
+			box.SelectionLength = text.Length;
+
+			box.SelectionColor = foreColor;
+			box.SelectionBackColor = backColor;
+			box.AppendText(text);
 		}
 	}
 }

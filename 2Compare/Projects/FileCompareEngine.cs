@@ -11,6 +11,7 @@ namespace cs511_g11
 	{
 		private FileController m_controllerFileLeft;
 		private FileController m_controllerFileRight;
+
 		private ArrayList m_matchList;
 		private DiffStateList m_stateList;
 
@@ -160,12 +161,7 @@ namespace cs511_g11
 		}
 
 
-		private bool AddChanges(
-			ArrayList report,
-			int curDest,
-			int nextDest,
-			int curSource,
-			int nextSource)
+		private bool AddChanges(ArrayList report, int curDest, int nextDest, int curSource, int nextSource)
 		{
 			bool retval = false;
 			int diffDest = nextDest - curDest;
