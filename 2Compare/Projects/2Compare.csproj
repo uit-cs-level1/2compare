@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileCompareEngine.cs" />
+    <Compile Include="FileCompareEngineHelper.cs" />
     <Compile Include="FileCompareUtils.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

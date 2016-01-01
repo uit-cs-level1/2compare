@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace cs511_g11
 {
-	public class TextLine
+	public class TextLine : IComparable
 	{
 		public string m_content;
 		public int m_hashCode;
@@ -45,6 +45,16 @@ namespace cs511_g11
 				m_lines.Add(new TextLine(item));
 			}
 		}
+
+		public int Count()
+		{
+			return m_lines.Count;
+		}
+
+		public IComparable GetByIndex(int index)
+		{
+			return (TextLine)m_lines[index];
+		}
 	}
 
 	public static class FileCompareUtils
@@ -64,16 +74,15 @@ namespace cs511_g11
 				return;
 			}
 
-			/*try
+			try
 			{
 				double time = 0;
-				FileCompareEngine de = new FileCompareEngine();
-				time = de.ProcessDiff(_controllerFileLeft, _controllerFileRight, 0);
+				FileCompareEngine _engine = new FileCompareEngine();
 
-				ArrayList rep = de.DiffReport();
-				Results dlg = new Results(_controllerFileLeft, _controllerFileRight, rep, time);
-				dlg.ShowDialog();
-				dlg.Dispose();
+				_engine.Setup(_controllerFileLeft, _controllerFileRight);
+				time = _engine.Execute();
+
+				ArrayList _result = _engine.GetResult();
 			}
 			catch (Exception ex)
 			{
@@ -83,7 +92,7 @@ namespace cs511_g11
 					ex.StackTrace);
 				MessageBox.Show(tmp, "Compare Error");
 				return;
-			}*/
+			}
 		}
 	}
 }
