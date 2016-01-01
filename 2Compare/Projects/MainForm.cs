@@ -472,7 +472,8 @@ namespace cs511_g11
 					MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
 				}
 
-				FileCompareUtils.CompareFile(Textbox_left.Text, Textbox_right.Text);
+				if(Textbox_right.Text != "")
+					FileCompareUtils.CompareFile(Textbox_left.Text, Textbox_right.Text);
 			}
 		}
 
@@ -498,7 +499,8 @@ namespace cs511_g11
 					MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
 				}
 
-				FileCompareUtils.CompareFile(Textbox_left.Text, Textbox_right.Text);
+				if(Textbox_left.Text != "")
+					FileCompareUtils.CompareFile(Textbox_left.Text, Textbox_right.Text);
 			}
 		}
 
