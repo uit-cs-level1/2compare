@@ -11,36 +11,42 @@ namespace cs511_g11
 {
 	public partial class MainForm : MetroForm
     {
-        public MainForm()
-        {
-            InitializeComponent();
-        }
+		RichTextBoxSynchronizedScroll Textbox_left = new RichTextBoxSynchronizedScroll();
+		RichTextBoxSynchronizedScroll Textbox_right = new RichTextBoxSynchronizedScroll();
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-        }
+		public MainForm()
+		{
+			InitializeComponent();
 
-        private void metroTextBox1_Click(object sender, EventArgs e)
-        {
+			this.metroTabPage2.Controls.Add(Textbox_left);
+			this.metroTabPage2.Controls.Add(Textbox_right);
 
-        }
+			Textbox_left.AcceptsTab = true;
+			Textbox_left.EnableAutoDragDrop = true;
+			Textbox_left.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			Textbox_left.Location = new System.Drawing.Point(0, 60);
+			Textbox_left.Margin = new System.Windows.Forms.Padding(5);
+			Textbox_left.Name = "Textbox_left";
+			Textbox_left.Size = new System.Drawing.Size(475, 418);
+			Textbox_left.TabIndex = 9;
+			Textbox_left.Text = "";
+			Textbox_left.WordWrap = false;
+			Textbox_left.TextChanged += new System.EventHandler(this.Textbox_left_TextChanged);
 
-        private void metroLabel2_Click(object sender, EventArgs e)
-        {
+			Textbox_right.AcceptsTab = true;
+			Textbox_right.EnableAutoDragDrop = true;
+			Textbox_right.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			Textbox_right.Location = new System.Drawing.Point(496, 60);
+			Textbox_right.Margin = new System.Windows.Forms.Padding(5);
+			Textbox_right.Name = "Textbox_right";
+			Textbox_right.Size = new System.Drawing.Size(475, 418);
+			Textbox_right.TabIndex = 10;
+			Textbox_right.Text = "";
+			Textbox_right.WordWrap = false;
 
-        }
-
-        private void metroUserControl1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void metroTile1_Click(object sender, EventArgs e)
-        {
-            metroTabControl1.SelectTab(metroTabPage2);
-           
-        }
+			Textbox_left.Parent = Textbox_right.Parent = this.metroTabPage2;
+			Textbox_left.BindScroll(Textbox_right);
+		}
 
         private void metroTile2_Click(object sender, EventArgs e)
         {
@@ -459,7 +465,6 @@ namespace cs511_g11
 			//FileCompareUtils.AppendText(Textbox_left, ((TextLine)_leftController.GetByIndex(0)).m_content, Color.Black, Color.White);
 			//FileCompareUtils.AppendText(Textbox_left, ((TextLine)_leftController.GetByIndex(1)).m_content, Color.Green, Color.LightGreen);
 			//FileCompareUtils.AppendText(Textbox_left, ((TextLine)_leftController.GetByIndex(2)).m_content, Color.Red, Color.LightPink);
-
 
 			for (int i = 0; i < _result.Count; i++)
 			{

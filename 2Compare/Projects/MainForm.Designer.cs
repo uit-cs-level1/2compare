@@ -37,8 +37,6 @@
 			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			this.metroTile1 = new MetroFramework.Controls.MetroTile();
 			this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
-			this.Textbox_right = new System.Windows.Forms.RichTextBox();
-			this.Textbox_left = new System.Windows.Forms.RichTextBox();
 			this.File_2 = new MetroFramework.Controls.MetroLabel();
 			this.File_1 = new MetroFramework.Controls.MetroLabel();
 			this.FileCompareToolbox = new MetroFramework.Controls.MetroButton();
@@ -156,7 +154,6 @@
 			this.metroLabel2.Text = "We have two main functions:";
 			this.metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.metroLabel2.UseStyleColors = true;
-			this.metroLabel2.Click += new System.EventHandler(this.metroLabel2_Click);
 			// 
 			// metroTile1
 			// 
@@ -171,14 +168,11 @@
 			this.metroToolTip1.SetToolTip(this.metroTile1, "Use to Compare 2 Text Files");
 			this.metroTile1.UseSelectable = true;
 			this.metroTile1.UseStyleColors = true;
-			this.metroTile1.Click += new System.EventHandler(this.metroTile1_Click);
 			this.metroTile1.MouseLeave += new System.EventHandler(this.metroTile1_MouseLeave);
 			this.metroTile1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.metroTile1_MouseMove);
 			// 
 			// metroTabPage2
 			// 
-			this.metroTabPage2.Controls.Add(this.Textbox_right);
-			this.metroTabPage2.Controls.Add(this.Textbox_left);
 			this.metroTabPage2.Controls.Add(this.File_2);
 			this.metroTabPage2.Controls.Add(this.File_1);
 			this.metroTabPage2.Controls.Add(this.FileCompareToolbox);
@@ -193,33 +187,6 @@
 			this.metroTabPage2.VerticalScrollbarBarColor = true;
 			this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
 			this.metroTabPage2.VerticalScrollbarSize = 3;
-			// 
-			// Textbox_right
-			// 
-			this.Textbox_right.AcceptsTab = true;
-			this.Textbox_right.EnableAutoDragDrop = true;
-			this.Textbox_right.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.Textbox_right.Location = new System.Drawing.Point(496, 60);
-			this.Textbox_right.Margin = new System.Windows.Forms.Padding(5);
-			this.Textbox_right.Name = "Textbox_right";
-			this.Textbox_right.Size = new System.Drawing.Size(475, 418);
-			this.Textbox_right.TabIndex = 10;
-			this.Textbox_right.Text = "";
-			this.Textbox_right.WordWrap = false;
-			// 
-			// Textbox_left
-			// 
-			this.Textbox_left.AcceptsTab = true;
-			this.Textbox_left.EnableAutoDragDrop = true;
-			this.Textbox_left.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.Textbox_left.Location = new System.Drawing.Point(0, 60);
-			this.Textbox_left.Margin = new System.Windows.Forms.Padding(5);
-			this.Textbox_left.Name = "Textbox_left";
-			this.Textbox_left.Size = new System.Drawing.Size(475, 418);
-			this.Textbox_left.TabIndex = 9;
-			this.Textbox_left.Text = "";
-			this.Textbox_left.WordWrap = false;
-			this.Textbox_left.TextChanged += new System.EventHandler(this.Textbox_left_TextChanged);
 			// 
 			// File_2
 			// 
@@ -523,7 +490,6 @@
 			this.Text = "2Compare";
 			this.TextAlign = MetroFramework.Forms.MetroFormTextAlign.Center;
 			this.TransparencyKey = System.Drawing.Color.Gainsboro;
-			this.Load += new System.EventHandler(this.Form1_Load);
 			this.metroTabControl1.ResumeLayout(false);
 			this.metroTabPage1.ResumeLayout(false);
 			this.metroTabPage1.PerformLayout();
@@ -580,8 +546,6 @@
 		private MetroFramework.Controls.MetroButton FileCompareToolbox;
 		private System.Windows.Forms.ToolStripMenuItem Add_LeftFile;
 		private System.Windows.Forms.ToolStripMenuItem Add_RightFile;
-		private System.Windows.Forms.RichTextBox Textbox_right;
-		private System.Windows.Forms.RichTextBox Textbox_left;
 	}
 }
 
