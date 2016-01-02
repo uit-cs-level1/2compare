@@ -471,7 +471,7 @@ namespace cs511_g11
 						for(int j = 0; j < _item.Length; j++)
 						{
 							string _contentLeft = ((TextLine)_leftController.GetByIndex(_item.SourceIndex + j)).m_content;
-							string _contentRight = ((TextLine)_leftController.GetByIndex(_item.DestIndex + j)).m_content;
+							string _contentRight = ((TextLine)_rightController.GetByIndex(_item.DestIndex + j)).m_content;
 
 							FileCompareUtils.AppendText(Textbox_left, _contentLeft, Color.Black, Color.White);
 							FileCompareUtils.AppendText(Textbox_right, _contentRight, Color.Black, Color.White);
@@ -481,15 +481,31 @@ namespace cs511_g11
 						for (int j = 0; j < _item.Length; j++)
 						{
 							string _contentLeft = ((TextLine)_leftController.GetByIndex(_item.SourceIndex + j)).m_content;
-							string _contentRight = ((TextLine)_leftController.GetByIndex(_item.DestIndex + j)).m_content;
+							string _contentRight = ((TextLine)_rightController.GetByIndex(_item.DestIndex + j)).m_content;
 
 							FileCompareUtils.AppendText(Textbox_left, _contentLeft, Color.Red, Color.LightPink);
 							FileCompareUtils.AppendText(Textbox_right, _contentRight, Color.Red, Color.LightPink);
 						}
 						break;
 					case DiffResultSpanStatus.AddDestination:
+						for (int j = 0; j < _item.Length; j++)
+						{
+							//string _contentLeft = ((TextLine)_leftController.GetByIndex(_item.SourceIndex + j)).m_content;
+							string _contentRight = ((TextLine)_rightController.GetByIndex(_item.DestIndex + j)).m_content;
+
+							FileCompareUtils.AppendText(Textbox_left, "", Color.Red, Color.LightPink);
+							FileCompareUtils.AppendText(Textbox_right, _contentRight, Color.Red, Color.LightPink);
+						}
 						break;
 					case DiffResultSpanStatus.DeleteSource:
+						for (int j = 0; j < _item.Length; j++)
+						{
+							string _contentLeft = ((TextLine)_leftController.GetByIndex(_item.SourceIndex + j)).m_content;
+							//String _contentRight = ((TextLine)_rightController.GetByIndex(_item.DestIndex + j)).m_content;
+
+							FileCompareUtils.AppendText(Textbox_left, _contentLeft, Color.Red, Color.LightPink);
+							FileCompareUtils.AppendText(Textbox_right, "", Color.Red, Color.LightPink);
+						}
 						break;
 				}
 			}
@@ -559,6 +575,11 @@ namespace cs511_g11
 		private void TextCompare_Compare_Click(object sender, EventArgs e)
 		{
 			FileCompare();
+		}
+
+		private void Textbox_left_TextChanged(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

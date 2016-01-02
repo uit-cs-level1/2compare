@@ -110,7 +110,7 @@
 			this.metroTabPage1.HorizontalScrollbarSize = 10;
 			this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
 			this.metroTabPage1.Name = "metroTabPage1";
-			this.metroTabPage1.Size = new System.Drawing.Size(854, 439);
+			this.metroTabPage1.Size = new System.Drawing.Size(970, 478);
 			this.metroTabPage1.TabIndex = 0;
 			this.metroTabPage1.Text = "How To Use";
 			this.metroTabPage1.VerticalScrollbarBarColor = true;
@@ -219,6 +219,7 @@
 			this.Textbox_left.TabIndex = 9;
 			this.Textbox_left.Text = "";
 			this.Textbox_left.WordWrap = false;
+			this.Textbox_left.TextChanged += new System.EventHandler(this.Textbox_left_TextChanged);
 			// 
 			// File_2
 			// 
@@ -263,7 +264,7 @@
 			this.metroTabPage3.HorizontalScrollbarSize = 10;
 			this.metroTabPage3.Location = new System.Drawing.Point(4, 38);
 			this.metroTabPage3.Name = "metroTabPage3";
-			this.metroTabPage3.Size = new System.Drawing.Size(854, 439);
+			this.metroTabPage3.Size = new System.Drawing.Size(970, 478);
 			this.metroTabPage3.TabIndex = 2;
 			this.metroTabPage3.Text = "Folder Compare";
 			this.metroTabPage3.VerticalScrollbarBarColor = true;
@@ -330,7 +331,7 @@
 			this.metroTabPage4.HorizontalScrollbarSize = 10;
 			this.metroTabPage4.Location = new System.Drawing.Point(4, 38);
 			this.metroTabPage4.Name = "metroTabPage4";
-			this.metroTabPage4.Size = new System.Drawing.Size(854, 439);
+			this.metroTabPage4.Size = new System.Drawing.Size(970, 478);
 			this.metroTabPage4.TabIndex = 3;
 			this.metroTabPage4.Text = "Theme";
 			this.metroTabPage4.VerticalScrollbarBarColor = true;
@@ -407,7 +408,7 @@
 			this.metroTabPage5.HorizontalScrollbarSize = 10;
 			this.metroTabPage5.Location = new System.Drawing.Point(4, 38);
 			this.metroTabPage5.Name = "metroTabPage5";
-			this.metroTabPage5.Size = new System.Drawing.Size(854, 439);
+			this.metroTabPage5.Size = new System.Drawing.Size(970, 478);
 			this.metroTabPage5.TabIndex = 4;
 			this.metroTabPage5.Text = "Information";
 			this.metroTabPage5.VerticalScrollbarBarColor = true;
