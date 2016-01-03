@@ -11,38 +11,58 @@ namespace cs511_g11
 {
 	public partial class MainForm : MetroForm
     {
-        public MainForm()
-        {
-            InitializeComponent();
-        }
+		RichTextBoxSynchronizedScroll Textbox_left = new RichTextBoxSynchronizedScroll();
+		RichTextBoxSynchronizedScroll Textbox_right = new RichTextBoxSynchronizedScroll();
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-        }
+		public MainForm()
+		{
+			InitializeComponent();
+			SetupRichTextbox();
 
-        private void metroTextBox1_Click(object sender, EventArgs e)
-        {
+			FileCompareUtils.m_controllerFileLeft = new TextController();
+			FileCompareUtils.m_controllerFileRight = new TextController();
 
-        }
+			FileCompareUtils.m_controllerFileLeft.Clear();
+			FileCompareUtils.m_controllerFileRight.Clear();
+		}
 
-        private void metroLabel2_Click(object sender, EventArgs e)
-        {
+		private void SetupRichTextbox()
+		{
+			Textbox_left.AcceptsTab = true;
+			Textbox_left.EnableAutoDragDrop = true;
+			Textbox_left.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			Textbox_left.Location = new System.Drawing.Point(0, 60);
+			Textbox_left.Margin = new System.Windows.Forms.Padding(5);
+			Textbox_left.Name = "Textbox_left";
+			Textbox_left.Size = new System.Drawing.Size(475, 418);
+			Textbox_left.TabIndex = 9;
+			Textbox_left.Text = "";
+			Textbox_left.WordWrap = false;
+			Textbox_left.TextChanged += new System.EventHandler(this.Textbox_left_TextChanged);
+			Textbox_left.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Textbox_left_KeyPress);
+			Textbox_left.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Textbox_left_KeyUp);
+			Textbox_left.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Textbox_left_KeyDown);
 
-        }
+			Textbox_right.AcceptsTab = true;
+			Textbox_right.EnableAutoDragDrop = true;
+			Textbox_right.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			Textbox_right.Location = new System.Drawing.Point(496, 60);
+			Textbox_right.Margin = new System.Windows.Forms.Padding(5);
+			Textbox_right.Name = "Textbox_right";
+			Textbox_right.Size = new System.Drawing.Size(475, 418);
+			Textbox_right.TabIndex = 10;
+			Textbox_right.Text = "";
+			Textbox_right.WordWrap = false;
+			Textbox_right.TextChanged += new System.EventHandler(this.Textbox_right_TextChanged);
+			Textbox_right.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Textbox_right_KeyPress);
+			Textbox_right.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Textbox_right_KeyUp);
+			Textbox_right.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Textbox_right_KeyDown);
 
-        private void metroUserControl1_Load(object sender, EventArgs e)
-        {
+			Textbox_left.Parent = Textbox_right.Parent = this.metroTabPage2;
+			Textbox_left.BindScroll(Textbox_right);
+		}
 
-        }
-
-        private void metroTile1_Click(object sender, EventArgs e)
-        {
-            metroTabControl1.SelectTab(metroTabPage2);
-           
-        }
-
-        private void metroTile2_Click(object sender, EventArgs e)
+		private void metroTile2_Click(object sender, EventArgs e)
         {
             metroTabControl1.SelectTab(metroTabPage3);
         }
@@ -463,10 +483,10 @@ namespace cs511_g11
 
 		private void FileCompare()
 		{
-			ArrayList _result = FileCompareUtils.CompareFile(Textbox_left.Text, Textbox_right.Text);
+			ArrayList _result = FileCompareUtils.CompareFile();
 
-			FileController _leftController = FileCompareUtils.m_controllerFileLeft;
-			FileController _rightController = FileCompareUtils.m_controllerFileRight;
+			TextController _leftController = FileCompareUtils.m_controllerFileLeft;
+			TextController _rightController = FileCompareUtils.m_controllerFileRight;
 
 			Textbox_left.Clear();
 			Textbox_right.Clear();
@@ -483,11 +503,6 @@ namespace cs511_g11
             sw.WriteLine(result);
             sw.Close();
 
-			//FileCompareUtils.AppendText(Textbox_left, ((TextLine)_leftController.GetByIndex(0)).m_content, Color.Black, Color.White);
-			//FileCompareUtils.AppendText(Textbox_left, ((TextLine)_leftController.GetByIndex(1)).m_content, Color.Green, Color.LightGreen);
-			//FileCompareUtils.AppendText(Textbox_left, ((TextLine)_leftController.GetByIndex(2)).m_content, Color.Red, Color.LightPink);
-
-
 			for (int i = 0; i < _result.Count; i++)
 			{
 				DiffResultSpan _item = ((DiffResultSpan)_result[i]);
@@ -497,8 +512,8 @@ namespace cs511_g11
 					case DiffResultSpanStatus.NoChange:
 						for(int j = 0; j < _item.Length; j++)
 						{
-							string _contentLeft = ((TextLine)_leftController.GetByIndex(_item.SourceIndex + j)).m_content;
-							string _contentRight = ((TextLine)_rightController.GetByIndex(_item.DestIndex + j)).m_content;
+							string _contentLeft = ((TextLine)_leftController.GetLineByIndex(_item.SourceIndex + j)).m_content;
+							string _contentRight = ((TextLine)_rightController.GetLineByIndex(_item.DestIndex + j)).m_content;
 
 							FileCompareUtils.AppendText(Textbox_left, _contentLeft, Color.Black, Color.White);
 							FileCompareUtils.AppendText(Textbox_right, _contentRight, Color.Black, Color.White);
@@ -507,8 +522,8 @@ namespace cs511_g11
 					case DiffResultSpanStatus.Replace:
 						for (int j = 0; j < _item.Length; j++)
 						{
-							string _contentLeft = ((TextLine)_leftController.GetByIndex(_item.SourceIndex + j)).m_content;
-							string _contentRight = ((TextLine)_rightController.GetByIndex(_item.DestIndex + j)).m_content;
+							string _contentLeft = ((TextLine)_leftController.GetLineByIndex(_item.SourceIndex + j)).m_content;
+							string _contentRight = ((TextLine)_rightController.GetLineByIndex(_item.DestIndex + j)).m_content;
 
 							FileCompareUtils.AppendText(Textbox_left, _contentLeft, Color.Red, Color.LightPink);
 							FileCompareUtils.AppendText(Textbox_right, _contentRight, Color.Red, Color.LightPink);
@@ -518,21 +533,27 @@ namespace cs511_g11
 						for (int j = 0; j < _item.Length; j++)
 						{
 							//string _contentLeft = ((TextLine)_leftController.GetByIndex(_item.SourceIndex + j)).m_content;
-							string _contentRight = ((TextLine)_rightController.GetByIndex(_item.DestIndex + j)).m_content;
+							string _contentRight = ((TextLine)_rightController.GetLineByIndex(_item.DestIndex + j)).m_content;
 
 							FileCompareUtils.AppendText(Textbox_left, "", Color.Red, Color.LightPink);
 							FileCompareUtils.AppendText(Textbox_right, _contentRight, Color.Red, Color.LightPink);
 						}
+
+						if (FileCompareUtils.m_controllerFileLeft.Lines.Count > 0)
+							((TextLine)FileCompareUtils.m_controllerFileLeft.GetLineByIndex(((DiffResultSpan)_result[i - 1]).SourceIndex)).m_ignoredLine += _item.Length;
 						break;
 					case DiffResultSpanStatus.DeleteSource:
 						for (int j = 0; j < _item.Length; j++)
 						{
-							string _contentLeft = ((TextLine)_leftController.GetByIndex(_item.SourceIndex + j)).m_content;
+							string _contentLeft = ((TextLine)_leftController.GetLineByIndex(_item.SourceIndex + j)).m_content;
 							//String _contentRight = ((TextLine)_rightController.GetByIndex(_item.DestIndex + j)).m_content;
 
 							FileCompareUtils.AppendText(Textbox_left, _contentLeft, Color.Red, Color.LightPink);
 							FileCompareUtils.AppendText(Textbox_right, "", Color.Red, Color.LightPink);
 						}
+
+						if(FileCompareUtils.m_controllerFileRight.Lines.Count > 0)
+							((TextLine)FileCompareUtils.m_controllerFileRight.GetLineByIndex(((DiffResultSpan)_result[i - 1]).DestIndex)).m_ignoredLine += _item.Length;
 						break;
 				}
 			}
@@ -553,8 +574,14 @@ namespace cs511_g11
 					{
 						using (_readStream)
 						{
+<<<<<<< HEAD
 							Textbox_left.Text = File.ReadAllText(_dialog.FileName);
                             File_1.Text = _dialog.FileName.ToString();
+=======
+							FileCompareUtils.m_controllerFileLeft.Clear();
+							FileCompareUtils.m_controllerFileLeft.Setup(File.ReadAllText(_dialog.FileName));
+							FileCompare();
+>>>>>>> 9d19c3f4897c3c7b83379de3dcb2fbf98401652d
 						}
 					}
 				}
@@ -562,9 +589,6 @@ namespace cs511_g11
 				{
 					MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
 				}
-
-				if (Textbox_right.Text != "")
-					FileCompare();
 			}
 		}
 
@@ -581,8 +605,14 @@ namespace cs511_g11
 					{
 						using (_readStream)
 						{
+<<<<<<< HEAD
 							Textbox_right.Text = File.ReadAllText(_dialog.FileName);
                             File_2.Text = _dialog.FileName.ToString();
+=======
+							FileCompareUtils.m_controllerFileRight.Clear();
+							FileCompareUtils.m_controllerFileRight.Setup(File.ReadAllText(_dialog.FileName));
+							FileCompare();
+>>>>>>> 9d19c3f4897c3c7b83379de3dcb2fbf98401652d
 						}
 					}
 				}
@@ -590,9 +620,6 @@ namespace cs511_g11
 				{
 					MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
 				}
-
-				if(Textbox_left.Text != "")
-					FileCompare();
 			}
 		}
 
@@ -610,7 +637,96 @@ namespace cs511_g11
 
 		private void Textbox_left_TextChanged(object sender, EventArgs e)
 		{
+			//FileCompare();
+		}
 
+		private void Textbox_right_TextChanged(object sender, EventArgs e)
+		{
+			//FileCompare();
+		}
+
+		private void Textbox_left_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			int _index = Textbox_left.SelectionStart;
+			int _currentLine = Textbox_left.GetLineFromCharIndex(_index);
+
+			int _firstCharIndex = Textbox_left.GetFirstCharIndexFromLine(_currentLine);
+
+			if (e.KeyChar == Convert.ToChar(Keys.Return))
+			{
+				string _content = Textbox_left.Lines[_currentLine];
+				string _previousLineContent = Textbox_left.Lines[_currentLine - 1];
+				FileCompareUtils.m_controllerFileLeft.UpdateLinesWithEnter(FileCompareUtils.m_controllerFileLeft.GetLine(_currentLine), _content, _previousLineContent);
+			}
+			else if (e.KeyChar == Convert.ToChar(Keys.Back))
+			{
+				string _content = Textbox_left.Lines[_currentLine];
+				FileCompareUtils.m_controllerFileLeft.UpdateLinesWithDelete(FileCompareUtils.m_controllerFileLeft.GetLine(_currentLine), _content);
+			}
+		}
+
+		private void Textbox_right_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			int _index = Textbox_right.SelectionStart;
+			int _currentLine = Textbox_right.GetLineFromCharIndex(_index);
+
+			int _firstCharIndex = Textbox_right.GetFirstCharIndexFromLine(_currentLine);
+
+			if (e.KeyChar == Convert.ToChar(Keys.Return))
+			{
+				string _content = Textbox_right.Lines[_currentLine];
+				string _previousLineContent = Textbox_right.Lines[_currentLine - 1];
+				FileCompareUtils.m_controllerFileRight.UpdateLinesWithEnter(FileCompareUtils.m_controllerFileRight.GetLine(_currentLine), _content, _previousLineContent);
+			}
+			else if (e.KeyChar == Convert.ToChar(Keys.Back))
+			{
+				string _content = Textbox_right.Lines[_currentLine];
+				FileCompareUtils.m_controllerFileRight.UpdateLinesWithDelete(FileCompareUtils.m_controllerFileRight.GetLine(_currentLine), _content);
+			}
+		}
+
+		private void Textbox_left_KeyUp(object sender, KeyEventArgs e)
+		{
+			int _index = Textbox_left.SelectionStart;
+			int _currentLine = Textbox_left.GetLineFromCharIndex(_index);
+
+			string _newContent = Textbox_left.Lines[_currentLine];
+			FileCompareUtils.m_controllerFileLeft.Update(FileCompareUtils.m_controllerFileLeft.GetLine(_currentLine), _newContent);
+		}
+
+		private void Textbox_right_KeyUp(object sender, KeyEventArgs e)
+		{
+			int _index = Textbox_right.SelectionStart;
+			int _currentLine = Textbox_right.GetLineFromCharIndex(_index);
+
+			string _newContent = Textbox_right.Lines[_currentLine];
+			FileCompareUtils.m_controllerFileRight.Update(FileCompareUtils.m_controllerFileRight.GetLine(_currentLine), _newContent);
+		}
+
+		private void Textbox_left_KeyDown(object sender, KeyEventArgs e)
+		{
+			int _index = Textbox_left.SelectionStart;
+			int _currentLine = Textbox_left.GetLineFromCharIndex(_index);
+
+			if (e.KeyCode == Keys.Delete)
+			{
+				string _content = Textbox_left.Lines[_currentLine];
+				string _previousContent = Textbox_left.Lines[_currentLine + 1];
+				FileCompareUtils.m_controllerFileLeft.UpdateLinesWithDelete(FileCompareUtils.m_controllerFileLeft.GetLine(_currentLine), _content + _previousContent);
+			}
+		}
+
+		private void Textbox_right_KeyDown(object sender, KeyEventArgs e)
+		{
+			int _index = Textbox_right.SelectionStart;
+			int _currentLine = Textbox_right.GetLineFromCharIndex(_index);
+
+			if (e.KeyCode == Keys.Delete)
+			{
+				string _content = Textbox_right.Lines[_currentLine];
+				string _previousContent = Textbox_right.Lines[_currentLine + 1];
+				FileCompareUtils.m_controllerFileRight.UpdateLinesWithDelete(FileCompareUtils.m_controllerFileRight.GetLine(_currentLine), _content + _previousContent);
+			}
 		}
 
         private void leftFileToolStripMenuItem_Click(object sender, EventArgs e)
