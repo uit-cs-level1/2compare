@@ -9,8 +9,8 @@ namespace cs511_g11
 {
 	public class FileCompareEngine
 	{
-		private FileController m_controllerFileLeft;
-		private FileController m_controllerFileRight;
+		private TextController m_controllerFileLeft;
+		private TextController m_controllerFileRight;
 
 		private ArrayList m_matchList;
 		private DiffStateList m_stateList;
@@ -20,7 +20,7 @@ namespace cs511_g11
 			int matchCount;
 			for (matchCount = 0; matchCount < maxLength; matchCount++)
 			{
-				if (m_controllerFileRight.GetByIndex(destIndex + matchCount).CompareTo(m_controllerFileLeft.GetByIndex(sourceIndex + matchCount)) != 0)
+				if (m_controllerFileRight.GetLineByIndex(destIndex + matchCount).CompareTo(m_controllerFileLeft.GetLineByIndex(sourceIndex + matchCount)) != 0)
 				{
 					break;
 				}
@@ -135,7 +135,7 @@ namespace cs511_g11
 			}
 		}
 
-		public void Setup(FileController controllerFileLeft, FileController controllerFileRight)
+		public void Setup(TextController controllerFileLeft, TextController controllerFileRight)
 		{
 			m_controllerFileLeft = controllerFileLeft;
 			m_controllerFileRight = controllerFileRight;
