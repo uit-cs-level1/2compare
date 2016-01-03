@@ -437,6 +437,21 @@ namespace cs511_g11
                 compare(treeView1, treeView2);
                 compare(treeView2, treeView1);
             }
+
+            // get history when compare text
+            
+            string ngay = DateTime.Now.Day.ToString();
+            string thang = DateTime.Now.Month.ToString();
+            string year = DateTime.Now.Year.ToString();
+            string hour = DateTime.Now.Hour.ToString();
+            string min = DateTime.Now.Minute.ToString();
+            string second = DateTime.Now.Second.ToString();
+            string result = ngay + "/" + thang + "/" + year + "........" + hour + ":" + min + ":" + second + " Compare folder";
+            string path = @"../../Datas/History.txt";
+            StreamWriter sw = new StreamWriter(path,true);
+            sw.WriteLine(result);
+            sw.Close();
+         
         }
 
 		///////////////////////////////////////////////////////////////////////////////
@@ -455,6 +470,18 @@ namespace cs511_g11
 
 			Textbox_left.Clear();
 			Textbox_right.Clear();
+            // get history when compare
+            string ngay = DateTime.Now.Day.ToString();
+            string thang = DateTime.Now.Month.ToString();
+            string year = DateTime.Now.Year.ToString();
+            string hour = DateTime.Now.Hour.ToString();
+            string min = DateTime.Now.Minute.ToString();
+            string second = DateTime.Now.Second.ToString();
+            string result = ngay + "/" + thang + "/" + year + "........" + hour + ":" + min + ":" + second + " Compare Text";
+            string path = @"../../Datas/History.txt";
+            StreamWriter sw = new StreamWriter(path, true);
+            sw.WriteLine(result);
+            sw.Close();
 
 			//FileCompareUtils.AppendText(Textbox_left, ((TextLine)_leftController.GetByIndex(0)).m_content, Color.Black, Color.White);
 			//FileCompareUtils.AppendText(Textbox_left, ((TextLine)_leftController.GetByIndex(1)).m_content, Color.Green, Color.LightGreen);
@@ -527,6 +554,7 @@ namespace cs511_g11
 						using (_readStream)
 						{
 							Textbox_left.Text = File.ReadAllText(_dialog.FileName);
+                            File_1.Text = _dialog.FileName.ToString();
 						}
 					}
 				}
@@ -554,6 +582,7 @@ namespace cs511_g11
 						using (_readStream)
 						{
 							Textbox_right.Text = File.ReadAllText(_dialog.FileName);
+                            File_2.Text = _dialog.FileName.ToString();
 						}
 					}
 				}
@@ -574,12 +603,59 @@ namespace cs511_g11
 
 		private void TextCompare_Compare_Click(object sender, EventArgs e)
 		{
-			FileCompare();
+           
+
+            
 		}
 
 		private void Textbox_left_TextChanged(object sender, EventArgs e)
 		{
 
 		}
+
+        private void leftFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                    StreamWriter sw = new StreamWriter(File_1.Text.Trim());
+                    sw.WriteLine(Textbox_left.Text);
+                    sw.Close();
+
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Form1", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void rightFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                StreamWriter sw = new StreamWriter(File_2.Text.Trim());
+                sw.Write(Textbox_left.Text);
+                sw.Close();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Form1", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void history_Click(object sender, EventArgs e)
+        {
+            string path = @"../../Datas/History.txt";
+            StreamReader a = new StreamReader(path);
+            _hisry.Text = a.ReadToEnd();
+            a.Close();
+
+        }
+
+        
 	}
 }
