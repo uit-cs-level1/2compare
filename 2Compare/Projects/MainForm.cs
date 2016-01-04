@@ -753,7 +753,9 @@ namespace cs511_g11
             }
         }*/
 
-        private void history_Click(object sender, EventArgs e)
+       
+
+        private void history_btn_Click(object sender, EventArgs e)
         {
             string path = @"../../Datas/History.txt";
             StreamReader a = new StreamReader(path);
