@@ -571,6 +571,7 @@ namespace cs511_g11
 		{
 			OpenFileDialog _dialog = new OpenFileDialog();
 			Stream _readStream = null;
+           
 
 			if (_dialog.ShowDialog() == DialogResult.OK)
 			{
@@ -583,6 +584,7 @@ namespace cs511_g11
 							Textbox_left.m_textController.Clear();
 							Textbox_left.m_textController.Setup(File.ReadAllText(_dialog.FileName));
 							Textbox_left.m_path = _dialog.FileName;
+                            File_1.Text = _dialog.FileName.ToString();
 							FileCompare();
 						}
 					}
@@ -610,6 +612,7 @@ namespace cs511_g11
 							Textbox_right.m_textController.Clear();
 							Textbox_right.m_textController.Setup(File.ReadAllText(_dialog.FileName));
 							Textbox_right.m_path = _dialog.FileName;
+                            File_2.Text = _dialog.FileName.ToString();
 							FileCompare();
 						}
 					}

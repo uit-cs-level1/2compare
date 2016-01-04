@@ -60,3 +60,9 @@
 4/1/2016........21:0:6 Compare Text
 4/1/2016........21:6:8 Compare Text
 4/1/2016........21:6:15 Compare Text
+4/1/2016........21:8:47 Compare Text
+4/1/2016........21:8:50 Compare Text
+4/1/2016........21:11:17 Compare Text
+4/1/2016........21:12:0 Compare Text
+4/1/2016........21:14:10 Compare Text
+4/1/2016........21:14:14 Compare Text
