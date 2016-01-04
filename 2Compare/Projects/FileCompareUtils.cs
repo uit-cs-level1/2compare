@@ -179,18 +179,18 @@ namespace cs511_g11
 			}
 		}
 
-		public static void AppendText(this RichTextBox box, string text, Color foreColor, Color backColor)
+		public static void AppendText(this RichTextBoxSynchronizedScroll box, string text, Color foreColor, Color backColor)
 		{
 			text += '\n';
 
 			box.SelectionStart = box.TextLength;
-			box.SelectionLength = text.Length + 50;
-
-			string _newText = text + new string(' ', 50);
+			box.SelectionLength = text.Length;
 
 			box.SelectionColor = foreColor;
 			box.SelectionBackColor = backColor;
-			box.AppendText(_newText);
+			box.AppendText(text);
+
+			box.PaintLineHighlight();
 		}
 	}
 }
