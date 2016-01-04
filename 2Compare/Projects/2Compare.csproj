@@ -67,7 +67,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScrollController.cs">
+    <Compile Include="RichTextBoxAdvanced.cs">
       <SubType>Component</SubType>
     </Compile>
     <EmbeddedResource Include="MainForm.resx">

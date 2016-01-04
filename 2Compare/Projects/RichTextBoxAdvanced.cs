@@ -9,19 +9,19 @@ using System.Windows.Forms;
 
 namespace cs511_g11
 {
-	public class RichTextBoxSynchronizedScroll : RichTextBox
+	public class RichTextBoxAdvanced : RichTextBox
 	{
 		private const int WM_VSCROLL = 0x115;
 		private const int WM_HSCROLL = 0x114;
 		private const int WM_MOUSEWHEEL = 0x20a;
 
-		private List<RichTextBoxSynchronizedScroll> peers = new List<RichTextBoxSynchronizedScroll>();
+		private List<RichTextBoxAdvanced> peers = new List<RichTextBoxAdvanced>();
 
 		/// <summary>
 		/// Establish a 2-way binding between RTBs for scrolling.
 		/// </summary>
 		/// <param name="arg">Another RTB</param>
-		public void BindScroll(RichTextBoxSynchronizedScroll arg)
+		public void BindScroll(RichTextBoxAdvanced arg)
 		{
 			if (peers.Contains(arg) || arg == this) { return; }
 			peers.Add(arg);
@@ -37,7 +37,7 @@ namespace cs511_g11
 		{
 			if (m.Msg == WM_VSCROLL || m.Msg == WM_HSCROLL || m.Msg == WM_MOUSEWHEEL)
 			{
-				foreach (RichTextBoxSynchronizedScroll peer in this.peers)
+				foreach (RichTextBoxAdvanced peer in this.peers)
 				{
 					Message peerMessage = Message.Create(peer.Handle, m.Msg, m.WParam, m.LParam);
 					peer.DirectWndProc(ref peerMessage);
@@ -154,5 +154,8 @@ namespace cs511_g11
 			return Math.Max(si.nMax, this.Height);
 		}
 		#endregion
+
+		public TextController m_textController;
+		public string m_path;
 	}
 }

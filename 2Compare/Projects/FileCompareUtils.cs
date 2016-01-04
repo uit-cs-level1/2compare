@@ -17,7 +17,8 @@ namespace cs511_g11
 		{
 			m_content = str.Replace("\t", "    ");
 			m_content = m_content.Replace("\n", "");
-			m_hashCode = str.GetHashCode();
+			m_content = m_content.Replace("\r", "");
+			m_hashCode = m_content.GetHashCode();
 
 			m_ignoredLine = 0;
 		}
@@ -26,7 +27,7 @@ namespace cs511_g11
 		{
 			m_content = str.Replace("\t", "    ");
 			m_content = m_content.Replace("\n", "");
-			m_hashCode = str.GetHashCode();
+			m_hashCode = m_content.GetHashCode();
 		}
 
 		public int CompareTo(object obj)
@@ -153,17 +154,14 @@ namespace cs511_g11
 
 	public static class FileCompareUtils
 	{
-		public static TextController m_controllerFileLeft = null;
-		public static TextController m_controllerFileRight = null;
-
-		public static ArrayList CompareFile()
+		public static ArrayList CompareFile(TextController leftController, TextController rightController)
 		{
 			try
 			{
 				double _time = 0;
 				FileCompareEngine _engine = new FileCompareEngine();
 
-				_engine.Setup(m_controllerFileLeft, m_controllerFileRight);
+				_engine.Setup(leftController, rightController);
 				_time = _engine.Execute();
 
 				return _engine.GetResult();
@@ -179,7 +177,7 @@ namespace cs511_g11
 			}
 		}
 
-		public static void AppendText(this RichTextBoxSynchronizedScroll box, string text, Color foreColor, Color backColor)
+		public static void AppendText(this RichTextBoxAdvanced box, string text, Color foreColor, Color backColor)
 		{
 			text += '\n';
 
