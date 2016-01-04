@@ -1,12 +1,7 @@
-Cũng như con người, máy tính cũng "nói" các ngôn ngữ khác nhau. 
-Một số “đọc” và “ghi” từ trái sang phải, trong khi một số khác thì ngược lại. 
-Một bộ máy có thể xử lý dữ liệu được tạo ra bởi nó một cách bình thường. 
-Vấn đề xảy ra khi một bộ máy “khác loại” cố gắng đọc dữ liệu đó. 
-Thuật ngữ “big endian” và “little endian” diễn tả sự khác nhau về cách đọc và ghi dữ liệu giữa các nền tảng máy tính. 
-Tôi là Rye Nguyễn.
-Bài viết sẽ cung cấp cho các bạn một số kiến thức về big và little endian.
+Trong bất cứ một ngôn ngữ lập trình nào, 
+việc tương tác trực tiếp với máy tính là rất quan trọng và cần thiết. 
 
-
-le thi tuyet mai
-
-abcd
+Một chương trình được viết ra cần có khả năng nhận dữ liệu từ người dùng 
+và hiển thị những kết quả thu được sau tính toán. 
+Do đó việc thành thạo trong việc nhập/xuất dữ liệu là điều không thể thiếu đối với mỗi lập trình viên. 
+Bài viết này sẽ giúp các bạn hiểu rõ hơn về thao tác nhập/xuất dữ liệu thông qua phương tiện nhập xuất chuẩn.

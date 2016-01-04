@@ -185,10 +185,26 @@ namespace cs511_g11
 			box.SelectionLength = text.Length;
 
 			box.SelectionColor = foreColor;
-			box.SelectionBackColor = backColor;
+			//box.SelectionBackColor = backColor;
 			box.AppendText(text);
+		}
 
-			box.PaintLineHighlight();
+		public static void Highlighting(this RichTextBoxAdvanced box, int index, Color highlightColor)
+		{
+			int _lineWidth = System.Windows.Forms.SystemInformation.VerticalScrollBarWidth;
+			int _lineHeight = Convert.ToInt32(box.Font.Height * box.ZoomFactor);
+
+			using (Graphics g = box.CreateGraphics())
+			{
+				Pen _pen = new Pen(highlightColor, 2);
+				Brush brush = new SolidBrush(highlightColor);
+
+				Rectangle _line = new Rectangle(0, _lineHeight * index, 500, _lineHeight);
+
+				g.DrawRectangle(_pen, _line);
+
+				_pen.Dispose();
+			}
 		}
 	}
 }
