@@ -2,3 +2,5 @@
 3/1/2016........20:52:26 Compare Text
 4/1/2016........7:5:19 Compare Text
 4/1/2016........7:5:23 Compare Text
+4/1/2016........7:10:5 Compare Text
+4/1/2016........7:10:10 Compare Text
