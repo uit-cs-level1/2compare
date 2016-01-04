@@ -28,17 +28,6 @@ namespace cs511_g11
 			Textbox_right.m_textController.Clear();
 
 			m_focusTextBox = Textbox_left;
-
-			foreach (Control ctrl in Controls)
-			{
-				if (ctrl is RichTextBoxAdvanced)
-				{
-					ctrl.Enter += delegate (object sender, EventArgs e)
-					{
-						m_focusTextBox = (RichTextBoxAdvanced)sender;
-					};
-				}
-			}
 		}
 
 		private void SetupRichTextbox()
@@ -763,7 +752,7 @@ namespace cs511_g11
 			m_focusTextBox = Textbox_right;
 		}
 
-		private void history_Click(object sender, EventArgs e)
+        private void history_btn_Click(object sender, EventArgs e)
         {
             string path = @"../../Datas/History.txt";
             StreamReader a = new StreamReader(path);
