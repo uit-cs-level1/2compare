@@ -457,6 +457,21 @@ namespace cs511_g11
                 compare(treeView1, treeView2);
                 compare(treeView2, treeView1);
             }
+
+            // get history when compare text
+            
+            string ngay = DateTime.Now.Day.ToString();
+            string thang = DateTime.Now.Month.ToString();
+            string year = DateTime.Now.Year.ToString();
+            string hour = DateTime.Now.Hour.ToString();
+            string min = DateTime.Now.Minute.ToString();
+            string second = DateTime.Now.Second.ToString();
+            string result = ngay + "/" + thang + "/" + year + "........" + hour + ":" + min + ":" + second + " Compare folder";
+            string path = @"../../Datas/History.txt";
+            StreamWriter sw = new StreamWriter(path,true);
+            sw.WriteLine(result);
+            sw.Close();
+         
         }
 
 		///////////////////////////////////////////////////////////////////////////////
@@ -475,6 +490,18 @@ namespace cs511_g11
 
 			Textbox_left.Clear();
 			Textbox_right.Clear();
+            // get history when compare
+            string ngay = DateTime.Now.Day.ToString();
+            string thang = DateTime.Now.Month.ToString();
+            string year = DateTime.Now.Year.ToString();
+            string hour = DateTime.Now.Hour.ToString();
+            string min = DateTime.Now.Minute.ToString();
+            string second = DateTime.Now.Second.ToString();
+            string result = ngay + "/" + thang + "/" + year + "........" + hour + ":" + min + ":" + second + " Compare Text";
+            string path = @"../../Datas/History.txt";
+            StreamWriter sw = new StreamWriter(path, true);
+            sw.WriteLine(result);
+            sw.Close();
 
 			for (int i = 0; i < _result.Count; i++)
 			{
@@ -482,7 +509,7 @@ namespace cs511_g11
 
 				switch (_item.Status)
 				{
-					case DiffResultSpanStatus.NoChange:
+					case DiffResultSpanStatus.SameText:
 						for(int j = 0; j < _item.Length; j++)
 						{
 							string _contentLeft = ((TextLine)_leftController.GetLineByIndex(_item.SourceIndex + j)).m_content;
@@ -492,7 +519,7 @@ namespace cs511_g11
 							FileCompareUtils.AppendText(Textbox_right, _contentRight, Color.Black, Color.White);
 						}
 						break;
-					case DiffResultSpanStatus.Replace:
+					case DiffResultSpanStatus.DiffrenentText:
 						for (int j = 0; j < _item.Length; j++)
 						{
 							string _contentLeft = ((TextLine)_leftController.GetLineByIndex(_item.SourceIndex + j)).m_content;
@@ -502,7 +529,7 @@ namespace cs511_g11
 							FileCompareUtils.AppendText(Textbox_right, _contentRight, Color.Red, Color.LightPink);
 						}
 						break;
-					case DiffResultSpanStatus.AddDestination:
+					case DiffResultSpanStatus.LeftNotExist:
 						for (int j = 0; j < _item.Length; j++)
 						{
 							//string _contentLeft = ((TextLine)_leftController.GetByIndex(_item.SourceIndex + j)).m_content;
@@ -515,7 +542,7 @@ namespace cs511_g11
 						if (FileCompareUtils.m_controllerFileLeft.Lines.Count > 0)
 							((TextLine)FileCompareUtils.m_controllerFileLeft.GetLineByIndex(((DiffResultSpan)_result[i - 1]).SourceIndex)).m_ignoredLine += _item.Length;
 						break;
-					case DiffResultSpanStatus.DeleteSource:
+					case DiffResultSpanStatus.RightNotExist:
 						for (int j = 0; j < _item.Length; j++)
 						{
 							string _contentLeft = ((TextLine)_leftController.GetLineByIndex(_item.SourceIndex + j)).m_content;
@@ -593,7 +620,9 @@ namespace cs511_g11
 
 		private void TextCompare_Compare_Click(object sender, EventArgs e)
 		{
-			FileCompare();
+           
+
+            
 		}
 
 		private void Textbox_left_TextChanged(object sender, EventArgs e)
@@ -652,7 +681,7 @@ namespace cs511_g11
 			int _currentLine = Textbox_left.GetLineFromCharIndex(_index);
 
 			string _newContent = Textbox_left.Lines[_currentLine];
-			FileCompareUtils.m_controllerFileLeft.Update(FileCompareUtils.m_controllerFileLeft.GetLine(_currentLine), _newContent);
+			FileCompareUtils.m_controllerFileLeft.UpdateLine(FileCompareUtils.m_controllerFileLeft.GetLine(_currentLine), _newContent);
 		}
 
 		private void Textbox_right_KeyUp(object sender, KeyEventArgs e)
@@ -661,7 +690,7 @@ namespace cs511_g11
 			int _currentLine = Textbox_right.GetLineFromCharIndex(_index);
 
 			string _newContent = Textbox_right.Lines[_currentLine];
-			FileCompareUtils.m_controllerFileRight.Update(FileCompareUtils.m_controllerFileRight.GetLine(_currentLine), _newContent);
+			FileCompareUtils.m_controllerFileRight.UpdateLine(FileCompareUtils.m_controllerFileRight.GetLine(_currentLine), _newContent);
 		}
 
 		private void Textbox_left_KeyDown(object sender, KeyEventArgs e)
@@ -689,5 +718,47 @@ namespace cs511_g11
 				FileCompareUtils.m_controllerFileRight.UpdateLinesWithDelete(FileCompareUtils.m_controllerFileRight.GetLine(_currentLine), _content + _previousContent);
 			}
 		}
+
+        /*private void leftFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                    StreamWriter sw = new StreamWriter(File_1.Text.Trim());
+                    sw.WriteLine(Textbox_left.Text);
+                    sw.Close();
+
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "MainForm", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void rightFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                StreamWriter sw = new StreamWriter(File_2.Text.Trim());
+                sw.Write(Textbox_left.Text);
+                sw.Close();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "MainForm", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }*/
+
+        private void history_Click(object sender, EventArgs e)
+        {
+            string path = @"../../Datas/History.txt";
+            StreamReader a = new StreamReader(path);
+            History.Text = a.ReadToEnd();
+            a.Close();
+        }
 	}
 }

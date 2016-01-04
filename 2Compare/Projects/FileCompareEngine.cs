@@ -88,7 +88,7 @@ namespace cs511_g11
 					//recalc new best length since it isn't valid or has never been done.
 					GetLongestSourceMatch(curItem, destIndex, destEnd, sourceStart, sourceEnd);
 				}
-				if (curItem.Status == DiffStatus.Matched)
+				if (curItem.Status == Status.Matched)
 				{
 					if (curItem.Length > curBestLength)
 					{

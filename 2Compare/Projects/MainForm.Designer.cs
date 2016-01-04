@@ -1,33 +1,33 @@
 ﻿namespace cs511_g11
 {
-    partial class MainForm
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class MainForm
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
@@ -47,6 +47,7 @@
 			this.treeView1 = new System.Windows.Forms.TreeView();
 			this.metroButton2 = new MetroFramework.Controls.MetroButton();
 			this.metroTabPage4 = new MetroFramework.Controls.MetroTabPage();
+			this.History = new System.Windows.Forms.RichTextBox();
 			this.metroRadioButton2 = new MetroFramework.Controls.MetroRadioButton();
 			this.White = new MetroFramework.Controls.MetroRadioButton();
 			this.metroTrackBar2 = new MetroFramework.Controls.MetroTrackBar();
@@ -66,6 +67,7 @@
 			this.metroContextMenu2 = new MetroFramework.Controls.MetroContextMenu(this.components);
 			this.addFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.compareToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.history_btn = new MetroFramework.Controls.MetroButton();
 			this.metroTabControl1.SuspendLayout();
 			this.metroTabPage1.SuspendLayout();
 			this.metroTabPage2.SuspendLayout();
@@ -87,7 +89,7 @@
 			this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.metroTabControl1.Location = new System.Drawing.Point(23, 60);
 			this.metroTabControl1.Name = "metroTabControl1";
-			this.metroTabControl1.SelectedIndex = 1;
+			this.metroTabControl1.SelectedIndex = 3;
 			this.metroTabControl1.Size = new System.Drawing.Size(978, 520);
 			this.metroTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
 			this.metroTabControl1.TabIndex = 0;
@@ -288,6 +290,8 @@
 			// 
 			// metroTabPage4
 			// 
+			this.metroTabPage4.Controls.Add(this.history_btn);
+			this.metroTabPage4.Controls.Add(this.History);
 			this.metroTabPage4.Controls.Add(this.metroRadioButton2);
 			this.metroTabPage4.Controls.Add(this.White);
 			this.metroTabPage4.Controls.Add(this.metroTrackBar2);
@@ -305,6 +309,14 @@
 			this.metroTabPage4.VerticalScrollbarHighlightOnWheel = false;
 			this.metroTabPage4.VerticalScrollbarSize = 3;
 			this.metroTabPage4.Click += new System.EventHandler(this.metroTabPage4_Click);
+			// 
+			// History
+			// 
+			this.History.Location = new System.Drawing.Point(502, 51);
+			this.History.Name = "History";
+			this.History.Size = new System.Drawing.Size(465, 407);
+			this.History.TabIndex = 8;
+			this.History.Text = "";
 			// 
 			// metroRadioButton2
 			// 
@@ -474,6 +486,16 @@
 			this.compareToolStripMenuItem1.Text = "Compare";
 			this.compareToolStripMenuItem1.Click += new System.EventHandler(this.compareToolStripMenuItem1_Click);
 			// 
+			// history_btn
+			// 
+			this.history_btn.Location = new System.Drawing.Point(16, 186);
+			this.history_btn.Name = "history_btn";
+			this.history_btn.Size = new System.Drawing.Size(112, 23);
+			this.history_btn.TabIndex = 9;
+			this.history_btn.Text = "Show History";
+			this.history_btn.UseSelectable = true;
+			this.history_btn.UseStyleColors = true;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -506,46 +528,48 @@
 			this.metroContextMenu2.ResumeLayout(false);
 			this.ResumeLayout(false);
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private MetroFramework.Controls.MetroTabControl metroTabControl1;
-        private MetroFramework.Controls.MetroTabPage metroTabPage1;
-        private MetroFramework.Controls.MetroTabPage metroTabPage3;
-        private MetroFramework.Controls.MetroTabPage metroTabPage4;
-        private MetroFramework.Controls.MetroTabPage metroTabPage5;
-        private MetroFramework.Controls.MetroTile metroTile1;
-        private MetroFramework.Controls.MetroLabel metroLabel2;
-        private MetroFramework.Controls.MetroTile metroTile2;
-        private MetroFramework.Controls.MetroUserControl metroUserControl1;
-        private MetroFramework.Components.MetroToolTip metroToolTip1;
-        private MetroFramework.Components.MetroStyleManager metroStyleManager;
-        private MetroFramework.Components.MetroStyleExtender metroStyleExtender;
-        private MetroFramework.Controls.MetroContextMenu TextCompareMenu;
-        private System.Windows.Forms.ToolStripMenuItem TextCompare_AddFile;
-        private System.Windows.Forms.ToolStripMenuItem TextCompare_Save;
-        private MetroFramework.Controls.MetroButton metroButton2;
-        private System.Windows.Forms.ToolStripMenuItem TextCompare_Compare;
-        private MetroFramework.Controls.MetroTrackBar metroTrackBar2;
-        private MetroFramework.Controls.MetroButton metroButton4;
-        private MetroFramework.Controls.MetroButton metroButton3;
-        private MetroFramework.Controls.MetroRadioButton metroRadioButton2;
-        private MetroFramework.Controls.MetroRadioButton White;
-        private MetroFramework.Controls.MetroLabel metroLabel1;
-        private MetroFramework.Controls.MetroContextMenu metroContextMenu2;
-        private System.Windows.Forms.ToolStripMenuItem addFolderToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem compareToolStripMenuItem1;
-        private System.Windows.Forms.TreeView treeView2;
-        private MetroFramework.Controls.MetroLabel metroLabel4;
-        private MetroFramework.Controls.MetroLabel metroLabel3;
-        private System.Windows.Forms.TreeView treeView1;
+		private MetroFramework.Controls.MetroTabControl metroTabControl1;
+		private MetroFramework.Controls.MetroTabPage metroTabPage1;
+		private MetroFramework.Controls.MetroTabPage metroTabPage3;
+		private MetroFramework.Controls.MetroTabPage metroTabPage4;
+		private MetroFramework.Controls.MetroTabPage metroTabPage5;
+		private MetroFramework.Controls.MetroTile metroTile1;
+		private MetroFramework.Controls.MetroLabel metroLabel2;
+		private MetroFramework.Controls.MetroTile metroTile2;
+		private MetroFramework.Controls.MetroUserControl metroUserControl1;
+		private MetroFramework.Components.MetroToolTip metroToolTip1;
+		private MetroFramework.Components.MetroStyleManager metroStyleManager;
+		private MetroFramework.Components.MetroStyleExtender metroStyleExtender;
+		private MetroFramework.Controls.MetroContextMenu TextCompareMenu;
+		private System.Windows.Forms.ToolStripMenuItem TextCompare_AddFile;
+		private System.Windows.Forms.ToolStripMenuItem TextCompare_Save;
+		private MetroFramework.Controls.MetroButton metroButton2;
+		private System.Windows.Forms.ToolStripMenuItem TextCompare_Compare;
+		private MetroFramework.Controls.MetroTrackBar metroTrackBar2;
+		private MetroFramework.Controls.MetroButton metroButton4;
+		private MetroFramework.Controls.MetroButton metroButton3;
+		private MetroFramework.Controls.MetroRadioButton metroRadioButton2;
+		private MetroFramework.Controls.MetroRadioButton White;
+		private MetroFramework.Controls.MetroLabel metroLabel1;
+		private MetroFramework.Controls.MetroContextMenu metroContextMenu2;
+		private System.Windows.Forms.ToolStripMenuItem addFolderToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem compareToolStripMenuItem1;
+		private System.Windows.Forms.TreeView treeView2;
+		private MetroFramework.Controls.MetroLabel metroLabel4;
+		private MetroFramework.Controls.MetroLabel metroLabel3;
+		private System.Windows.Forms.TreeView treeView1;
 		private MetroFramework.Controls.MetroTabPage metroTabPage2;
 		private MetroFramework.Controls.MetroLabel File_2;
 		private MetroFramework.Controls.MetroLabel File_1;
 		private MetroFramework.Controls.MetroButton FileCompareToolbox;
 		private System.Windows.Forms.ToolStripMenuItem Add_LeftFile;
 		private System.Windows.Forms.ToolStripMenuItem Add_RightFile;
+		private System.Windows.Forms.RichTextBox History;
+		private MetroFramework.Controls.MetroButton history_btn;
 	}
 }
 

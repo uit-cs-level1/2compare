@@ -16,6 +16,7 @@ namespace cs511_g11
 		public TextLine(string str)
 		{
 			m_content = str.Replace("\t", "    ");
+			m_content = m_content.Replace("\n", "");
 			m_hashCode = str.GetHashCode();
 
 			m_ignoredLine = 0;
@@ -24,6 +25,7 @@ namespace cs511_g11
 		public void ReplaceContent(string str)
 		{
 			m_content = str.Replace("\t", "    ");
+			m_content = m_content.Replace("\n", "");
 			m_hashCode = str.GetHashCode();
 		}
 
@@ -66,23 +68,23 @@ namespace cs511_g11
 		{
 			string[] _tokens = fileContent.Split('\n');
 
-			foreach (string item in _tokens)
+			foreach (string _item in _tokens)
 			{
-				if (item.Length > m_limitedLineLength)
+				if (_item.Length > m_limitedLineLength)
 				{
 					throw new InvalidOperationException(
 						string.Format("File contains a line greater than {0} characters.",
 						m_limitedLineLength.ToString()));
 				}
 
-				if (item.Length > m_maxLength)
-					m_maxLength = item.Length;
+				if (_item.Length > m_maxLength)
+					m_maxLength = _item.Length;
 
-				m_lines.Add(new TextLine(item));
+				m_lines.Add(new TextLine(_item));
 			}
 		}
 
-		public void Update(int index, string content)
+		public void UpdateLine(int index, string content)
 		{
 			((TextLine)GetLineByIndex(index)).ReplaceContent(content);
 
@@ -111,22 +113,12 @@ namespace cs511_g11
 				m_maxLength = content.Length;
 		}
 
-		public int Count()
-		{
-			return m_lines.Count;
-		}
-
 		public IComparable GetLineByIndex(int index)
 		{
 			if (m_lines.Count == index)
 				m_lines.Add(new TextLine(""));
 
 			return (TextLine)m_lines[index];
-		}
-
-		public void Clear()
-		{
-			m_lines.Clear();
 		}
 
 		public int GetLine(int index)
@@ -147,6 +139,16 @@ namespace cs511_g11
 
 			return _currentLine;
 		}
+
+		public int Count()
+		{
+			return m_lines.Count;
+		}
+
+		public void Clear()
+		{
+			m_lines.Clear();
+		}
 	}
 
 	public static class FileCompareUtils
@@ -158,11 +160,11 @@ namespace cs511_g11
 		{
 			try
 			{
-				double time = 0;
+				double _time = 0;
 				FileCompareEngine _engine = new FileCompareEngine();
 
 				_engine.Setup(m_controllerFileLeft, m_controllerFileRight);
-				time = _engine.Execute();
+				_time = _engine.Execute();
 
 				return _engine.GetResult();
 			}
@@ -182,11 +184,13 @@ namespace cs511_g11
 			text += '\n';
 
 			box.SelectionStart = box.TextLength;
-			box.SelectionLength = text.Length;
+			box.SelectionLength = text.Length + 50;
+
+			string _newText = text + new string(' ', 50);
 
 			box.SelectionColor = foreColor;
 			box.SelectionBackColor = backColor;
-			box.AppendText(text);
+			box.AppendText(_newText);
 		}
 	}
 }

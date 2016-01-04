@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace cs511_g11
 {
-	internal enum DiffStatus
+	internal enum Status
 	{
 		Matched = 1,
-		NoMatch = -1,
+		NotMatched = -1,
 		Unknown = -2
 
 	}
@@ -45,25 +45,25 @@ namespace cs511_g11
 				return len;
 			}
 		}
-		public DiffStatus Status
+		public Status Status
 		{
 			get
 			{
-				DiffStatus stat;
+				Status stat;
 				if (_length > 0)
 				{
-					stat = DiffStatus.Matched;
+					stat = Status.Matched;
 				}
 				else
 				{
 					switch (_length)
 					{
 						case -1:
-							stat = DiffStatus.NoMatch;
+							stat = Status.NotMatched;
 							break;
 						default:
 							System.Diagnostics.Debug.Assert(_length == -2, "Invalid status: _length < -2");
-							stat = DiffStatus.Unknown;
+							stat = Status.Unknown;
 							break;
 					}
 				}
@@ -79,7 +79,7 @@ namespace cs511_g11
 		protected void SetToUnkown()
 		{
 			_startIndex = BAD_INDEX;
-			_length = (int)DiffStatus.Unknown;
+			_length = (int)Status.Unknown;
 		}
 
 		public void SetMatch(int start, int length)
@@ -93,7 +93,7 @@ namespace cs511_g11
 		public void SetNoMatch()
 		{
 			_startIndex = BAD_INDEX;
-			_length = (int)DiffStatus.NoMatch;
+			_length = (int)Status.NotMatched;
 		}
 
 
@@ -107,7 +107,7 @@ namespace cs511_g11
 					SetToUnkown();
 				}
 			}
-			return (_length != (int)DiffStatus.Unknown);
+			return (_length != (int)Status.Unknown);
 		}
 	}
 
@@ -151,10 +151,10 @@ namespace cs511_g11
 
 	public enum DiffResultSpanStatus
 	{
-		NoChange,
-		Replace,
-		DeleteSource,
-		AddDestination
+		SameText,
+		DiffrenentText,
+		RightNotExist,
+		LeftNotExist
 	}
 
 	public class DiffResultSpan : IComparable
@@ -184,22 +184,22 @@ namespace cs511_g11
 
 		public static DiffResultSpan CreateNoChange(int destIndex, int sourceIndex, int length)
 		{
-			return new DiffResultSpan(DiffResultSpanStatus.NoChange, destIndex, sourceIndex, length);
+			return new DiffResultSpan(DiffResultSpanStatus.SameText, destIndex, sourceIndex, length);
 		}
 
 		public static DiffResultSpan CreateReplace(int destIndex, int sourceIndex, int length)
 		{
-			return new DiffResultSpan(DiffResultSpanStatus.Replace, destIndex, sourceIndex, length);
+			return new DiffResultSpan(DiffResultSpanStatus.DiffrenentText, destIndex, sourceIndex, length);
 		}
 
 		public static DiffResultSpan CreateDeleteSource(int sourceIndex, int length)
 		{
-			return new DiffResultSpan(DiffResultSpanStatus.DeleteSource, BAD_INDEX, sourceIndex, length);
+			return new DiffResultSpan(DiffResultSpanStatus.RightNotExist, BAD_INDEX, sourceIndex, length);
 		}
 
 		public static DiffResultSpan CreateAddDestination(int destIndex, int length)
 		{
-			return new DiffResultSpan(DiffResultSpanStatus.AddDestination, destIndex, BAD_INDEX, length);
+			return new DiffResultSpan(DiffResultSpanStatus.LeftNotExist, destIndex, BAD_INDEX, length);
 		}
 
 		public void AddLength(int i)
