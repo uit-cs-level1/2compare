@@ -185,7 +185,7 @@ namespace cs511_g11
 			box.SelectionLength = text.Length;
 
 			box.SelectionColor = foreColor;
-			//box.SelectionBackColor = backColor;
+			box.SelectionBackColor = backColor;
 			box.AppendText(text);
 		}
 

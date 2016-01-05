@@ -193,7 +193,6 @@
 			this.metroTabPage2.VerticalScrollbarBarColor = true;
 			this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
 			this.metroTabPage2.VerticalScrollbarSize = 3;
-			this.metroTabPage2.Paint += new System.Windows.Forms.PaintEventHandler(this.metroTabPage2_Paint);
 			// 
 			// TextBoxLeft
 			// 

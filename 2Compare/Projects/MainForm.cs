@@ -25,8 +25,6 @@ namespace cs511_g11
 			TextBoxRight.m_textController.Clear();
 
 			m_focusTextBox = TextBoxLeft;
-
-			FileCompareUtils.Highlighting(TextBoxLeft, 2, Color.LightPink);
 		}
 
 		private void SetupRichTextbox()
@@ -500,8 +498,8 @@ namespace cs511_g11
 							FileCompareUtils.AppendText(TextBoxLeft, _contentLeft, Color.Red, Color.LightPink);
 							FileCompareUtils.AppendText(TextBoxRight, _contentRight, Color.Red, Color.LightPink);
 
-							FileCompareUtils.Highlighting(TextBoxLeft, _item.SourceIndex + j, Color.LightPink);
-							FileCompareUtils.Highlighting(TextBoxRight, _item.DestIndex + j, Color.LightPink);
+							//FileCompareUtils.Highlighting(TextBoxLeft, _item.SourceIndex + j, Color.LightPink);
+							//FileCompareUtils.Highlighting(TextBoxRight, _item.DestIndex + j, Color.LightPink);
 						}
 						break;
 					case DiffResultSpanStatus.LeftNotExist:
@@ -513,8 +511,8 @@ namespace cs511_g11
 							FileCompareUtils.AppendText(TextBoxLeft, "", Color.Red, Color.LightPink);
 							FileCompareUtils.AppendText(TextBoxRight, _contentRight, Color.Red, Color.LightPink);
 
-							FileCompareUtils.Highlighting(TextBoxLeft, _item.SourceIndex + j, Color.Gray);
-							FileCompareUtils.Highlighting(TextBoxRight, _item.DestIndex + j, Color.LightPink);
+							//FileCompareUtils.Highlighting(TextBoxLeft, _item.SourceIndex + j, Color.Gray);
+							//FileCompareUtils.Highlighting(TextBoxRight, _item.DestIndex + j, Color.LightPink);
 						}
 
 						if (_leftController.Lines.Count > 0)
@@ -529,8 +527,8 @@ namespace cs511_g11
 							FileCompareUtils.AppendText(TextBoxLeft, _contentLeft, Color.Red, Color.LightPink);
 							FileCompareUtils.AppendText(TextBoxRight, "", Color.Red, Color.LightPink);
 
-							FileCompareUtils.Highlighting(TextBoxLeft, _item.SourceIndex + j, Color.LightPink);
-							FileCompareUtils.Highlighting(TextBoxRight, _item.DestIndex + j, Color.Gray);
+							//FileCompareUtils.Highlighting(TextBoxLeft, _item.SourceIndex + j, Color.LightPink);
+							//FileCompareUtils.Highlighting(TextBoxRight, _item.DestIndex + j, Color.Gray);
 						}
 
 						if(_rightController.Lines.Count > 0)
@@ -737,15 +735,5 @@ namespace cs511_g11
             History.Text = a.ReadToEnd();
             a.Close();
         }
-
-		private void metroTabPage2_Paint(object sender, PaintEventArgs e)
-		{
-			Graphics _graphics = metroTabPage2.CreateGraphics();
-
-			Brush _redBrush = new SolidBrush(Color.LightPink);
-			Pen _pen = new Pen(_redBrush, 8);
-
-			_graphics.FillRectangle(_redBrush, 100, 100, 500, 500);
-		}
 	}
 }

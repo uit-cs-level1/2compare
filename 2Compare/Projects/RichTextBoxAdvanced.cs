@@ -19,14 +19,14 @@ namespace cs511_g11
 
 		public RichTextBoxAdvanced()
 		{
-			this.SetStyle(ControlStyles.SupportsTransparentBackColor |
-				 ControlStyles.OptimizedDoubleBuffer |
-				 ControlStyles.AllPaintingInWmPaint |
-				 ControlStyles.ResizeRedraw |
-				 ControlStyles.UserPaint, true);
-			BackColor = Color.Transparent;
+			//this.SetStyle(ControlStyles.SupportsTransparentBackColor |
+			//	 ControlStyles.OptimizedDoubleBuffer |
+			//	 ControlStyles.AllPaintingInWmPaint |
+			//	 ControlStyles.ResizeRedraw |
+			//	 ControlStyles.UserPaint, true);
+			//BackColor = Color.Transparent;
 
-			this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+			//this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
 		}
 
 		/// <summary>
