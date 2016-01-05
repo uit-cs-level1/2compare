@@ -98,9 +98,23 @@
 4/1/2016........21:12:0 Compare Text
 4/1/2016........21:14:10 Compare Text
 4/1/2016........21:14:14 Compare Text
+<<<<<<< HEAD
+4/1/2016........21:20:5 Compare Text
+4/1/2016........21:20:8 Compare Text
+4/1/2016........21:20:14 Compare Text
+4/1/2016........21:21:3 Compare Text
+4/1/2016........21:21:14 Compare Text
+4/1/2016........21:23:41 Compare Text
+4/1/2016........21:23:55 Compare Text
+4/1/2016........21:24:11 Compare Text
+5/1/2016........8:4:16 Compare Text
+5/1/2016........8:4:21 Compare Text
+5/1/2016........8:4:37 Compare Text
+=======
 >>>>>>> 1c22b08e876c184c1a97c1522947d86f77030a5f
 5/1/2016........1:39:55 Compare Text
 5/1/2016........1:39:59 Compare Text
+<<<<<<< HEAD:2Compare/Data/History.txt
 5/1/2016........2:13:39 Compare Text
 5/1/2016........2:17:20 Compare Text
 5/1/2016........2:17:24 Compare Text
@@ -138,3 +152,6 @@
 5/1/2016........2:23:55 Compare Text
 5/1/2016........2:23:59 Compare Text
 5/1/2016........2:24:5 Compare Text
+=======
+>>>>>>> 26de547b9d460e99b6f75a16cbbc76ec522c2efd
+>>>>>>> 23fbe85c8028d4eca2b027bdd69ab79733e25173:2Compare/Datas/History.txt
