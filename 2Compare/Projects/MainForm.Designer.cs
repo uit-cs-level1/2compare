@@ -410,9 +410,9 @@
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.Location = new System.Drawing.Point(286, 59);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(205, 76);
+            this.metroLabel1.Size = new System.Drawing.Size(205, 133);
             this.metroLabel1.TabIndex = 2;
-            this.metroLabel1.Text = "SOFTWARE DEVELOPED BY............\r\n\r\nPHAN NAY GHI THONG :))\r\n";
+            this.metroLabel1.Text = "SOFTWARE DEVELOPED BY............\r\n\r\nRye Nguyen\r\nShichi Ki\r\nKen Pop\r\nKhoa Pham\r\n";
             this.metroLabel1.UseStyleColors = true;
             this.metroLabel1.Click += new System.EventHandler(this.metroLabel1_Click);
             // 
