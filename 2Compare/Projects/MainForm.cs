@@ -11,9 +11,6 @@ namespace cs511_g11
 {
 	public partial class MainForm : MetroForm
     {
-		RichTextBoxAdvanced Textbox_left = new RichTextBoxAdvanced();
-		RichTextBoxAdvanced Textbox_right = new RichTextBoxAdvanced();
-
 		RichTextBoxAdvanced m_focusTextBox;
 
 		public MainForm()
@@ -21,51 +18,20 @@ namespace cs511_g11
 			InitializeComponent();
 			SetupRichTextbox();
 
-			Textbox_left.m_textController = new TextController();
-			Textbox_right.m_textController = new TextController();
+			TextBoxLeft.m_textController = new TextController();
+			TextBoxRight.m_textController = new TextController();
 
-			Textbox_left.m_textController.Clear();
-			Textbox_right.m_textController.Clear();
+			TextBoxLeft.m_textController.Clear();
+			TextBoxRight.m_textController.Clear();
 
-			m_focusTextBox = Textbox_left;
+			m_focusTextBox = TextBoxLeft;
+
+			FileCompareUtils.Highlighting(TextBoxLeft, 2, Color.LightPink);
 		}
 
 		private void SetupRichTextbox()
 		{
-			Textbox_left.AcceptsTab = true;
-			Textbox_left.EnableAutoDragDrop = true;
-			Textbox_left.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			Textbox_left.Location = new System.Drawing.Point(0, 60);
-			Textbox_left.Margin = new System.Windows.Forms.Padding(5);
-			Textbox_left.Name = "Textbox_left";
-			Textbox_left.Size = new System.Drawing.Size(475, 418);
-			Textbox_left.TabIndex = 9;
-			Textbox_left.Text = "";
-			Textbox_left.WordWrap = false;
-			Textbox_left.TextChanged += new System.EventHandler(this.Textbox_left_TextChanged);
-			Textbox_left.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Textbox_left_KeyPress);
-			Textbox_left.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Textbox_left_KeyUp);
-			Textbox_left.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Textbox_left_KeyDown);
-			Textbox_left.LostFocus += new EventHandler(Textbox_left_LostFocus);
-
-			Textbox_right.AcceptsTab = true;
-			Textbox_right.EnableAutoDragDrop = true;
-			Textbox_right.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			Textbox_right.Location = new System.Drawing.Point(496, 60);
-			Textbox_right.Margin = new System.Windows.Forms.Padding(5);
-			Textbox_right.Name = "Textbox_right";
-			Textbox_right.Size = new System.Drawing.Size(475, 418);
-			Textbox_right.TabIndex = 10;
-			Textbox_right.Text = "";
-			Textbox_right.WordWrap = false;
-			Textbox_right.TextChanged += new System.EventHandler(this.Textbox_right_TextChanged);
-			Textbox_right.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Textbox_right_KeyPress);
-			Textbox_right.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Textbox_right_KeyUp);
-			Textbox_right.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Textbox_right_KeyDown);
-			Textbox_right.LostFocus += new EventHandler(Textbox_right_LostFocus);
-
-			Textbox_left.Parent = Textbox_right.Parent = this.metroTabPage2;
-			Textbox_left.BindScroll(Textbox_right);
+			TextBoxLeft.BindScroll(TextBoxRight);
 		}
 
 		private void metroTile2_Click(object sender, EventArgs e)
@@ -489,13 +455,13 @@ namespace cs511_g11
 
 		private void FileCompare()
 		{
-			ArrayList _result = FileCompareUtils.CompareFile(Textbox_left.m_textController, Textbox_right.m_textController);
+			ArrayList _result = FileCompareUtils.CompareFile(TextBoxLeft.m_textController, TextBoxRight.m_textController);
 
-			TextController _leftController = Textbox_left.m_textController;
-			TextController _rightController = Textbox_right.m_textController;
+			TextController _leftController = TextBoxLeft.m_textController;
+			TextController _rightController = TextBoxRight.m_textController;
 
-			Textbox_left.Clear();
-			Textbox_right.Clear();
+			TextBoxLeft.Clear();
+			TextBoxRight.Clear();
             // get history when compare
             string ngay = DateTime.Now.Day.ToString();
             string thang = DateTime.Now.Month.ToString();
@@ -521,8 +487,8 @@ namespace cs511_g11
 							string _contentLeft = ((TextLine)_leftController.GetLineByIndex(_item.SourceIndex + j)).m_content;
 							string _contentRight = ((TextLine)_rightController.GetLineByIndex(_item.DestIndex + j)).m_content;
 
-							FileCompareUtils.AppendText(Textbox_left, _contentLeft, Color.Black, Color.White);
-							FileCompareUtils.AppendText(Textbox_right, _contentRight, Color.Black, Color.White);
+							FileCompareUtils.AppendText(TextBoxLeft, _contentLeft, Color.Black, Color.White);
+							FileCompareUtils.AppendText(TextBoxRight, _contentRight, Color.Black, Color.White);
 						}
 						break;
 					case DiffResultSpanStatus.DiffrenentText:
@@ -531,8 +497,11 @@ namespace cs511_g11
 							string _contentLeft = ((TextLine)_leftController.GetLineByIndex(_item.SourceIndex + j)).m_content;
 							string _contentRight = ((TextLine)_rightController.GetLineByIndex(_item.DestIndex + j)).m_content;
 
-							FileCompareUtils.AppendText(Textbox_left, _contentLeft, Color.Red, Color.LightPink);
-							FileCompareUtils.AppendText(Textbox_right, _contentRight, Color.Red, Color.LightPink);
+							FileCompareUtils.AppendText(TextBoxLeft, _contentLeft, Color.Red, Color.LightPink);
+							FileCompareUtils.AppendText(TextBoxRight, _contentRight, Color.Red, Color.LightPink);
+
+							FileCompareUtils.Highlighting(TextBoxLeft, _item.SourceIndex + j, Color.LightPink);
+							FileCompareUtils.Highlighting(TextBoxRight, _item.DestIndex + j, Color.LightPink);
 						}
 						break;
 					case DiffResultSpanStatus.LeftNotExist:
@@ -541,8 +510,11 @@ namespace cs511_g11
 							//string _contentLeft = ((TextLine)_leftController.GetByIndex(_item.SourceIndex + j)).m_content;
 							string _contentRight = ((TextLine)_rightController.GetLineByIndex(_item.DestIndex + j)).m_content;
 
-							FileCompareUtils.AppendText(Textbox_left, "", Color.Red, Color.LightPink);
-							FileCompareUtils.AppendText(Textbox_right, _contentRight, Color.Red, Color.LightPink);
+							FileCompareUtils.AppendText(TextBoxLeft, "", Color.Red, Color.LightPink);
+							FileCompareUtils.AppendText(TextBoxRight, _contentRight, Color.Red, Color.LightPink);
+
+							FileCompareUtils.Highlighting(TextBoxLeft, _item.SourceIndex + j, Color.Gray);
+							FileCompareUtils.Highlighting(TextBoxRight, _item.DestIndex + j, Color.LightPink);
 						}
 
 						if (_leftController.Lines.Count > 0)
@@ -554,8 +526,11 @@ namespace cs511_g11
 							string _contentLeft = ((TextLine)_leftController.GetLineByIndex(_item.SourceIndex + j)).m_content;
 							//String _contentRight = ((TextLine)_rightController.GetByIndex(_item.DestIndex + j)).m_content;
 
-							FileCompareUtils.AppendText(Textbox_left, _contentLeft, Color.Red, Color.LightPink);
-							FileCompareUtils.AppendText(Textbox_right, "", Color.Red, Color.LightPink);
+							FileCompareUtils.AppendText(TextBoxLeft, _contentLeft, Color.Red, Color.LightPink);
+							FileCompareUtils.AppendText(TextBoxRight, "", Color.Red, Color.LightPink);
+
+							FileCompareUtils.Highlighting(TextBoxLeft, _item.SourceIndex + j, Color.LightPink);
+							FileCompareUtils.Highlighting(TextBoxRight, _item.DestIndex + j, Color.Gray);
 						}
 
 						if(_rightController.Lines.Count > 0)
@@ -581,9 +556,9 @@ namespace cs511_g11
 					{
 						using (_readStream)
 						{
-							Textbox_left.m_textController.Clear();
-							Textbox_left.m_textController.Setup(File.ReadAllText(_dialog.FileName));
-							Textbox_left.m_path = _dialog.FileName;
+							TextBoxLeft.m_textController.Clear();
+							TextBoxLeft.m_textController.Setup(File.ReadAllText(_dialog.FileName));
+							TextBoxLeft.m_path = _dialog.FileName;
                             File_1.Text = _dialog.FileName.ToString();
 							FileCompare();
 						}
@@ -609,9 +584,9 @@ namespace cs511_g11
 					{
 						using (_readStream)
 						{
-							Textbox_right.m_textController.Clear();
-							Textbox_right.m_textController.Setup(File.ReadAllText(_dialog.FileName));
-							Textbox_right.m_path = _dialog.FileName;
+							TextBoxRight.m_textController.Clear();
+							TextBoxRight.m_textController.Setup(File.ReadAllText(_dialog.FileName));
+							TextBoxRight.m_path = _dialog.FileName;
                             File_2.Text = _dialog.FileName.ToString();
 							FileCompare();
 						}
@@ -651,108 +626,108 @@ namespace cs511_g11
 			FileCompare();
 		}
 
-		private void Textbox_left_TextChanged(object sender, EventArgs e)
+		private void TextBoxLeft_TextChanged(object sender, EventArgs e)
 		{
 			//FileCompare();
 		}
 
-		private void Textbox_right_TextChanged(object sender, EventArgs e)
+		private void TextBoxRight_TextChanged(object sender, EventArgs e)
 		{
 			//FileCompare();
 		}
 
-		private void Textbox_left_KeyPress(object sender, KeyPressEventArgs e)
+		private void TextBoxLeft_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			int _index = Textbox_left.SelectionStart;
-			int _currentLine = Textbox_left.GetLineFromCharIndex(_index);
+			int _index = TextBoxLeft.SelectionStart;
+			int _currentLine = TextBoxLeft.GetLineFromCharIndex(_index);
 
-			int _firstCharIndex = Textbox_left.GetFirstCharIndexFromLine(_currentLine);
+			int _firstCharIndex = TextBoxLeft.GetFirstCharIndexFromLine(_currentLine);
 
 			if (e.KeyChar == Convert.ToChar(Keys.Return))
 			{
-				string _content = Textbox_left.Lines[_currentLine];
-				string _previousLineContent = Textbox_left.Lines[_currentLine - 1];
-				Textbox_left.m_textController.UpdateLinesWithEnter(Textbox_left.m_textController.GetLine(_currentLine), _content, _previousLineContent);
+				string _content = TextBoxLeft.Lines[_currentLine];
+				string _previousLineContent = TextBoxLeft.Lines[_currentLine - 1];
+				TextBoxLeft.m_textController.UpdateLinesWithEnter(TextBoxLeft.m_textController.GetLine(_currentLine), _content, _previousLineContent);
 			}
 			else if (e.KeyChar == Convert.ToChar(Keys.Back))
 			{
-				string _content = Textbox_left.Lines[_currentLine];
-				Textbox_right.m_textController.UpdateLinesWithDelete(Textbox_right.m_textController.GetLine(_currentLine), _content);
+				string _content = TextBoxLeft.Lines[_currentLine];
+				TextBoxRight.m_textController.UpdateLinesWithDelete(TextBoxRight.m_textController.GetLine(_currentLine), _content);
 			}
 		}
 
-		private void Textbox_right_KeyPress(object sender, KeyPressEventArgs e)
+		private void TextBoxRight_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			int _index = Textbox_right.SelectionStart;
-			int _currentLine = Textbox_right.GetLineFromCharIndex(_index);
+			int _index = TextBoxRight.SelectionStart;
+			int _currentLine = TextBoxRight.GetLineFromCharIndex(_index);
 
-			int _firstCharIndex = Textbox_right.GetFirstCharIndexFromLine(_currentLine);
+			int _firstCharIndex = TextBoxRight.GetFirstCharIndexFromLine(_currentLine);
 
 			if (e.KeyChar == Convert.ToChar(Keys.Return))
 			{
-				string _content = Textbox_right.Lines[_currentLine];
-				string _previousLineContent = Textbox_right.Lines[_currentLine - 1];
-				Textbox_right.m_textController.UpdateLinesWithEnter(Textbox_right.m_textController.GetLine(_currentLine), _content, _previousLineContent);
+				string _content = TextBoxRight.Lines[_currentLine];
+				string _previousLineContent = TextBoxRight.Lines[_currentLine - 1];
+				TextBoxRight.m_textController.UpdateLinesWithEnter(TextBoxRight.m_textController.GetLine(_currentLine), _content, _previousLineContent);
 			}
 			else if (e.KeyChar == Convert.ToChar(Keys.Back))
 			{
-				string _content = Textbox_right.Lines[_currentLine];
-				Textbox_right.m_textController.UpdateLinesWithDelete(Textbox_right.m_textController.GetLine(_currentLine), _content);
+				string _content = TextBoxRight.Lines[_currentLine];
+				TextBoxRight.m_textController.UpdateLinesWithDelete(TextBoxRight.m_textController.GetLine(_currentLine), _content);
 			}
 		}
 
-		private void Textbox_left_KeyUp(object sender, KeyEventArgs e)
+		private void TextBoxLeft_KeyUp(object sender, KeyEventArgs e)
 		{
-			int _index = Textbox_left.SelectionStart;
-			int _currentLine = Textbox_left.GetLineFromCharIndex(_index);
+			int _index = TextBoxLeft.SelectionStart;
+			int _currentLine = TextBoxLeft.GetLineFromCharIndex(_index);
 
-			string _newContent = Textbox_left.Lines[_currentLine];
-			Textbox_left.m_textController.UpdateLine(Textbox_left.m_textController.GetLine(_currentLine), _newContent);
+			string _newContent = TextBoxLeft.Lines[_currentLine];
+			TextBoxLeft.m_textController.UpdateLine(TextBoxLeft.m_textController.GetLine(_currentLine), _newContent);
 		}
 
-		private void Textbox_right_KeyUp(object sender, KeyEventArgs e)
+		private void TextBoxRight_KeyUp(object sender, KeyEventArgs e)
 		{
-			int _index = Textbox_right.SelectionStart;
-			int _currentLine = Textbox_right.GetLineFromCharIndex(_index);
+			int _index = TextBoxRight.SelectionStart;
+			int _currentLine = TextBoxRight.GetLineFromCharIndex(_index);
 
-			string _newContent = Textbox_right.Lines[_currentLine];
-			Textbox_right.m_textController.UpdateLine(Textbox_right.m_textController.GetLine(_currentLine), _newContent);
+			string _newContent = TextBoxRight.Lines[_currentLine];
+			TextBoxRight.m_textController.UpdateLine(TextBoxRight.m_textController.GetLine(_currentLine), _newContent);
 		}
 
-		private void Textbox_left_KeyDown(object sender, KeyEventArgs e)
+		private void TextBoxLeft_KeyDown(object sender, KeyEventArgs e)
 		{
-			int _index = Textbox_left.SelectionStart;
-			int _currentLine = Textbox_left.GetLineFromCharIndex(_index);
+			int _index = TextBoxLeft.SelectionStart;
+			int _currentLine = TextBoxLeft.GetLineFromCharIndex(_index);
 
 			if (e.KeyCode == Keys.Delete)
 			{
-				string _content = Textbox_left.Lines[_currentLine];
-				string _previousContent = Textbox_left.Lines[_currentLine + 1];
-				Textbox_left.m_textController.UpdateLinesWithDelete(Textbox_left.m_textController.GetLine(_currentLine), _content + _previousContent);
+				string _content = TextBoxLeft.Lines[_currentLine];
+				string _previousContent = TextBoxLeft.Lines[_currentLine + 1];
+				TextBoxLeft.m_textController.UpdateLinesWithDelete(TextBoxLeft.m_textController.GetLine(_currentLine), _content + _previousContent);
 			}
 		}
 
-		private void Textbox_right_KeyDown(object sender, KeyEventArgs e)
+		private void TextBoxRight_KeyDown(object sender, KeyEventArgs e)
 		{
-			int _index = Textbox_right.SelectionStart;
-			int _currentLine = Textbox_right.GetLineFromCharIndex(_index);
+			int _index = TextBoxRight.SelectionStart;
+			int _currentLine = TextBoxRight.GetLineFromCharIndex(_index);
 
 			if (e.KeyCode == Keys.Delete)
 			{
-				string _content = Textbox_right.Lines[_currentLine];
-				string _previousContent = Textbox_right.Lines[_currentLine + 1];
-				Textbox_right.m_textController.UpdateLinesWithDelete(Textbox_right.m_textController.GetLine(_currentLine), _content + _previousContent);
+				string _content = TextBoxRight.Lines[_currentLine];
+				string _previousContent = TextBoxRight.Lines[_currentLine + 1];
+				TextBoxRight.m_textController.UpdateLinesWithDelete(TextBoxRight.m_textController.GetLine(_currentLine), _content + _previousContent);
 			}
 		}
 
-		private void Textbox_left_LostFocus(object sender, EventArgs e)
+		private void TextBoxLeft_LostFocus(object sender, EventArgs e)
 		{
-			m_focusTextBox = Textbox_left;
+			m_focusTextBox = TextBoxLeft;
 		}
 
-		private void Textbox_right_LostFocus(object sender, EventArgs e)
+		private void TextBoxRight_LostFocus(object sender, EventArgs e)
 		{
-			m_focusTextBox = Textbox_right;
+			m_focusTextBox = TextBoxRight;
 		}
 
         private void history_btn_Click(object sender, EventArgs e)
@@ -762,5 +737,15 @@ namespace cs511_g11
             History.Text = a.ReadToEnd();
             a.Close();
         }
+
+		private void metroTabPage2_Paint(object sender, PaintEventArgs e)
+		{
+			Graphics _graphics = metroTabPage2.CreateGraphics();
+
+			Brush _redBrush = new SolidBrush(Color.LightPink);
+			Pen _pen = new Pen(_redBrush, 8);
+
+			_graphics.FillRectangle(_redBrush, 100, 100, 500, 500);
+		}
 	}
 }

@@ -60,12 +60,45 @@
 4/1/2016........21:0:6 Compare Text
 4/1/2016........21:6:8 Compare Text
 4/1/2016........21:6:15 Compare Text
+<<<<<<< HEAD
+5/1/2016........0:2:7 Compare Text
+5/1/2016........0:2:12 Compare Text
+5/1/2016........0:2:22 Compare Text
+5/1/2016........0:18:30 Compare Text
+5/1/2016........0:18:38 Compare Text
+5/1/2016........0:19:6 Compare Text
+5/1/2016........0:19:28 Compare Text
+5/1/2016........0:23:33 Compare Text
+5/1/2016........0:24:31 Compare Text
+5/1/2016........0:24:42 Compare Text
+5/1/2016........0:24:51 Compare Text
+5/1/2016........0:31:31 Compare Text
+5/1/2016........0:31:40 Compare Text
+5/1/2016........0:32:4 Compare Text
+5/1/2016........0:33:11 Compare Text
+5/1/2016........0:35:24 Compare Text
+5/1/2016........0:36:49 Compare Text
+5/1/2016........0:41:2 Compare Text
+5/1/2016........0:41:4 Compare Text
+5/1/2016........0:41:9 Compare Text
+5/1/2016........0:54:15 Compare Text
+5/1/2016........0:54:19 Compare Text
+5/1/2016........0:54:50 Compare Text
+5/1/2016........0:55:34 Compare Text
+5/1/2016........1:28:50 Compare Text
+5/1/2016........1:28:57 Compare Text
+5/1/2016........1:29:44 Compare Text
+5/1/2016........1:32:42 Compare Text
+5/1/2016........1:32:47 Compare Text
+5/1/2016........1:32:52 Compare Text
+=======
 4/1/2016........21:8:47 Compare Text
 4/1/2016........21:8:50 Compare Text
 4/1/2016........21:11:17 Compare Text
 4/1/2016........21:12:0 Compare Text
 4/1/2016........21:14:10 Compare Text
 4/1/2016........21:14:14 Compare Text
+<<<<<<< HEAD
 4/1/2016........21:20:5 Compare Text
 4/1/2016........21:20:8 Compare Text
 4/1/2016........21:20:14 Compare Text
@@ -77,3 +110,8 @@
 5/1/2016........8:4:16 Compare Text
 5/1/2016........8:4:21 Compare Text
 5/1/2016........8:4:37 Compare Text
+=======
+>>>>>>> 1c22b08e876c184c1a97c1522947d86f77030a5f
+5/1/2016........1:39:55 Compare Text
+5/1/2016........1:39:59 Compare Text
+>>>>>>> 26de547b9d460e99b6f75a16cbbc76ec522c2efd

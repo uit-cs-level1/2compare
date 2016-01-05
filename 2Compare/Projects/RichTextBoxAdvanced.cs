@@ -9,13 +9,25 @@ using System.Windows.Forms;
 
 namespace cs511_g11
 {
-	public class RichTextBoxAdvanced : RichTextBox
+	public partial class RichTextBoxAdvanced : RichTextBox
 	{
 		private const int WM_VSCROLL = 0x115;
 		private const int WM_HSCROLL = 0x114;
 		private const int WM_MOUSEWHEEL = 0x20a;
 
 		private List<RichTextBoxAdvanced> peers = new List<RichTextBoxAdvanced>();
+
+		public RichTextBoxAdvanced()
+		{
+			this.SetStyle(ControlStyles.SupportsTransparentBackColor |
+				 ControlStyles.OptimizedDoubleBuffer |
+				 ControlStyles.AllPaintingInWmPaint |
+				 ControlStyles.ResizeRedraw |
+				 ControlStyles.UserPaint, true);
+			BackColor = Color.Transparent;
+
+			this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+		}
 
 		/// <summary>
 		/// Establish a 2-way binding between RTBs for scrolling.
@@ -62,98 +74,6 @@ namespace cs511_g11
 				mRectangle = r;
 			}
 		}
-
-		public void PaintLineHighlight()
-		{
-			using (Graphics g = this.CreateGraphics())
-			{
-				// highlight color
-				Color c = Color.Beige;
-				// current pen color
-				Pen cp = new Pen(Color.Beige);
-				// color for removing highlight
-				Pen lp = new Pen(this.BackColor);
-				// brush for removing highlight
-				SolidBrush lb = new SolidBrush(this.BackColor);
-				// brush for applying highlight
-				SolidBrush cb = new SolidBrush(Color.FromArgb(64, c.R, c.G, c.B));
-				// index of the current line
-				int index = this.GetFirstCharIndexOfCurrentLine();
-				// rectangle to specify which region to paint too
-				Rectangle r = new Rectangle();
-
-				// specify dimensions
-				r.X = 0;
-				r.Y = this.GetPositionFromCharIndex(index).Y;
-				r.Width = this.HorizontalScrollBarWidth();
-				r.Height = Convert.ToInt32(this.Font.Height * this.ZoomFactor);
-
-				// this will always be true unless the current line remains the same
-				if (!(mLastHighlight.mCharIndex == index) && !(mLastHighlight.mRectangle == r))
-				{
-					// remove the last highlight. regardless of the brush specified, white is always applied, and the text is painted over
-					//g.DrawRectangle(lp, mLastHighlight.mRectangle);
-					//g.FillRectangle(lb, mLastHighlight.mRectangle);
-					// apply highlight to the current line
-					g.DrawRectangle(cp, r);
-					g.FillRectangle(cb, r);
-				}
-
-				mLastHighlight = new LastHighlight(index, r);
-			}
-		}
-
-		#region RichScrollBars
-		[DllImport("user32.dll")]
-		[return: MarshalAs(UnmanagedType.Bool)]
-		private static extern bool GetScrollInfo(IntPtr hWnd, int fnBar, ref SCROLLINFO si);
-
-		[StructLayout(LayoutKind.Sequential)]
-		public class SCROLLINFO
-		{
-			public int cbSize;
-			public int fMask;
-			public int nMin;
-			public int nMax;
-			public int nPage;
-			public int nPos;
-			public int nTrackPos;
-			public SCROLLINFO()
-			{
-				this.cbSize = Marshal.SizeOf(typeof(SCROLLINFO));
-			}
-
-			public SCROLLINFO(int mask, int min, int max, int page, int pos)
-			{
-				this.cbSize = Marshal.SizeOf(typeof(SCROLLINFO));
-				this.fMask = mask;
-				this.nMin = min;
-				this.nMax = max;
-				this.nPage = page;
-				this.nPos = pos;
-			}
-		}
-
-		private const int SIF_ALL = 0X17;
-		private const int SB_HORZ = 0;
-		private const int SB_VERT = 1;
-
-		public int HorizontalScrollBarWidth()
-		{
-			SCROLLINFO si = new SCROLLINFO() { fMask = SIF_ALL };
-			GetScrollInfo(this.Handle, SB_HORZ, ref si);
-
-			return Math.Max(si.nMax, this.Width);
-		}
-
-		public int VerticalScrollBarHeight()
-		{
-			SCROLLINFO si = new SCROLLINFO() { fMask = SIF_ALL };
-			GetScrollInfo(this.Handle, SB_VERT, ref si);
-
-			return Math.Max(si.nMax, this.Height);
-		}
-		#endregion
 
 		public TextController m_textController;
 		public string m_path;
