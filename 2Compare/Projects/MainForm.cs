@@ -429,18 +429,19 @@ namespace cs511_g11
             }
 
             // get history when compare text
-            
+
             string ngay = DateTime.Now.Day.ToString();
             string thang = DateTime.Now.Month.ToString();
             string year = DateTime.Now.Year.ToString();
             string hour = DateTime.Now.Hour.ToString();
             string min = DateTime.Now.Minute.ToString();
             string second = DateTime.Now.Second.ToString();
-            string result = ngay + "/" + thang + "/" + year + "........" + hour + ":" + min + ":" + second + " Compare folder";
-            string path = @"../../Datas/History.txt";
-            StreamWriter sw = new StreamWriter(path,true);
+            string result = ngay + "/" + thang + "/" + year + "........" + hour + ":" + min + ":" + second + " Compare Folder";
+            string path = @"../../Data/History.txt";
+            StreamWriter sw = new StreamWriter(path, true);
             sw.WriteLine(result);
             sw.Close();
+            //sw.Close();
          
         }
 
