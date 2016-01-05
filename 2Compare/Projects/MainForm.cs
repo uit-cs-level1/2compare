@@ -730,7 +730,7 @@ namespace cs511_g11
 
         private void history_btn_Click(object sender, EventArgs e)
         {
-            string path = @"../../Datas/History.txt";
+            string path = @"../../Data/History.txt";
             StreamReader a = new StreamReader(path);
             History.Text = a.ReadToEnd();
             a.Close();
