@@ -155,3 +155,5 @@
 =======
 >>>>>>> 26de547b9d460e99b6f75a16cbbc76ec522c2efd
 >>>>>>> 23fbe85c8028d4eca2b027bdd69ab79733e25173:2Compare/Datas/History.txt
+5/1/2016........12:26:58 Compare Text
+5/1/2016........12:27:3 Compare Text

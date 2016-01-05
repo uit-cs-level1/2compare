@@ -468,7 +468,7 @@ namespace cs511_g11
             string min = DateTime.Now.Minute.ToString();
             string second = DateTime.Now.Second.ToString();
             string result = ngay + "/" + thang + "/" + year + "........" + hour + ":" + min + ":" + second + " Compare Text";
-            string path = @"../../Datas/History.txt";
+            string path = @"../../Data/History.txt";
             StreamWriter sw = new StreamWriter(path, true);
             sw.WriteLine(result);
             sw.Close();
