@@ -480,7 +480,7 @@ namespace cs511_g11
 				switch (_item.Status)
 				{
 					case DiffResultSpanStatus.SameText:
-						for(int j = 0; j < _item.Length; j++)
+						for (int j = 0; j < _item.Length; j++)
 						{
 							string _contentLeft = ((TextLine)_leftController.GetLineByIndex(_item.SourceIndex + j)).m_content;
 							string _contentRight = ((TextLine)_rightController.GetLineByIndex(_item.DestIndex + j)).m_content;
@@ -515,8 +515,11 @@ namespace cs511_g11
 							//FileCompareUtils.Highlighting(TextBoxRight, _item.DestIndex + j, Color.LightPink);
 						}
 
-						if (_leftController.Lines.Count > 0)
-							((TextLine)_leftController.GetLineByIndex(((DiffResultSpan)_result[i - 1]).SourceIndex)).m_ignoredLine += _item.Length;
+						if (_leftController.Lines.Count > 0)   // Left Exist
+						{
+							int _index = ((DiffResultSpan)_result[i - 1]).SourceIndex + ((DiffResultSpan)_result[i - 1]).Length - 1;
+							((TextLine)_leftController.GetLineByIndex(_index)).m_ignoredLine = _item.Length;
+						}
 						break;
 					case DiffResultSpanStatus.RightNotExist:
 						for (int j = 0; j < _item.Length; j++)
@@ -531,14 +534,37 @@ namespace cs511_g11
 							//FileCompareUtils.Highlighting(TextBoxRight, _item.DestIndex + j, Color.Gray);
 						}
 
-						if(_rightController.Lines.Count > 0)
-							((TextLine)_rightController.GetLineByIndex(((DiffResultSpan)_result[i - 1]).DestIndex)).m_ignoredLine += _item.Length;
+						if (_rightController.Lines.Count > 0)    // Right Exist
+						{
+							int _index = ((DiffResultSpan)_result[i - 1]).DestIndex + ((DiffResultSpan)_result[i - 1]).Length - 1;
+							((TextLine)_rightController.GetLineByIndex(_index)).m_ignoredLine = _item.Length;
+						}
 						break;
 				}
 			}
 		}
 
-        
+        private void SaveFile()
+		{
+			try
+			{
+				using (FileStream fs = new FileStream(m_focusTextBox.m_path, FileMode.Create, FileAccess.Write))
+				using (StreamWriter _writeStream = new StreamWriter(fs))
+				{
+					TextController _textController = m_focusTextBox.m_textController;
+					for (int i = 0; i < _textController.Lines.Count - 1; i++)
+					{
+						_writeStream.WriteLine(((TextLine)_textController.GetLineByIndex(i)).m_content);
+					}
+
+					_writeStream.Write(((TextLine)_textController.GetLineByIndex(_textController.Lines.Count - 1)).m_content);
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Error: Could not write file to disk. Original error: " + ex.Message);
+			}
+		}
 
 		private void Add_LeftFile_Click(object sender, EventArgs e)
 		{
@@ -599,24 +625,7 @@ namespace cs511_g11
 
 		private void TextCompare_Save_Click(object sender, EventArgs e)
 		{
-			try
-			{
-				using (FileStream fs = new FileStream(m_focusTextBox.m_path, FileMode.Create, FileAccess.Write))
-				using (StreamWriter _writeStream = new StreamWriter(fs))
-				{
-					TextController _textController = m_focusTextBox.m_textController;
-					for (int i = 0; i < _textController.Lines.Count - 1; i++)
-					{
-						_writeStream.WriteLine(((TextLine)_textController.GetLineByIndex(i)).m_content);
-					}
-
-					_writeStream.Write(((TextLine)_textController.GetLineByIndex(_textController.Lines.Count - 1)).m_content);
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Error: Could not write file to disk. Original error: " + ex.Message);
-			}
+			SaveFile();
 		}
 
 		private void TextCompare_Compare_Click(object sender, EventArgs e)
@@ -647,11 +656,6 @@ namespace cs511_g11
 				string _previousLineContent = TextBoxLeft.Lines[_currentLine - 1];
 				TextBoxLeft.m_textController.UpdateLinesWithEnter(TextBoxLeft.m_textController.GetLine(_currentLine), _content, _previousLineContent);
 			}
-			else if (e.KeyChar == Convert.ToChar(Keys.Back))
-			{
-				string _content = TextBoxLeft.Lines[_currentLine];
-				TextBoxRight.m_textController.UpdateLinesWithDelete(TextBoxRight.m_textController.GetLine(_currentLine), _content);
-			}
 		}
 
 		private void TextBoxRight_KeyPress(object sender, KeyPressEventArgs e)
@@ -663,14 +667,9 @@ namespace cs511_g11
 
 			if (e.KeyChar == Convert.ToChar(Keys.Return))
 			{
-				string _content = TextBoxRight.Lines[_currentLine];
-				string _previousLineContent = TextBoxRight.Lines[_currentLine - 1];
+				string _content = TextBoxRight.Lines[TextBoxRight.m_textController.GetLine(_currentLine)];
+				string _previousLineContent = TextBoxRight.Lines[TextBoxRight.m_textController.GetLine(_currentLine) - 1];
 				TextBoxRight.m_textController.UpdateLinesWithEnter(TextBoxRight.m_textController.GetLine(_currentLine), _content, _previousLineContent);
-			}
-			else if (e.KeyChar == Convert.ToChar(Keys.Back))
-			{
-				string _content = TextBoxRight.Lines[_currentLine];
-				TextBoxRight.m_textController.UpdateLinesWithDelete(TextBoxRight.m_textController.GetLine(_currentLine), _content);
 			}
 		}
 
@@ -697,12 +696,58 @@ namespace cs511_g11
 			int _index = TextBoxLeft.SelectionStart;
 			int _currentLine = TextBoxLeft.GetLineFromCharIndex(_index);
 
-			if (e.KeyCode == Keys.Delete)
+			if (e.Control && e.KeyCode == Keys.S)
 			{
-				string _content = TextBoxLeft.Lines[_currentLine];
-				string _previousContent = TextBoxLeft.Lines[_currentLine + 1];
-				TextBoxLeft.m_textController.UpdateLinesWithDelete(TextBoxLeft.m_textController.GetLine(_currentLine), _content + _previousContent);
+				SaveFile();
 			}
+
+			//if (e.Control && e.KeyCode == Keys.C)
+			//{
+			//	string s = TextBoxLeft.SelectedText;
+			//}
+
+			if (e.KeyCode == Keys.Delete || e.KeyCode == Keys.Back)
+			{
+				try
+				{
+					int _firstCharIndexFromNextLine = TextBoxLeft.GetFirstCharIndexFromLine(_currentLine + 1);
+
+					if (_index + 1 == _firstCharIndexFromNextLine)
+					{
+						string _content = TextBoxLeft.Lines[_currentLine];
+						string _previousContent = TextBoxLeft.Lines[_currentLine + 1];
+
+						TextBoxLeft.m_textController.UpdateLinesWithDelete(TextBoxLeft.m_textController.GetLine(_currentLine), _content + _previousContent, true);
+					}
+					else
+					{
+						int _firstCharIndex = TextBoxLeft.GetFirstCharIndexFromLine(_currentLine);
+
+						string _content = TextBoxLeft.Lines[_currentLine];
+						_content = _content.Remove(_index - _firstCharIndex, 1);
+
+						TextBoxLeft.m_textController.UpdateLinesWithDelete(TextBoxLeft.m_textController.GetLine(_currentLine), _content);
+					}
+				}
+				catch
+				{
+					if(TextBoxLeft.Text == "")
+						MessageBox.Show("Không có dữ liệu để xử lý!");
+				}
+			}
+			/*else if (e.KeyCode == Keys.Back)
+			{
+				try
+				{
+					string _content = TextBoxLeft.Lines[_currentLine];
+					TextBoxLeft.m_textController.UpdateLinesWithDelete(TextBoxLeft.m_textController.GetLine(_currentLine), _content);
+				}
+				catch
+				{
+					if (TextBoxLeft.Text == "")
+						MessageBox.Show("Không có dữ liệu để xử lý!");
+				}
+			}*/
 		}
 
 		private void TextBoxRight_KeyDown(object sender, KeyEventArgs e)
@@ -710,11 +755,37 @@ namespace cs511_g11
 			int _index = TextBoxRight.SelectionStart;
 			int _currentLine = TextBoxRight.GetLineFromCharIndex(_index);
 
+			if (e.Control && e.KeyCode == Keys.S)
+			{
+				SaveFile();
+			}
+
 			if (e.KeyCode == Keys.Delete)
 			{
-				string _content = TextBoxRight.Lines[_currentLine];
-				string _previousContent = TextBoxRight.Lines[_currentLine + 1];
-				TextBoxRight.m_textController.UpdateLinesWithDelete(TextBoxRight.m_textController.GetLine(_currentLine), _content + _previousContent);
+				try
+				{
+					string _content = TextBoxRight.Lines[_currentLine];
+					string _previousContent = TextBoxRight.Lines[_currentLine + 1];
+					TextBoxRight.m_textController.UpdateLinesWithDelete(TextBoxRight.m_textController.GetLine(_currentLine), _content + _previousContent);
+				}
+				catch
+				{
+					if (TextBoxRight.Text == "")
+						MessageBox.Show("Không có dữ liệu để xử lý!");
+				}
+			}
+			else if (e.KeyCode == Keys.Back)
+			{
+				try
+				{
+					string _content = TextBoxRight.Lines[_currentLine];
+					TextBoxRight.m_textController.UpdateLinesWithDelete(TextBoxRight.m_textController.GetLine(_currentLine), _content);
+				}
+				catch
+				{
+					if (TextBoxRight.Text == "")
+						MessageBox.Show("Không có dữ liệu để xử lý!");
+				}
 			}
 		}
 

@@ -1,6 +1,9 @@
 Trong bất cứ một ngôn ngữ lập trình nào, 
 việc tương tác trực tiếp với máy tính là rất quan trọng và cần thiết. 
+
 Một chương trình được viết ra cần có khả năng nhận dữ liệu từ người dùng 
 và hiển thị những kết quả thu được sau tính toán. 
 Do đó việc thành thạo trong việc nhập/xuất dữ liệu là điều không thể thiếu đối với mỗi lập trình viên. 
 Bài viết này sẽ giúp các bạn hiểu rõ hơn về thao tác nhập/xuất dữ liệu thông qua phương tiện nhập xuất chuẩn.
+
+Rye Nguyễn là số 1

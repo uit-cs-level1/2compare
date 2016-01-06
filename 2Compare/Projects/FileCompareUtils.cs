@@ -96,19 +96,15 @@ namespace cs511_g11
 		public void UpdateLinesWithEnter(int index, string content, string previousLineContent)
 		{
 			((TextLine)GetLineByIndex(index - 1)).ReplaceContent(previousLineContent);
-			m_lines.Insert(index, new TextLine(content));
+			((TextLine)GetLineByIndex(index)).ReplaceContent(content);
 		}
 
-		public void UpdateLinesWithDelete(int index, string content)
+		public void UpdateLinesWithDelete(int index, string content, bool mergeLines = false)
 		{
-			string _temp = ((TextLine)GetLineByIndex(index)).m_content + ((TextLine)GetLineByIndex(index + 1)).m_content;
-
-			if (_temp.CompareTo(content) == 0)
-			{
-				m_lines.RemoveAt(index + 1);
-			}
-
 			((TextLine)GetLineByIndex(index)).ReplaceContent(content);
+
+			if(mergeLines)
+				m_lines.RemoveAt(index + 1);
 
 			if (m_maxLength < content.Length)
 				m_maxLength = content.Length;
@@ -122,20 +118,27 @@ namespace cs511_g11
 			return (TextLine)m_lines[index];
 		}
 
-		public int GetLine(int index)
+		public int GetLine(int textboxIndex)
 		{
-			int _sum = 0;
+			int _currentTextboxIndex = 0;
+			int _preTextboxIndex = 0;
 			int _currentLine = 0;
 
-			while(_sum < index)
+			while(_currentTextboxIndex < textboxIndex)
 			{
-				_sum += ((TextLine)GetLineByIndex(_currentLine++)).m_ignoredLine + 1;
+				_preTextboxIndex = _currentTextboxIndex;
+				_currentTextboxIndex += 1 + ((TextLine)GetLineByIndex(_currentLine++)).m_ignoredLine;
 			}
 
-			if (_sum > index)
+			if (_currentTextboxIndex >= textboxIndex)
 			{
-				((TextLine)GetLineByIndex(_currentLine - 1)).m_ignoredLine--;
 				m_lines.Insert(_currentLine, new TextLine(""));
+
+				if(((TextLine)GetLineByIndex(_currentLine - 1)).m_ignoredLine > 0)
+				{
+					((TextLine)GetLineByIndex(_currentLine - 1)).m_ignoredLine = textboxIndex - _preTextboxIndex - 1;
+					((TextLine)m_lines[_currentLine]).m_ignoredLine = _currentTextboxIndex - textboxIndex;
+				}
 			}
 
 			return _currentLine;
