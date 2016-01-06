@@ -77,6 +77,7 @@ namespace cs511_g11
                 metroTrackBar2.BackColor = this.BackColor;
                 treeView1.BackColor = this.BackColor;
                 treeView2.BackColor = this.BackColor;
+                HistoryText.BackColor = this.BackColor;
 
             }
             else
@@ -87,6 +88,7 @@ namespace cs511_g11
                 metroTrackBar2.BackColor = this.BackColor;
                 treeView1.BackColor = this.BackColor;
                 treeView2.BackColor = this.BackColor;
+                HistoryText.BackColor = this.BackColor;
 
             }
         }
@@ -244,10 +246,24 @@ namespace cs511_g11
         {
 
         }
-        int checkfile(string path)
+        bool checkfile(string path1,string path2)
         {
-            int kq = 1;
-            return kq;
+            string s1, s2;
+            string line;
+            using (StreamReader sr = new StreamReader(path1))
+            {
+                s1 = sr.ReadToEnd().ToString();
+                sr.Close();
+            }
+            using (StreamReader sr2 = new StreamReader(path2))
+            {
+                s2 = sr2.ReadToEnd().ToString();
+                sr2.Close();
+            }
+            if (s2.CompareTo(s1) == 0)
+                return true;
+            else
+                return false;
         }
         private string listname(TreeNode node)
         {
@@ -260,7 +276,7 @@ namespace cs511_g11
 
                 while (k != 1)
                 {
-                    name = '\\' + name + node.Text + "\\";
+                    name =name+'\\'+node.Text;
                     node = node.NextNode;
 
                 }
@@ -324,10 +340,11 @@ namespace cs511_g11
                 repeat:
                     string t1 = '\\' + Node.Text;
                     string t2 = Node.Text + '\\';
-                    if ((listname(Node2).Contains(t1) == false) || (listname(Node2).Contains(t2) == false))
+                    string t = listname(Node2);
+                    if ((t.Contains(t1) == false) /*|| (t.Contains(t2) == false)*/)
                     {
                         tomau(Node,x);
-                        Node.ForeColor = Color.Blue;
+                        Node.ForeColor = Color.Red;
                     }
                     else
                     {
@@ -346,7 +363,7 @@ namespace cs511_g11
                         else
                         {
 
-                            if (checkfile(Node.FullPath) == 1)
+                            if (checkfile(metroLabel3.Text+'\\' + Node.FullPath, metroLabel4.Text + '\\' + Node.FullPath) == false)
                             {
                                 tomau(Node,x);
                                 Node.ForeColor = Color.Red;
@@ -379,9 +396,10 @@ namespace cs511_g11
                     TreeNode knodes = y.Nodes[0];
                     string t1 = '\\' + knode.Text;
                     string t2 = knode.Text + '\\';
-                    if ((listname(knodes).Contains(t1) == false) || (listname(knodes).Contains(t2) == false))
+                    string t = listname(knodes);
+                    if ((t.Contains(t1) == false) /*|| (t.Contains(t2) == false)*/)
                     {
-                        knode.ForeColor = Color.Blue;
+                        knode.ForeColor = Color.Red;
                     }
                     else
                     {
@@ -400,7 +418,7 @@ namespace cs511_g11
                         else
                         {
 
-                            if (checkfile(knode.FullPath) == 1)
+                            if (checkfile(metroLabel3.Text + '\\' + knode.FullPath, metroLabel4.Text + '\\' + knode.FullPath) == false)
                             {
                                 knode.ForeColor = Color.Red;
                             }
@@ -810,12 +828,34 @@ namespace cs511_g11
 			m_focusTextBox = TextBoxRight;
 		}
 
-        private void history_btn_Click(object sender, EventArgs e)
+    
+        private void metroTabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+             
+        }
+
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            treeView1.Nodes.Clear();
+            treeView2.Nodes.Clear();
+        }
+
+        private void History_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void HistoryButton_Click(object sender, EventArgs e)
         {
             string path = @"../../Data/History.txt";
             StreamReader a = new StreamReader(path);
-            History.Text = a.ReadToEnd();
+            HistoryText.Text = a.ReadToEnd();
             a.Close();
         }
-	}
+    }
 }
