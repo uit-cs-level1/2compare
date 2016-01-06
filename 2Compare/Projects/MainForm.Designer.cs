@@ -40,6 +40,8 @@
             this.File_2 = new MetroFramework.Controls.MetroLabel();
             this.File_1 = new MetroFramework.Controls.MetroLabel();
             this.FileCompareToolbox = new MetroFramework.Controls.MetroButton();
+            this.TextBoxLeft = new cs511_g11.RichTextBoxAdvanced();
+            this.TextBoxRight = new cs511_g11.RichTextBoxAdvanced();
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
             this.treeView2 = new System.Windows.Forms.TreeView();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
@@ -54,6 +56,9 @@
             this.metroButton3 = new MetroFramework.Controls.MetroButton();
             this.metroTabPage5 = new MetroFramework.Controls.MetroTabPage();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.metroTabPage6 = new MetroFramework.Controls.MetroTabPage();
+            this.HistoryText = new System.Windows.Forms.RichTextBox();
+            this.HistoryButton = new MetroFramework.Controls.MetroButton();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
             this.metroStyleExtender = new MetroFramework.Components.MetroStyleExtender(this.components);
@@ -67,21 +72,16 @@
             this.addFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compareToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.metroTabPage6 = new MetroFramework.Controls.MetroTabPage();
-            this.HistoryButton = new MetroFramework.Controls.MetroButton();
-            this.HistoryText = new System.Windows.Forms.RichTextBox();
-            this.TextBoxLeft = new cs511_g11.RichTextBoxAdvanced();
-            this.TextBoxRight = new cs511_g11.RichTextBoxAdvanced();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
             this.metroTabPage3.SuspendLayout();
             this.metroTabPage4.SuspendLayout();
             this.metroTabPage5.SuspendLayout();
+            this.metroTabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.TextCompareMenu.SuspendLayout();
             this.metroContextMenu2.SuspendLayout();
-            this.metroTabPage6.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroTabControl1
@@ -95,7 +95,7 @@
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(23, 60);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 5;
+            this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.Size = new System.Drawing.Size(978, 520);
             this.metroTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.metroTabControl1.TabIndex = 0;
@@ -176,6 +176,7 @@
             this.metroToolTip1.SetToolTip(this.metroTile1, "Use to Compare 2 Text Files");
             this.metroTile1.UseSelectable = true;
             this.metroTile1.UseStyleColors = true;
+            this.metroTile1.Click += new System.EventHandler(this.metroTile1_Click);
             this.metroTile1.MouseLeave += new System.EventHandler(this.metroTile1_MouseLeave);
             this.metroTile1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.metroTile1_MouseMove);
             // 
@@ -229,6 +230,42 @@
             this.FileCompareToolbox.UseSelectable = true;
             this.FileCompareToolbox.UseStyleColors = true;
             this.FileCompareToolbox.Click += new System.EventHandler(this.FileCompareToolbox_Click);
+            // 
+            // TextBoxLeft
+            // 
+            this.TextBoxLeft.AcceptsTab = true;
+            this.TextBoxLeft.EnableAutoDragDrop = true;
+            this.TextBoxLeft.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextBoxLeft.Location = new System.Drawing.Point(0, 60);
+            this.TextBoxLeft.Margin = new System.Windows.Forms.Padding(5);
+            this.TextBoxLeft.Name = "TextBoxLeft";
+            this.TextBoxLeft.Size = new System.Drawing.Size(475, 418);
+            this.TextBoxLeft.TabIndex = 9;
+            this.TextBoxLeft.Text = "";
+            this.TextBoxLeft.WordWrap = false;
+            this.TextBoxLeft.TextChanged += new System.EventHandler(this.TextBoxLeft_TextChanged);
+            this.TextBoxLeft.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxLeft_KeyDown);
+            this.TextBoxLeft.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxLeft_KeyPress);
+            this.TextBoxLeft.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxLeft_KeyUp);
+            this.TextBoxLeft.LostFocus += new System.EventHandler(this.TextBoxLeft_LostFocus);
+            // 
+            // TextBoxRight
+            // 
+            this.TextBoxRight.AcceptsTab = true;
+            this.TextBoxRight.EnableAutoDragDrop = true;
+            this.TextBoxRight.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextBoxRight.Location = new System.Drawing.Point(496, 60);
+            this.TextBoxRight.Margin = new System.Windows.Forms.Padding(5);
+            this.TextBoxRight.Name = "TextBoxRight";
+            this.TextBoxRight.Size = new System.Drawing.Size(475, 418);
+            this.TextBoxRight.TabIndex = 10;
+            this.TextBoxRight.Text = "";
+            this.TextBoxRight.WordWrap = false;
+            this.TextBoxRight.TextChanged += new System.EventHandler(this.TextBoxRight_TextChanged);
+            this.TextBoxRight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxRight_KeyDown);
+            this.TextBoxRight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxRight_KeyPress);
+            this.TextBoxRight.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxRight_KeyUp);
+            this.TextBoxRight.LostFocus += new System.EventHandler(this.TextBoxRight_LostFocus);
             // 
             // metroTabPage3
             // 
@@ -404,6 +441,42 @@
             this.metroLabel1.UseStyleColors = true;
             this.metroLabel1.Click += new System.EventHandler(this.metroLabel1_Click);
             // 
+            // metroTabPage6
+            // 
+            this.metroTabPage6.Controls.Add(this.HistoryText);
+            this.metroTabPage6.Controls.Add(this.HistoryButton);
+            this.metroTabPage6.HorizontalScrollbarBarColor = true;
+            this.metroTabPage6.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage6.HorizontalScrollbarSize = 10;
+            this.metroTabPage6.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage6.Name = "metroTabPage6";
+            this.metroTabPage6.Size = new System.Drawing.Size(970, 478);
+            this.metroTabPage6.TabIndex = 5;
+            this.metroTabPage6.Text = "History";
+            this.metroTabPage6.VerticalScrollbarBarColor = true;
+            this.metroTabPage6.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage6.VerticalScrollbarSize = 9;
+            // 
+            // HistoryText
+            // 
+            this.HistoryText.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.HistoryText.Location = new System.Drawing.Point(338, 20);
+            this.HistoryText.Name = "HistoryText";
+            this.HistoryText.Size = new System.Drawing.Size(592, 430);
+            this.HistoryText.TabIndex = 4;
+            this.HistoryText.Text = "";
+            // 
+            // HistoryButton
+            // 
+            this.HistoryButton.Location = new System.Drawing.Point(65, 213);
+            this.HistoryButton.Name = "HistoryButton";
+            this.HistoryButton.Size = new System.Drawing.Size(109, 45);
+            this.HistoryButton.TabIndex = 3;
+            this.HistoryButton.Text = "Show History";
+            this.HistoryButton.UseSelectable = true;
+            this.HistoryButton.UseStyleColors = true;
+            this.HistoryButton.Click += new System.EventHandler(this.HistoryButton_Click);
+            // 
             // metroToolTip1
             // 
             this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
@@ -493,78 +566,6 @@
             this.resetToolStripMenuItem.Text = "Reset";
             this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
             // 
-            // metroTabPage6
-            // 
-            this.metroTabPage6.Controls.Add(this.HistoryText);
-            this.metroTabPage6.Controls.Add(this.HistoryButton);
-            this.metroTabPage6.HorizontalScrollbarBarColor = true;
-            this.metroTabPage6.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroTabPage6.HorizontalScrollbarSize = 10;
-            this.metroTabPage6.Location = new System.Drawing.Point(4, 38);
-            this.metroTabPage6.Name = "metroTabPage6";
-            this.metroTabPage6.Size = new System.Drawing.Size(970, 478);
-            this.metroTabPage6.TabIndex = 5;
-            this.metroTabPage6.Text = "History";
-            this.metroTabPage6.VerticalScrollbarBarColor = true;
-            this.metroTabPage6.VerticalScrollbarHighlightOnWheel = false;
-            this.metroTabPage6.VerticalScrollbarSize = 10;
-            // 
-            // HistoryButton
-            // 
-            this.HistoryButton.Location = new System.Drawing.Point(65, 213);
-            this.HistoryButton.Name = "HistoryButton";
-            this.HistoryButton.Size = new System.Drawing.Size(109, 45);
-            this.HistoryButton.TabIndex = 3;
-            this.HistoryButton.Text = "Show History";
-            this.HistoryButton.UseSelectable = true;
-            this.HistoryButton.UseStyleColors = true;
-            this.HistoryButton.Click += new System.EventHandler(this.HistoryButton_Click);
-            // 
-            // HistoryText
-            // 
-            this.HistoryText.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.HistoryText.Location = new System.Drawing.Point(338, 20);
-            this.HistoryText.Name = "HistoryText";
-            this.HistoryText.Size = new System.Drawing.Size(592, 430);
-            this.HistoryText.TabIndex = 4;
-            this.HistoryText.Text = "";
-            // 
-            // TextBoxLeft
-            // 
-            this.TextBoxLeft.AcceptsTab = true;
-            this.TextBoxLeft.EnableAutoDragDrop = true;
-            this.TextBoxLeft.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TextBoxLeft.Location = new System.Drawing.Point(0, 60);
-            this.TextBoxLeft.Margin = new System.Windows.Forms.Padding(5);
-            this.TextBoxLeft.Name = "TextBoxLeft";
-            this.TextBoxLeft.Size = new System.Drawing.Size(475, 418);
-            this.TextBoxLeft.TabIndex = 9;
-            this.TextBoxLeft.Text = "";
-            this.TextBoxLeft.WordWrap = false;
-            this.TextBoxLeft.TextChanged += new System.EventHandler(this.TextBoxLeft_TextChanged);
-            this.TextBoxLeft.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxLeft_KeyDown);
-            this.TextBoxLeft.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxLeft_KeyPress);
-            this.TextBoxLeft.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxLeft_KeyUp);
-            this.TextBoxLeft.LostFocus += new System.EventHandler(this.TextBoxLeft_LostFocus);
-            // 
-            // TextBoxRight
-            // 
-            this.TextBoxRight.AcceptsTab = true;
-            this.TextBoxRight.EnableAutoDragDrop = true;
-            this.TextBoxRight.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TextBoxRight.Location = new System.Drawing.Point(496, 60);
-            this.TextBoxRight.Margin = new System.Windows.Forms.Padding(5);
-            this.TextBoxRight.Name = "TextBoxRight";
-            this.TextBoxRight.Size = new System.Drawing.Size(475, 418);
-            this.TextBoxRight.TabIndex = 10;
-            this.TextBoxRight.Text = "";
-            this.TextBoxRight.WordWrap = false;
-            this.TextBoxRight.TextChanged += new System.EventHandler(this.TextBoxRight_TextChanged);
-            this.TextBoxRight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxRight_KeyDown);
-            this.TextBoxRight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxRight_KeyPress);
-            this.TextBoxRight.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxRight_KeyUp);
-            this.TextBoxRight.LostFocus += new System.EventHandler(this.TextBoxRight_LostFocus);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -591,10 +592,10 @@
             this.metroTabPage4.PerformLayout();
             this.metroTabPage5.ResumeLayout(false);
             this.metroTabPage5.PerformLayout();
+            this.metroTabPage6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
             this.TextCompareMenu.ResumeLayout(false);
             this.metroContextMenu2.ResumeLayout(false);
-            this.metroTabPage6.ResumeLayout(false);
             this.ResumeLayout(false);
 
 		}

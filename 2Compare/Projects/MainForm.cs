@@ -857,5 +857,10 @@ namespace cs511_g11
             HistoryText.Text = a.ReadToEnd();
             a.Close();
         }
+
+        private void metroTile1_Click(object sender, EventArgs e)
+        {
+            metroTabControl1.SelectTab(metroTabPage2);
+        }
     }
 }
