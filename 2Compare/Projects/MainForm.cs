@@ -452,8 +452,10 @@ namespace cs511_g11
 			TextCompareMenu.Show(FileCompareToolbox, new Point(0, FileCompareToolbox.Height));
 		}
 
-		private void FileCompare()
+		private bool FileCompare()
 		{
+			bool _returnValue = true;
+
 			ArrayList _result = FileCompareUtils.CompareFile(TextBoxLeft.m_textController, TextBoxRight.m_textController);
 
 			TextController _leftController = TextBoxLeft.m_textController;
@@ -502,6 +504,8 @@ namespace cs511_g11
 							//FileCompareUtils.Highlighting(TextBoxLeft, _item.SourceIndex + j, Color.LightPink);
 							//FileCompareUtils.Highlighting(TextBoxRight, _item.DestIndex + j, Color.LightPink);
 						}
+
+						_returnValue = false;
 						break;
 					case DiffResultSpanStatus.LeftNotExist:
 						for (int j = 0; j < _item.Length; j++)
@@ -521,6 +525,8 @@ namespace cs511_g11
 							int _index = ((DiffResultSpan)_result[i - 1]).SourceIndex + ((DiffResultSpan)_result[i - 1]).Length - 1;
 							((TextLine)_leftController.GetLineByIndex(_index)).m_ignoredLine = _item.Length;
 						}
+
+						_returnValue = false;
 						break;
 					case DiffResultSpanStatus.RightNotExist:
 						for (int j = 0; j < _item.Length; j++)
@@ -540,9 +546,13 @@ namespace cs511_g11
 							int _index = ((DiffResultSpan)_result[i - 1]).DestIndex + ((DiffResultSpan)_result[i - 1]).Length - 1;
 							((TextLine)_rightController.GetLineByIndex(_index)).m_ignoredLine = _item.Length;
 						}
+
+						_returnValue = false;
 						break;
 				}
 			}
+
+			return _returnValue;
 		}
 
         private void SaveFile()
