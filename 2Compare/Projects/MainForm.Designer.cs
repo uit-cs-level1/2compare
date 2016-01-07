@@ -539,9 +539,6 @@
             this.TextBoxLeft.TabIndex = 9;
             this.TextBoxLeft.Text = "";
             this.TextBoxLeft.WordWrap = false;
-            this.TextBoxLeft.TextChanged += new System.EventHandler(this.TextBoxLeft_TextChanged);
-            this.TextBoxLeft.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxLeft_KeyDown);
-            this.TextBoxLeft.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxLeft_KeyPress);
             this.TextBoxLeft.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxLeft_KeyUp);
             this.TextBoxLeft.LostFocus += new System.EventHandler(this.TextBoxLeft_LostFocus);
             // 
@@ -557,9 +554,6 @@
             this.TextBoxRight.TabIndex = 10;
             this.TextBoxRight.Text = "";
             this.TextBoxRight.WordWrap = false;
-            this.TextBoxRight.TextChanged += new System.EventHandler(this.TextBoxRight_TextChanged);
-            this.TextBoxRight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxRight_KeyDown);
-            this.TextBoxRight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxRight_KeyPress);
             this.TextBoxRight.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxRight_KeyUp);
             this.TextBoxRight.LostFocus += new System.EventHandler(this.TextBoxRight_LostFocus);
             // 
