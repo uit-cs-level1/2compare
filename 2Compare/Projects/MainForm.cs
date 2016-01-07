@@ -264,6 +264,12 @@ namespace cs511_g11
                 return true;
             else
                 return false;
+            long length1 = new System.IO.FileInfo(path1).Length;
+            long length2 = new System.IO.FileInfo(path2).Length;
+            if (length1 != length2)
+                return true;
+            else
+                return false;
         }
         private string listname(TreeNode node)
         {
