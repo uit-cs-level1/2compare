@@ -260,7 +260,7 @@ namespace cs511_g11
                 s2 = sr2.ReadToEnd().ToString();
                 sr2.Close();
             }
-            if (s2.CompareTo(s1) == 0)
+            if (s2.GetHashCode().CompareTo(s1.GetHashCode()) == 0)
                 return true;
             else
                 return false;
@@ -492,11 +492,11 @@ namespace cs511_g11
 
 			for (int i = 0; i < _result.Count; i++)
 			{
-				DiffResultSpan _item = ((DiffResultSpan)_result[i]);
+				DifferentResult _item = ((DifferentResult)_result[i]);
 
 				switch (_item.Status)
 				{
-					case DiffResultSpanStatus.SameText:
+					case ResultStatus.SameText:
 						for (int j = 0; j < _item.Length; j++)
 						{
 							string _contentLeft = ((TextLine)_leftController.GetLineByIndex(_item.SourceIndex + j)).m_content;
@@ -506,7 +506,7 @@ namespace cs511_g11
 							FileCompareUtils.AppendText(TextBoxRight, _contentRight, Color.Black, Color.White);
 						}
 						break;
-					case DiffResultSpanStatus.DiffrenentText:
+					case ResultStatus.DiffrenentText:
 						for (int j = 0; j < _item.Length; j++)
 						{
 							string _contentLeft = ((TextLine)_leftController.GetLineByIndex(_item.SourceIndex + j)).m_content;
@@ -519,7 +519,7 @@ namespace cs511_g11
 							//FileCompareUtils.Highlighting(TextBoxRight, _item.DestIndex + j, Color.LightPink);
 						}
 						break;
-					case DiffResultSpanStatus.LeftNotExist:
+					case ResultStatus.LeftNotExist:
 						for (int j = 0; j < _item.Length; j++)
 						{
 							//string _contentLeft = ((TextLine)_leftController.GetByIndex(_item.SourceIndex + j)).m_content;
@@ -536,7 +536,7 @@ namespace cs511_g11
 						{
 							try
 							{
-								int _index = ((DiffResultSpan)_result[i - 1]).SourceIndex + ((DiffResultSpan)_result[i - 1]).Length - 1;
+								int _index = ((DifferentResult)_result[i - 1]).SourceIndex + ((DifferentResult)_result[i - 1]).Length - 1;
 								((TextLine)_leftController.GetLineByIndex(_index)).m_ignoredLine = _item.Length;
 							}
 							catch
@@ -545,7 +545,7 @@ namespace cs511_g11
 							}
 						}
 						break;
-					case DiffResultSpanStatus.RightNotExist:
+					case ResultStatus.RightNotExist:
 						for (int j = 0; j < _item.Length; j++)
 						{
 							string _contentLeft = ((TextLine)_leftController.GetLineByIndex(_item.SourceIndex + j)).m_content;
@@ -562,7 +562,7 @@ namespace cs511_g11
 						{
 							try
 							{
-								int _index = ((DiffResultSpan)_result[i - 1]).DestIndex + ((DiffResultSpan)_result[i - 1]).Length - 1;
+								int _index = ((DifferentResult)_result[i - 1]).DestIndex + ((DifferentResult)_result[i - 1]).Length - 1;
 								((TextLine)_rightController.GetLineByIndex(_index)).m_ignoredLine = _item.Length;
 							}
 							catch

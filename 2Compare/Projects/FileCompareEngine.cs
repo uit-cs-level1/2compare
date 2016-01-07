@@ -13,7 +13,7 @@ namespace cs511_g11
 		private TextController m_controllerFileRight;
 
 		private ArrayList m_matchList;
-		private DiffStateList m_stateList;
+		private DifferentStateList m_stateList;
 
 		private int GetSourceMatchLength(int destIndex, int sourceIndex, int maxLength)
 		{
@@ -28,7 +28,7 @@ namespace cs511_g11
 			return matchCount;
 		}
 
-		private void GetLongestSourceMatch(DiffState curItem, int destIndex, int destEnd, int sourceStart, int sourceEnd)
+		private void GetLongestSourceMatch(DifferentState curItem, int destIndex, int destEnd, int sourceStart, int sourceEnd)
 		{
 
 			int maxDestLength = (destEnd - destIndex) + 1;
@@ -57,11 +57,11 @@ namespace cs511_g11
 			//DiffState cur = _stateList.GetByIndex(destIndex);
 			if (curBestIndex == -1)
 			{
-				curItem.SetNoMatch();
+				curItem.SetNotMatched();
 			}
 			else
 			{
-				curItem.SetMatch(curBestIndex, curBestLength);
+				curItem.SetMatched(curBestIndex, curBestLength);
 			}
 
 		}
@@ -71,8 +71,8 @@ namespace cs511_g11
 			int curBestIndex = -1;
 			int curBestLength = -1;
 			int maxPossibleDestLength = 0;
-			DiffState curItem = null;
-			DiffState bestItem = null;
+			DifferentState curItem = null;
+			DifferentState bestItem = null;
 			for (int destIndex = destStart; destIndex <= destEnd; destIndex++)
 			{
 				maxPossibleDestLength = (destEnd - destIndex) + 1;
@@ -88,7 +88,7 @@ namespace cs511_g11
 					//recalc new best length since it isn't valid or has never been done.
 					GetLongestSourceMatch(curItem, destIndex, destEnd, sourceStart, sourceEnd);
 				}
-				if (curItem.Status == Status.Matched)
+				if (curItem.Status == BlockStatus.Matched)
 				{
 					if (curItem.Length > curBestLength)
 					{
@@ -109,7 +109,7 @@ namespace cs511_g11
 			{
 
 				int sourceIndex = bestItem.StartIndex;
-				m_matchList.Add(DiffResultSpan.CreateNoChange(curBestIndex, sourceIndex, curBestLength));
+				m_matchList.Add(DifferentResult.CreateNoChange(curBestIndex, sourceIndex, curBestLength));
 				if (destStart < curBestIndex)
 				{
 					//Still have more lower destination data
@@ -152,7 +152,7 @@ namespace cs511_g11
 
 			if ((dcount > 0) && (scount > 0))
 			{
-				m_stateList = new DiffStateList(dcount);
+				m_stateList = new DifferentStateList(dcount);
 				ProcessRange(0, dcount - 1, 0, scount - 1);
 			}
 
@@ -172,24 +172,24 @@ namespace cs511_g11
 				if (diffSource > 0)
 				{
 					minDiff = Math.Min(diffDest, diffSource);
-					report.Add(DiffResultSpan.CreateReplace(curDest, curSource, minDiff));
+					report.Add(DifferentResult.CreateReplace(curDest, curSource, minDiff));
 					if (diffDest > diffSource)
 					{
 						curDest += minDiff;
-						report.Add(DiffResultSpan.CreateAddDestination(curDest, diffDest - diffSource));
+						report.Add(DifferentResult.CreateAddDestination(curDest, diffDest - diffSource));
 					}
 					else
 					{
 						if (diffSource > diffDest)
 						{
 							curSource += minDiff;
-							report.Add(DiffResultSpan.CreateDeleteSource(curSource, diffSource - diffDest));
+							report.Add(DifferentResult.CreateDeleteSource(curSource, diffSource - diffDest));
 						}
 					}
 				}
 				else
 				{
-					report.Add(DiffResultSpan.CreateAddDestination(curDest, diffDest));
+					report.Add(DifferentResult.CreateAddDestination(curDest, diffDest));
 				}
 				retval = true;
 			}
@@ -197,7 +197,7 @@ namespace cs511_g11
 			{
 				if (diffSource > 0)
 				{
-					report.Add(DiffResultSpan.CreateDeleteSource(curSource, diffSource));
+					report.Add(DifferentResult.CreateDeleteSource(curSource, diffSource));
 					retval = true;
 				}
 			}
@@ -215,7 +215,7 @@ namespace cs511_g11
 			{
 				if (scount > 0)
 				{
-					retval.Add(DiffResultSpan.CreateDeleteSource(0, scount));
+					retval.Add(DifferentResult.CreateDeleteSource(0, scount));
 				}
 				return retval;
 			}
@@ -223,7 +223,7 @@ namespace cs511_g11
 			{
 				if (scount == 0)
 				{
-					retval.Add(DiffResultSpan.CreateAddDestination(0, dcount));
+					retval.Add(DifferentResult.CreateAddDestination(0, dcount));
 					return retval;
 				}
 			}
@@ -232,10 +232,10 @@ namespace cs511_g11
 			m_matchList.Sort();
 			int curDest = 0;
 			int curSource = 0;
-			DiffResultSpan last = null;
+			DifferentResult last = null;
 
 			//Process each match record
-			foreach (DiffResultSpan drs in m_matchList)
+			foreach (DifferentResult drs in m_matchList)
 			{
 				if ((!AddChanges(retval, curDest, drs.DestIndex, curSource, drs.SourceIndex)) &&
 					(last != null))

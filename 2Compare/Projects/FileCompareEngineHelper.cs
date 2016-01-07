@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace cs511_g11
 {
-	internal enum Status
+	internal enum BlockStatus
 	{
 		Matched = 1,
 		NotMatched = -1,
@@ -14,26 +14,26 @@ namespace cs511_g11
 
 	}
 
-	internal class DiffState
+	internal class DifferentState
 	{
 		private const int BAD_INDEX = -1;
-		private int _startIndex;
-		private int _length;
+		private int m_startIndex;
+		private int m_length;
 
-		public int StartIndex { get { return _startIndex; } }
-		public int EndIndex { get { return ((_startIndex + _length) - 1); } }
+		public int StartIndex { get { return m_startIndex; } }
+		public int EndIndex { get { return ((m_startIndex + m_length) - 1); } }
 		public int Length
 		{
 			get
 			{
 				int len;
-				if (_length > 0)
+				if (m_length > 0)
 				{
-					len = _length;
+					len = m_length;
 				}
 				else
 				{
-					if (_length == 0)
+					if (m_length == 0)
 					{
 						len = 1;
 					}
@@ -45,25 +45,25 @@ namespace cs511_g11
 				return len;
 			}
 		}
-		public Status Status
+		public BlockStatus Status
 		{
 			get
 			{
-				Status stat;
-				if (_length > 0)
+				BlockStatus stat;
+				if (m_length > 0)
 				{
-					stat = Status.Matched;
+					stat = BlockStatus.Matched;
 				}
 				else
 				{
-					switch (_length)
+					switch (m_length)
 					{
 						case -1:
-							stat = Status.NotMatched;
+							stat = BlockStatus.NotMatched;
 							break;
 						default:
-							System.Diagnostics.Debug.Assert(_length == -2, "Invalid status: _length < -2");
-							stat = Status.Unknown;
+							System.Diagnostics.Debug.Assert(m_length == -2, "Invalid status: _length < -2");
+							stat = BlockStatus.Unknown;
 							break;
 					}
 				}
@@ -71,76 +71,76 @@ namespace cs511_g11
 			}
 		}
 
-		public DiffState()
+		public DifferentState()
 		{
-			SetToUnkown();
+			SetToUnknown();
 		}
 
-		protected void SetToUnkown()
+		protected void SetToUnknown()
 		{
-			_startIndex = BAD_INDEX;
-			_length = (int)Status.Unknown;
+			m_startIndex = BAD_INDEX;
+			m_length = (int)BlockStatus.Unknown;
 		}
 
-		public void SetMatch(int start, int length)
+		public void SetMatched(int start, int length)
 		{
 			System.Diagnostics.Debug.Assert(length > 0, "Length must be greater than zero");
 			System.Diagnostics.Debug.Assert(start >= 0, "Start must be greater than or equal to zero");
-			_startIndex = start;
-			_length = length;
+			m_startIndex = start;
+			m_length = length;
 		}
 
-		public void SetNoMatch()
+		public void SetNotMatched()
 		{
-			_startIndex = BAD_INDEX;
-			_length = (int)Status.NotMatched;
+			m_startIndex = BAD_INDEX;
+			m_length = (int)BlockStatus.NotMatched;
 		}
 
 
 		public bool HasValidLength(int newStart, int newEnd, int maxPossibleDestLength)
 		{
-			if (_length > 0) //have unlocked match
+			if (m_length > 0) //have unlocked match
 			{
-				if ((maxPossibleDestLength < _length) ||
-					((_startIndex < newStart) || (EndIndex > newEnd)))
+				if ((maxPossibleDestLength < m_length) ||
+					((m_startIndex < newStart) || (EndIndex > newEnd)))
 				{
-					SetToUnkown();
+					SetToUnknown();
 				}
 			}
-			return (_length != (int)Status.Unknown);
+			return (m_length != (int)BlockStatus.Unknown);
 		}
 	}
 
-	internal class DiffStateList
+	internal class DifferentStateList
 	{
 #if USE_HASH_TABLE
 		private Hashtable _table;
 #else
-		private DiffState[] _array;
+		private DifferentState[] _array;
 #endif
-		public DiffStateList(int destCount)
+		public DifferentStateList(int destCount)
 		{
 #if USE_HASH_TABLE
 			_table = new Hashtable(Math.Max(9,destCount/10));
 #else
-			_array = new DiffState[destCount];
+			_array = new DifferentState[destCount];
 #endif
 		}
 
-		public DiffState GetByIndex(int index)
+		public DifferentState GetByIndex(int index)
 		{
 #if USE_HASH_TABLE
-			DiffState retval = (DiffState)_table[index];
+			DifferentState retval = (DifferentState)_table[index];
 			if (retval == null)
 			{
-				retval = new DiffState();
+				retval = new DifferentState();
 				_table.Add(index,retval);
 			}
 #else
-			DiffState retval = _array[index];
+			DifferentState retval = _array[index];
 			if (retval == null)
 			{
-				retval = new DiffState();
+				retval = new DifferentState();
 				_array[index] = retval;
 			}
 #endif
@@ -149,7 +149,7 @@ namespace cs511_g11
 	}
 
 
-	public enum DiffResultSpanStatus
+	public enum ResultStatus
 	{
 		SameText,
 		DiffrenentText,
@@ -157,21 +157,21 @@ namespace cs511_g11
 		LeftNotExist
 	}
 
-	public class DiffResultSpan : IComparable
+	public class DifferentResult : IComparable
 	{
 		private const int BAD_INDEX = -1;
 		private int _destIndex;
 		private int _sourceIndex;
 		private int _length;
-		private DiffResultSpanStatus _status;
+		private ResultStatus _status;
 
 		public int DestIndex { get { return _destIndex; } }
 		public int SourceIndex { get { return _sourceIndex; } }
 		public int Length { get { return _length; } }
-		public DiffResultSpanStatus Status { get { return _status; } }
+		public ResultStatus Status { get { return _status; } }
 
-		protected DiffResultSpan(
-			DiffResultSpanStatus status,
+		protected DifferentResult(
+			ResultStatus status,
 			int destIndex,
 			int sourceIndex,
 			int length)
@@ -182,24 +182,24 @@ namespace cs511_g11
 			_length = length;
 		}
 
-		public static DiffResultSpan CreateNoChange(int destIndex, int sourceIndex, int length)
+		public static DifferentResult CreateNoChange(int destIndex, int sourceIndex, int length)
 		{
-			return new DiffResultSpan(DiffResultSpanStatus.SameText, destIndex, sourceIndex, length);
+			return new DifferentResult(ResultStatus.SameText, destIndex, sourceIndex, length);
 		}
 
-		public static DiffResultSpan CreateReplace(int destIndex, int sourceIndex, int length)
+		public static DifferentResult CreateReplace(int destIndex, int sourceIndex, int length)
 		{
-			return new DiffResultSpan(DiffResultSpanStatus.DiffrenentText, destIndex, sourceIndex, length);
+			return new DifferentResult(ResultStatus.DiffrenentText, destIndex, sourceIndex, length);
 		}
 
-		public static DiffResultSpan CreateDeleteSource(int sourceIndex, int length)
+		public static DifferentResult CreateDeleteSource(int sourceIndex, int length)
 		{
-			return new DiffResultSpan(DiffResultSpanStatus.RightNotExist, BAD_INDEX, sourceIndex, length);
+			return new DifferentResult(ResultStatus.RightNotExist, BAD_INDEX, sourceIndex, length);
 		}
 
-		public static DiffResultSpan CreateAddDestination(int destIndex, int length)
+		public static DifferentResult CreateAddDestination(int destIndex, int length)
 		{
-			return new DiffResultSpan(DiffResultSpanStatus.LeftNotExist, destIndex, BAD_INDEX, length);
+			return new DifferentResult(ResultStatus.LeftNotExist, destIndex, BAD_INDEX, length);
 		}
 
 		public void AddLength(int i)
@@ -219,7 +219,7 @@ namespace cs511_g11
 
 		public int CompareTo(object obj)
 		{
-			return _destIndex.CompareTo(((DiffResultSpan)obj)._destIndex);
+			return _destIndex.CompareTo(((DifferentResult)obj)._destIndex);
 		}
 
 		#endregion
