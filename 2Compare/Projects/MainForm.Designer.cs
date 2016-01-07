@@ -97,7 +97,7 @@
 			this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.metroTabControl1.Location = new System.Drawing.Point(23, 60);
 			this.metroTabControl1.Name = "metroTabControl1";
-			this.metroTabControl1.SelectedIndex = 2;
+			this.metroTabControl1.SelectedIndex = 0;
 			this.metroTabControl1.Size = new System.Drawing.Size(978, 520);
 			this.metroTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
 			this.metroTabControl1.TabIndex = 0;

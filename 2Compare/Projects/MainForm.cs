@@ -18,6 +18,12 @@ namespace cs511_g11
 			InitializeComponent();
 			SetupRichTextbox();
 
+			if (!System.IO.Directory.Exists(Environment.GetEnvironmentVariable("userprofile") + "\\AppData\\Local\\2Compare"))
+				Directory.CreateDirectory(Environment.GetEnvironmentVariable("userprofile") + "\\AppData\\Local\\2Compare");
+
+			if (!File.Exists(Environment.GetEnvironmentVariable("userprofile") + "\\AppData\\Local\\2Compare\\History.cs511"))
+				File.CreateText(Environment.GetEnvironmentVariable("userprofile") + "\\AppData\\Local\\2Compare\\History.cs511");
+
 			TextBoxLeft.m_textController = new TextController();
 			TextBoxRight.m_textController = new TextController();
 
@@ -664,7 +670,7 @@ namespace cs511_g11
 
 				TextBoxLeft.m_textController.UpdateLinesWithDelete(TextBoxLeft.m_textController.GetLineIndex(_currentLine, false), _content, _deleted);
 			}
-			else if (e.KeyCode == Keys.Tab || char.IsLetterOrDigit((char)e.KeyCode))
+			else if (e.KeyCode == Keys.Tab || e.KeyCode == Keys.Space || char.IsLetterOrDigit((char)e.KeyCode))
 			{
 				string _content = TextBoxLeft.Lines[_currentLine];
 				TextBoxLeft.m_textController.UpdateLine(TextBoxLeft.m_textController.GetLineIndex(_currentLine), _content);
@@ -702,7 +708,7 @@ namespace cs511_g11
 
 				TextBoxRight.m_textController.UpdateLinesWithDelete(TextBoxRight.m_textController.GetLineIndex(_currentLine, false), _content, _deleted);
 			}
-			else if (e.KeyCode == Keys.Tab || char.IsLetterOrDigit((char)e.KeyCode))
+			else if (e.KeyCode == Keys.Tab || e.KeyCode == Keys.Space || char.IsLetterOrDigit((char)e.KeyCode))
 			{
 				string _content = TextBoxRight.Lines[_currentLine];
 				TextBoxRight.m_textController.UpdateLine(TextBoxRight.m_textController.GetLineIndex(_currentLine), _content);
@@ -719,7 +725,7 @@ namespace cs511_g11
 
 		private void HistoryButton_Click(object sender, EventArgs e)
 		{
-			string path = @"../../Data/History.txt";
+			string path = Environment.GetEnvironmentVariable("userprofile") + "\\AppData\\Local\\2Compare\\History.cs511";
 			StreamReader a = new StreamReader(path);
 			HistoryText.Text = a.ReadToEnd();
 			a.Close();
@@ -871,7 +877,7 @@ namespace cs511_g11
 			DateTime _currentTime = DateTime.Now;
 			string result = leftPath + "<=>" + rightPath + " | " + _currentTime.ToShortDateString() + " " + _currentTime.ToLongTimeString();
 
-			StreamWriter sw = new StreamWriter(@"../../Data/History.txt", true);
+			StreamWriter sw = new StreamWriter(Environment.GetEnvironmentVariable("userprofile") + "\\AppData\\Local\\2Compare\\History.cs511", true);
 			sw.WriteLine(result);
 			sw.Close();
 		}
