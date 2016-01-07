@@ -447,6 +447,7 @@ namespace cs511_g11
             }
 
             // get history when compare text
+            
 
             string ngay = DateTime.Now.Day.ToString();
             string thang = DateTime.Now.Month.ToString();
@@ -454,7 +455,7 @@ namespace cs511_g11
             string hour = DateTime.Now.Hour.ToString();
             string min = DateTime.Now.Minute.ToString();
             string second = DateTime.Now.Second.ToString();
-            string result = ngay + "/" + thang + "/" + year + "........" + hour + ":" + min + ":" + second + " Compare Folder";
+            string result = ngay + "/" + thang + "/" + year + "........" + hour + ":" + min + ":" + second + " Compare Folder "+metroLabel3.Text+"<=>" + metroLabel4.Text;
             string path = @"../../Data/History.txt";
             StreamWriter sw = new StreamWriter(path, true);
             sw.WriteLine(result);
@@ -482,17 +483,8 @@ namespace cs511_g11
 			TextBoxLeft.Clear();
 			TextBoxRight.Clear();
             // get history when compare
-            string ngay = DateTime.Now.Day.ToString();
-            string thang = DateTime.Now.Month.ToString();
-            string year = DateTime.Now.Year.ToString();
-            string hour = DateTime.Now.Hour.ToString();
-            string min = DateTime.Now.Minute.ToString();
-            string second = DateTime.Now.Second.ToString();
-            string result = ngay + "/" + thang + "/" + year + "........" + hour + ":" + min + ":" + second + " Compare Text";
-            string path = @"../../Data/History.txt";
-            StreamWriter sw = new StreamWriter(path, true);
-            sw.WriteLine(result);
-            sw.Close();
+          
+          
 
 			for (int i = 0; i < _result.Count; i++)
 			{
@@ -569,6 +561,22 @@ namespace cs511_g11
 						break;
 				}
 			}
+            string path1 = File_1.Text;
+            string path2 = File_2.Text;
+            if (path1 != "" && path2 !="")
+            {
+                string ngay = DateTime.Now.Day.ToString();
+                string thang = DateTime.Now.Month.ToString();
+                string year = DateTime.Now.Year.ToString();
+                string hour = DateTime.Now.Hour.ToString();
+                string min = DateTime.Now.Minute.ToString();
+                string second = DateTime.Now.Second.ToString();
+                string result = ngay + "/" + thang + "/" + year + "........" + hour + ":" + min + ":" + second + " Compare Text " + File_1.Text + "<=>" + File_2.Text;
+                string path = @"../../Data/History.txt";
+                StreamWriter sw = new StreamWriter(path, true);
+                sw.WriteLine(result);
+                sw.Close();
+            }
 
 			return _returnValue;
 		}
@@ -843,6 +851,8 @@ namespace cs511_g11
         {
             treeView1.Nodes.Clear();
             treeView2.Nodes.Clear();
+            metroLabel3.Text= " ";
+            metroLabel4.Text = " ";
         }
 
         private void History_TextChanged(object sender, EventArgs e)
@@ -861,6 +871,11 @@ namespace cs511_g11
         private void metroTile1_Click(object sender, EventArgs e)
         {
             metroTabControl1.SelectTab(metroTabPage2);
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

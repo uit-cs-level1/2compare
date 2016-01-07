@@ -40,8 +40,6 @@
             this.File_2 = new MetroFramework.Controls.MetroLabel();
             this.File_1 = new MetroFramework.Controls.MetroLabel();
             this.FileCompareToolbox = new MetroFramework.Controls.MetroButton();
-            this.TextBoxLeft = new cs511_g11.RichTextBoxAdvanced();
-            this.TextBoxRight = new cs511_g11.RichTextBoxAdvanced();
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
             this.treeView2 = new System.Windows.Forms.TreeView();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
@@ -72,6 +70,8 @@
             this.addFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compareToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TextBoxLeft = new cs511_g11.RichTextBoxAdvanced();
+            this.TextBoxRight = new cs511_g11.RichTextBoxAdvanced();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
@@ -95,7 +95,7 @@
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(23, 60);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.SelectedIndex = 2;
             this.metroTabControl1.Size = new System.Drawing.Size(978, 520);
             this.metroTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.metroTabControl1.TabIndex = 0;
@@ -205,9 +205,8 @@
             this.File_2.AutoSize = true;
             this.File_2.Location = new System.Drawing.Point(509, 38);
             this.File_2.Name = "File_2";
-            this.File_2.Size = new System.Drawing.Size(40, 19);
+            this.File_2.Size = new System.Drawing.Size(0, 0);
             this.File_2.TabIndex = 8;
-            this.File_2.Text = "File 2";
             this.File_2.UseStyleColors = true;
             // 
             // File_1
@@ -215,9 +214,8 @@
             this.File_1.AutoSize = true;
             this.File_1.Location = new System.Drawing.Point(3, 38);
             this.File_1.Name = "File_1";
-            this.File_1.Size = new System.Drawing.Size(38, 19);
+            this.File_1.Size = new System.Drawing.Size(0, 0);
             this.File_1.TabIndex = 7;
-            this.File_1.Text = "File 1";
             this.File_1.UseStyleColors = true;
             // 
             // FileCompareToolbox
@@ -230,42 +228,6 @@
             this.FileCompareToolbox.UseSelectable = true;
             this.FileCompareToolbox.UseStyleColors = true;
             this.FileCompareToolbox.Click += new System.EventHandler(this.FileCompareToolbox_Click);
-            // 
-            // TextBoxLeft
-            // 
-            this.TextBoxLeft.AcceptsTab = true;
-            this.TextBoxLeft.EnableAutoDragDrop = true;
-            this.TextBoxLeft.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TextBoxLeft.Location = new System.Drawing.Point(0, 60);
-            this.TextBoxLeft.Margin = new System.Windows.Forms.Padding(5);
-            this.TextBoxLeft.Name = "TextBoxLeft";
-            this.TextBoxLeft.Size = new System.Drawing.Size(475, 418);
-            this.TextBoxLeft.TabIndex = 9;
-            this.TextBoxLeft.Text = "";
-            this.TextBoxLeft.WordWrap = false;
-            this.TextBoxLeft.TextChanged += new System.EventHandler(this.TextBoxLeft_TextChanged);
-            this.TextBoxLeft.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxLeft_KeyDown);
-            this.TextBoxLeft.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxLeft_KeyPress);
-            this.TextBoxLeft.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxLeft_KeyUp);
-            this.TextBoxLeft.LostFocus += new System.EventHandler(this.TextBoxLeft_LostFocus);
-            // 
-            // TextBoxRight
-            // 
-            this.TextBoxRight.AcceptsTab = true;
-            this.TextBoxRight.EnableAutoDragDrop = true;
-            this.TextBoxRight.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TextBoxRight.Location = new System.Drawing.Point(496, 60);
-            this.TextBoxRight.Margin = new System.Windows.Forms.Padding(5);
-            this.TextBoxRight.Name = "TextBoxRight";
-            this.TextBoxRight.Size = new System.Drawing.Size(475, 418);
-            this.TextBoxRight.TabIndex = 10;
-            this.TextBoxRight.Text = "";
-            this.TextBoxRight.WordWrap = false;
-            this.TextBoxRight.TextChanged += new System.EventHandler(this.TextBoxRight_TextChanged);
-            this.TextBoxRight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxRight_KeyDown);
-            this.TextBoxRight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxRight_KeyPress);
-            this.TextBoxRight.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxRight_KeyUp);
-            this.TextBoxRight.LostFocus += new System.EventHandler(this.TextBoxRight_LostFocus);
             // 
             // metroTabPage3
             // 
@@ -299,9 +261,8 @@
             this.metroLabel4.AutoSize = true;
             this.metroLabel4.Location = new System.Drawing.Point(447, 34);
             this.metroLabel4.Name = "metroLabel4";
-            this.metroLabel4.Size = new System.Drawing.Size(58, 19);
+            this.metroLabel4.Size = new System.Drawing.Size(0, 0);
             this.metroLabel4.TabIndex = 6;
-            this.metroLabel4.Text = "Folder 2";
             this.metroLabel4.UseStyleColors = true;
             this.metroLabel4.Click += new System.EventHandler(this.metroLabel4_Click);
             // 
@@ -310,9 +271,8 @@
             this.metroLabel3.AutoSize = true;
             this.metroLabel3.Location = new System.Drawing.Point(19, 37);
             this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(56, 19);
+            this.metroLabel3.Size = new System.Drawing.Size(0, 0);
             this.metroLabel3.TabIndex = 5;
-            this.metroLabel3.Text = "Folder 1";
             this.metroLabel3.UseStyleColors = true;
             // 
             // treeView1
@@ -455,7 +415,7 @@
             this.metroTabPage6.Text = "History";
             this.metroTabPage6.VerticalScrollbarBarColor = true;
             this.metroTabPage6.VerticalScrollbarHighlightOnWheel = false;
-            this.metroTabPage6.VerticalScrollbarSize = 9;
+            this.metroTabPage6.VerticalScrollbarSize = 8;
             // 
             // HistoryText
             // 
@@ -465,6 +425,7 @@
             this.HistoryText.Size = new System.Drawing.Size(592, 430);
             this.HistoryText.TabIndex = 4;
             this.HistoryText.Text = "";
+            this.HistoryText.WordWrap = false;
             // 
             // HistoryButton
             // 
@@ -566,6 +527,42 @@
             this.resetToolStripMenuItem.Text = "Reset";
             this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
             // 
+            // TextBoxLeft
+            // 
+            this.TextBoxLeft.AcceptsTab = true;
+            this.TextBoxLeft.EnableAutoDragDrop = true;
+            this.TextBoxLeft.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextBoxLeft.Location = new System.Drawing.Point(0, 60);
+            this.TextBoxLeft.Margin = new System.Windows.Forms.Padding(5);
+            this.TextBoxLeft.Name = "TextBoxLeft";
+            this.TextBoxLeft.Size = new System.Drawing.Size(475, 418);
+            this.TextBoxLeft.TabIndex = 9;
+            this.TextBoxLeft.Text = "";
+            this.TextBoxLeft.WordWrap = false;
+            this.TextBoxLeft.TextChanged += new System.EventHandler(this.TextBoxLeft_TextChanged);
+            this.TextBoxLeft.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxLeft_KeyDown);
+            this.TextBoxLeft.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxLeft_KeyPress);
+            this.TextBoxLeft.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxLeft_KeyUp);
+            this.TextBoxLeft.LostFocus += new System.EventHandler(this.TextBoxLeft_LostFocus);
+            // 
+            // TextBoxRight
+            // 
+            this.TextBoxRight.AcceptsTab = true;
+            this.TextBoxRight.EnableAutoDragDrop = true;
+            this.TextBoxRight.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextBoxRight.Location = new System.Drawing.Point(496, 60);
+            this.TextBoxRight.Margin = new System.Windows.Forms.Padding(5);
+            this.TextBoxRight.Name = "TextBoxRight";
+            this.TextBoxRight.Size = new System.Drawing.Size(475, 418);
+            this.TextBoxRight.TabIndex = 10;
+            this.TextBoxRight.Text = "";
+            this.TextBoxRight.WordWrap = false;
+            this.TextBoxRight.TextChanged += new System.EventHandler(this.TextBoxRight_TextChanged);
+            this.TextBoxRight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxRight_KeyDown);
+            this.TextBoxRight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxRight_KeyPress);
+            this.TextBoxRight.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxRight_KeyUp);
+            this.TextBoxRight.LostFocus += new System.EventHandler(this.TextBoxRight_LostFocus);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -581,6 +578,7 @@
             this.Text = "2Compare";
             this.TextAlign = MetroFramework.Forms.MetroFormTextAlign.Center;
             this.TransparencyKey = System.Drawing.Color.Gainsboro;
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.metroTabControl1.ResumeLayout(false);
             this.metroTabPage1.ResumeLayout(false);
             this.metroTabPage1.PerformLayout();
