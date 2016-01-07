@@ -1,3 +1,4 @@
 7/1/2016........10:29:20 Compare Text C:\Users\mai\Desktop\C#\2compare\2Compare\Data\fileLeft.txt<=>C:\Users\mai\Desktop\C#\2compare\2Compare\Data\fileRight.txt
 7/1/2016........11:18:9 Compare Text D:\2compare\2Compare\Data\fileLeft.txt<=>D:\2compare\2Compare\Data\fileRight.txt
 7/1/2016........11:18:40 Compare Text D:\2compare\2Compare\Data\fileLeft.txt<=>D:\2compare\2Compare\Data\fileRight.txt
+6/1/2016........20:38:41 Compare Folder F:\check<=>F:\check2

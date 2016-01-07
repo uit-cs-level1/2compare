@@ -808,5 +808,121 @@ namespace cs511_g11
         {
 
         }
+
+        private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node.IsExpanded == true)
+            {
+                try
+                {
+                    string[] arrListStr = e.Node.FullPath.Split('\\');
+                    string t = arrListStr[0];
+                    TreeNode X;
+                    X = treeView2.Nodes[0];
+                    while (X.Text != t)
+                    {
+                        X = X.NextNode;
+                    }
+                    X.Expand();
+                    for (int i = 1; i <= arrListStr.Length - 1; i++)
+                    {
+                        //X.ForeColor = Color.Red;
+                        X = X.Nodes[0];
+                        while (X.Text != arrListStr[i])
+                        {
+                            X = X.NextNode;
+                        }
+                        X.Expand();
+                    }
+                }
+                catch
+                { }
+            }
+            else
+            {
+                try
+                {
+                    string[] arrListStr = e.Node.FullPath.Split('\\');
+                    string t = arrListStr[0];
+                    TreeNode X;
+                    X = treeView2.Nodes[0];
+                    while (X.Text != t)
+                    {
+                        X = X.NextNode;
+                    }
+                    X.Collapse();
+                    for (int i = 1; i <= arrListStr.Length - 1; i++)
+                    {
+                        //X.ForeColor = Color.Red;
+                        X = X.Nodes[0];
+                        while (X.Text != arrListStr[i])
+                        {
+                            X = X.NextNode;
+                        }
+                        X.Collapse();
+                    }
+                }
+                catch
+                { }
+            }
+        }
+
+        private void treeView2_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node.IsExpanded == true)
+            {
+                try
+                {
+                    string[] arrListStr = e.Node.FullPath.Split('\\');
+                    string t = arrListStr[0];
+                    TreeNode X;
+                    X = treeView1.Nodes[0];
+                    while (X.Text != t)
+                    {
+                        X = X.NextNode;
+                    }
+                    X.Expand();
+                    for (int i = 1; i <= arrListStr.Length - 1; i++)
+                    {
+                        //X.ForeColor = Color.Red;
+                        X = X.Nodes[0];
+                        while (X.Text != arrListStr[i])
+                        {
+                            X = X.NextNode;
+                        }
+                        X.Expand();
+                    }
+                }
+                catch
+                { }
+            }
+            else
+            {
+                try
+                {
+                    string[] arrListStr = e.Node.FullPath.Split('\\');
+                    string t = arrListStr[0];
+                    TreeNode X;
+                    X = treeView1.Nodes[0];
+                    while (X.Text != t)
+                    {
+                        X = X.NextNode;
+                    }
+                    X.Collapse();
+                    for (int i = 1; i <= arrListStr.Length - 1; i++)
+                    {
+                        //X.ForeColor = Color.Red;
+                        X = X.Nodes[0];
+                        while (X.Text != arrListStr[i])
+                        {
+                            X = X.NextNode;
+                        }
+                        X.Collapse();
+                    }
+                }
+                catch
+                { }
+            }
+        }
     }
 }
