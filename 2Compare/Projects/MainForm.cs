@@ -229,12 +229,7 @@ namespace cs511_g11
         }
         private void addFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (treeView1.Nodes.Count == 0)
-            {
-                show_treenode(treeView1);
-            }
-            else
-                show_treenode(treeView2);
+
         }
 
         private void metroLabel4_Click(object sender, EventArgs e)
@@ -923,6 +918,16 @@ namespace cs511_g11
                 catch
                 { }
             }
+        }
+
+        private void lEFTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            show_treenode(treeView1);
+        }
+
+        private void rIGHTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            show_treenode(treeView2);
         }
     }
 }

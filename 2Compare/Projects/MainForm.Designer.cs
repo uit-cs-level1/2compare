@@ -72,6 +72,8 @@
             this.addFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compareToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lEFTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rIGHTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
@@ -447,7 +449,7 @@
             this.metroTabPage6.Text = "History";
             this.metroTabPage6.VerticalScrollbarBarColor = true;
             this.metroTabPage6.VerticalScrollbarHighlightOnWheel = false;
-            this.metroTabPage6.VerticalScrollbarSize = 7;
+            this.metroTabPage6.VerticalScrollbarSize = 6;
             // 
             // HistoryText
             // 
@@ -535,29 +537,46 @@
             this.compareToolStripMenuItem1,
             this.resetToolStripMenuItem});
             this.metroContextMenu2.Name = "metroContextMenu2";
-            this.metroContextMenu2.Size = new System.Drawing.Size(133, 70);
+            this.metroContextMenu2.Size = new System.Drawing.Size(153, 92);
             this.metroContextMenu2.Opening += new System.ComponentModel.CancelEventHandler(this.metroContextMenu2_Opening);
             // 
             // addFolderToolStripMenuItem
             // 
+            this.addFolderToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lEFTToolStripMenuItem,
+            this.rIGHTToolStripMenuItem});
             this.addFolderToolStripMenuItem.Name = "addFolderToolStripMenuItem";
-            this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.addFolderToolStripMenuItem.Text = "Add Folder";
             this.addFolderToolStripMenuItem.Click += new System.EventHandler(this.addFolderToolStripMenuItem_Click);
             // 
             // compareToolStripMenuItem1
             // 
             this.compareToolStripMenuItem1.Name = "compareToolStripMenuItem1";
-            this.compareToolStripMenuItem1.Size = new System.Drawing.Size(132, 22);
+            this.compareToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.compareToolStripMenuItem1.Text = "Compare";
             this.compareToolStripMenuItem1.Click += new System.EventHandler(this.compareToolStripMenuItem1_Click);
             // 
             // resetToolStripMenuItem
             // 
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.resetToolStripMenuItem.Text = "Reset";
             this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
+            // 
+            // lEFTToolStripMenuItem
+            // 
+            this.lEFTToolStripMenuItem.Name = "lEFTToolStripMenuItem";
+            this.lEFTToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lEFTToolStripMenuItem.Text = "LEFT ";
+            this.lEFTToolStripMenuItem.Click += new System.EventHandler(this.lEFTToolStripMenuItem_Click);
+            // 
+            // rIGHTToolStripMenuItem
+            // 
+            this.rIGHTToolStripMenuItem.Name = "rIGHTToolStripMenuItem";
+            this.rIGHTToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rIGHTToolStripMenuItem.Text = "RIGHT";
+            this.rIGHTToolStripMenuItem.Click += new System.EventHandler(this.rIGHTToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -638,6 +657,8 @@
         private MetroFramework.Controls.MetroTabPage metroTabPage6;
         private MetroFramework.Controls.MetroButton HistoryButton;
         private System.Windows.Forms.RichTextBox HistoryText;
+        private System.Windows.Forms.ToolStripMenuItem lEFTToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rIGHTToolStripMenuItem;
     }
 }
 
