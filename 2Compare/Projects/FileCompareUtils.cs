@@ -85,6 +85,21 @@ namespace cs511_g11
 			}
 		}
 
+		public void AddLine(string content)
+		{
+			if (content.Length > m_limitedLineLength)
+			{
+				throw new InvalidOperationException(
+					string.Format("File contains a line greater than {0} characters.",
+					m_limitedLineLength.ToString()));
+			}
+
+			if (content.Length > m_maxLength)
+				m_maxLength = content.Length;
+
+			m_lines.Add(new TextLine(content));
+		}
+
 		public void UpdateLine(int index, string content)
 		{
 			((TextLine)GetLineByIndex(index)).ReplaceContent(content);

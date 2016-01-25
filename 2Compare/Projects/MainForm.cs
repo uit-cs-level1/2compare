@@ -639,81 +639,6 @@ namespace cs511_g11
 			m_focusTextBox = TextBoxRight;
 		}
 
-		private void TextBoxLeft_KeyUp(object sender, KeyEventArgs e)
-		{
-			int _currentLine = TextBoxLeft.GetLineFromCharIndex(TextBoxLeft.SelectionStart);
-
-			if (e.Control && e.KeyCode == Keys.S)
-			{
-				SaveFile();
-			}
-
-			if (e.KeyCode == Keys.Return)
-			{
-				string _content = TextBoxLeft.Lines[_currentLine];
-
-				int _controllerPreviousIndex = TextBoxLeft.m_textController.GetLineIndex(_currentLine, false) - 1;
-				int _textboxPreviousIndex = TextBoxLeft.m_textController.GetTextboxLineIndex(_controllerPreviousIndex);
-				string _previousContent = TextBoxLeft.Lines[_textboxPreviousIndex];
-
-				TextBoxLeft.m_textController.UpdateLinesWithEnter(TextBoxLeft.m_textController.GetLineIndex(_currentLine, false), _content, _previousContent);
-			}
-			else if (e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete)
-			{
-				string _content = TextBoxLeft.Lines[_currentLine];
-
-				int _controllerPreviousIndex = TextBoxLeft.m_textController.GetLineIndex(_currentLine, false) + 1;
-				string _previousContent = ((TextLine)TextBoxLeft.m_textController.GetLineByIndex(_controllerPreviousIndex)).m_content;
-
-				int _index = _content.IndexOf(_previousContent);
-				bool _deleted = (_index == -1) ? false : true;
-
-				TextBoxLeft.m_textController.UpdateLinesWithDelete(TextBoxLeft.m_textController.GetLineIndex(_currentLine, false), _content, _deleted);
-			}
-			else if (e.KeyCode == Keys.Tab || e.KeyCode == Keys.Space || char.IsLetterOrDigit((char)e.KeyCode))
-			{
-				string _content = TextBoxLeft.Lines[_currentLine];
-				TextBoxLeft.m_textController.UpdateLine(TextBoxLeft.m_textController.GetLineIndex(_currentLine), _content);
-			}
-		}
-
-		private void TextBoxRight_KeyUp(object sender, KeyEventArgs e)
-		{
-			int _currentLine = TextBoxRight.GetLineFromCharIndex(TextBoxRight.SelectionStart);
-
-			if (e.Control && e.KeyCode == Keys.S)
-			{
-				SaveFile();
-			}
-
-			if (e.KeyCode == Keys.Return)
-			{
-				string _content = TextBoxRight.Lines[_currentLine];
-
-				int _controllerPreviousIndex = TextBoxRight.m_textController.GetLineIndex(_currentLine, false) - 1;
-				int _textboxPreviousIndex = TextBoxRight.m_textController.GetTextboxLineIndex(_controllerPreviousIndex);
-				string _previousContent = TextBoxRight.Lines[_textboxPreviousIndex];
-
-				TextBoxRight.m_textController.UpdateLinesWithEnter(TextBoxRight.m_textController.GetLineIndex(_currentLine, false), _content, _previousContent);
-			}
-			else if (e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete)
-			{
-				string _content = TextBoxRight.Lines[_currentLine];
-
-				int _controllerPreviousIndex = TextBoxRight.m_textController.GetLineIndex(_currentLine, false) + 1;
-				string _previousContent = ((TextLine)TextBoxRight.m_textController.GetLineByIndex(_controllerPreviousIndex)).m_content;
-
-				int _index = _content.IndexOf(_previousContent);
-				bool _deleted = (_index == -1) ? false : true;
-
-				TextBoxRight.m_textController.UpdateLinesWithDelete(TextBoxRight.m_textController.GetLineIndex(_currentLine, false), _content, _deleted);
-			}
-			else if (e.KeyCode == Keys.Tab || e.KeyCode == Keys.Space || char.IsLetterOrDigit((char)e.KeyCode))
-			{
-				string _content = TextBoxRight.Lines[_currentLine];
-				TextBoxRight.m_textController.UpdateLine(TextBoxRight.m_textController.GetLineIndex(_currentLine), _content);
-			}
-		}
 
 		private void resetToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -882,9 +807,38 @@ namespace cs511_g11
 			sw.Close();
 		}
 
-		private void treeView2_AfterSelect(object sender, TreeViewEventArgs e)
+		private void btn_toRight_Click(object sender, EventArgs e)
 		{
+			TextBoxRight.Clear();
+			TextBoxRight.m_textController.Clear();
 
+			TextController _textController = TextBoxLeft.m_textController;
+
+			for (int i = 0; i < _textController.Lines.Count; i++)
+			{
+				string _content = ((TextLine)_textController.GetLineByIndex(i)).m_content;
+				TextBoxRight.Text += _content;
+				TextBoxRight.m_textController.AddLine(_content);
+			}
+
+			FileCompare();
+		}
+
+		private void btn_toLeft_Click(object sender, EventArgs e)
+		{
+			TextBoxLeft.Clear();
+			TextBoxLeft.m_textController.Clear();
+
+			TextController _textController = TextBoxRight.m_textController;
+
+			for (int i = 0; i < _textController.Lines.Count; i++)
+			{
+				string _content = ((TextLine)_textController.GetLineByIndex(i)).m_content;
+				TextBoxLeft.Text += _content;
+				TextBoxLeft.m_textController.AddLine(_content);
+			}
+
+			FileCompare();
 		}
 	}
 }

@@ -37,9 +37,13 @@
 			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			this.metroTile1 = new MetroFramework.Controls.MetroTile();
 			this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
+			this.btn_toLeft = new System.Windows.Forms.Button();
+			this.btn_toRight = new System.Windows.Forms.Button();
 			this.File_right = new MetroFramework.Controls.MetroLabel();
 			this.File_left = new MetroFramework.Controls.MetroLabel();
 			this.FileCompareToolbox = new MetroFramework.Controls.MetroButton();
+			this.TextBoxLeft = new cs511_g11.RichTextBoxAdvanced();
+			this.TextBoxRight = new cs511_g11.RichTextBoxAdvanced();
 			this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
 			this.treeView2 = new System.Windows.Forms.TreeView();
 			this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
@@ -72,8 +76,6 @@
 			this.RightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.compareToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.TextBoxLeft = new cs511_g11.RichTextBoxAdvanced();
-			this.TextBoxRight = new cs511_g11.RichTextBoxAdvanced();
 			this.metroTabControl1.SuspendLayout();
 			this.metroTabPage1.SuspendLayout();
 			this.metroTabPage2.SuspendLayout();
@@ -97,7 +99,7 @@
 			this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.metroTabControl1.Location = new System.Drawing.Point(23, 60);
 			this.metroTabControl1.Name = "metroTabControl1";
-			this.metroTabControl1.SelectedIndex = 0;
+			this.metroTabControl1.SelectedIndex = 1;
 			this.metroTabControl1.Size = new System.Drawing.Size(978, 520);
 			this.metroTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
 			this.metroTabControl1.TabIndex = 0;
@@ -184,6 +186,8 @@
 			// 
 			// metroTabPage2
 			// 
+			this.metroTabPage2.Controls.Add(this.btn_toLeft);
+			this.metroTabPage2.Controls.Add(this.btn_toRight);
 			this.metroTabPage2.Controls.Add(this.File_right);
 			this.metroTabPage2.Controls.Add(this.File_left);
 			this.metroTabPage2.Controls.Add(this.FileCompareToolbox);
@@ -201,10 +205,36 @@
 			this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
 			this.metroTabPage2.VerticalScrollbarSize = 3;
 			// 
+			// btn_toLeft
+			// 
+			this.btn_toLeft.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.btn_toLeft.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this.btn_toLeft.Location = new System.Drawing.Point(468, 258);
+			this.btn_toLeft.Name = "btn_toLeft";
+			this.btn_toLeft.Size = new System.Drawing.Size(42, 44);
+			this.btn_toLeft.TabIndex = 12;
+			this.btn_toLeft.Text = "<<";
+			this.btn_toLeft.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+			this.btn_toLeft.UseVisualStyleBackColor = false;
+			this.btn_toLeft.Click += new System.EventHandler(this.btn_toLeft_Click);
+			// 
+			// btn_toRight
+			// 
+			this.btn_toRight.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.btn_toRight.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this.btn_toRight.Location = new System.Drawing.Point(468, 188);
+			this.btn_toRight.Name = "btn_toRight";
+			this.btn_toRight.Size = new System.Drawing.Size(42, 44);
+			this.btn_toRight.TabIndex = 11;
+			this.btn_toRight.Text = ">>";
+			this.btn_toRight.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+			this.btn_toRight.UseVisualStyleBackColor = false;
+			this.btn_toRight.Click += new System.EventHandler(this.btn_toRight_Click);
+			// 
 			// File_right
 			// 
 			this.File_right.AutoSize = true;
-			this.File_right.Location = new System.Drawing.Point(496, 36);
+			this.File_right.Location = new System.Drawing.Point(518, 36);
 			this.File_right.Name = "File_right";
 			this.File_right.Size = new System.Drawing.Size(63, 19);
 			this.File_right.TabIndex = 8;
@@ -231,6 +261,38 @@
 			this.FileCompareToolbox.UseSelectable = true;
 			this.FileCompareToolbox.UseStyleColors = true;
 			this.FileCompareToolbox.Click += new System.EventHandler(this.FileCompareToolbox_Click);
+			// 
+			// TextBoxLeft
+			// 
+			this.TextBoxLeft.AcceptsTab = true;
+			this.TextBoxLeft.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.TextBoxLeft.EnableAutoDragDrop = true;
+			this.TextBoxLeft.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.TextBoxLeft.Location = new System.Drawing.Point(0, 60);
+			this.TextBoxLeft.Margin = new System.Windows.Forms.Padding(5);
+			this.TextBoxLeft.Name = "TextBoxLeft";
+			this.TextBoxLeft.ReadOnly = true;
+			this.TextBoxLeft.Size = new System.Drawing.Size(460, 418);
+			this.TextBoxLeft.TabIndex = 9;
+			this.TextBoxLeft.Text = "";
+			this.TextBoxLeft.WordWrap = false;
+			this.TextBoxLeft.LostFocus += new System.EventHandler(this.TextBoxLeft_LostFocus);
+			// 
+			// TextBoxRight
+			// 
+			this.TextBoxRight.AcceptsTab = true;
+			this.TextBoxRight.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.TextBoxRight.EnableAutoDragDrop = true;
+			this.TextBoxRight.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.TextBoxRight.Location = new System.Drawing.Point(518, 60);
+			this.TextBoxRight.Margin = new System.Windows.Forms.Padding(5);
+			this.TextBoxRight.Name = "TextBoxRight";
+			this.TextBoxRight.ReadOnly = true;
+			this.TextBoxRight.Size = new System.Drawing.Size(453, 418);
+			this.TextBoxRight.TabIndex = 10;
+			this.TextBoxRight.Text = "";
+			this.TextBoxRight.WordWrap = false;
+			this.TextBoxRight.LostFocus += new System.EventHandler(this.TextBoxRight_LostFocus);
 			// 
 			// metroTabPage3
 			// 
@@ -548,36 +610,6 @@
 			this.resetToolStripMenuItem.Text = "Reset";
 			this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
 			// 
-			// TextBoxLeft
-			// 
-			this.TextBoxLeft.AcceptsTab = true;
-			this.TextBoxLeft.EnableAutoDragDrop = true;
-			this.TextBoxLeft.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.TextBoxLeft.Location = new System.Drawing.Point(0, 60);
-			this.TextBoxLeft.Margin = new System.Windows.Forms.Padding(5);
-			this.TextBoxLeft.Name = "TextBoxLeft";
-			this.TextBoxLeft.Size = new System.Drawing.Size(475, 418);
-			this.TextBoxLeft.TabIndex = 9;
-			this.TextBoxLeft.Text = "";
-			this.TextBoxLeft.WordWrap = false;
-			this.TextBoxLeft.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxLeft_KeyUp);
-			this.TextBoxLeft.LostFocus += new System.EventHandler(this.TextBoxLeft_LostFocus);
-			// 
-			// TextBoxRight
-			// 
-			this.TextBoxRight.AcceptsTab = true;
-			this.TextBoxRight.EnableAutoDragDrop = true;
-			this.TextBoxRight.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.TextBoxRight.Location = new System.Drawing.Point(496, 60);
-			this.TextBoxRight.Margin = new System.Windows.Forms.Padding(5);
-			this.TextBoxRight.Name = "TextBoxRight";
-			this.TextBoxRight.Size = new System.Drawing.Size(475, 418);
-			this.TextBoxRight.TabIndex = 10;
-			this.TextBoxRight.Text = "";
-			this.TextBoxRight.WordWrap = false;
-			this.TextBoxRight.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxRight_KeyUp);
-			this.TextBoxRight.LostFocus += new System.EventHandler(this.TextBoxRight_LostFocus);
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -658,6 +690,8 @@
         private System.Windows.Forms.RichTextBox HistoryText;
         private System.Windows.Forms.ToolStripMenuItem LeftToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RightToolStripMenuItem;
-    }
+		private System.Windows.Forms.Button btn_toLeft;
+		private System.Windows.Forms.Button btn_toRight;
+	}
 }
 
