@@ -30,35 +30,31 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
-			this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+			this.tab_controller = new MetroFramework.Controls.MetroTabControl();
+			this.tab_howToUse = new MetroFramework.Controls.MetroTabPage();
 			this.metroUserControl1 = new MetroFramework.Controls.MetroUserControl();
 			this.metroTile2 = new MetroFramework.Controls.MetroTile();
 			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			this.metroTile1 = new MetroFramework.Controls.MetroTile();
-			this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
-			this.btn_toLeft = new System.Windows.Forms.Button();
-			this.btn_toRight = new System.Windows.Forms.Button();
-			this.File_right = new MetroFramework.Controls.MetroLabel();
-			this.File_left = new MetroFramework.Controls.MetroLabel();
+			this.tab_textCompare = new MetroFramework.Controls.MetroTabPage();
+			this.lbl_fileRight = new MetroFramework.Controls.MetroLabel();
+			this.lbl_fileLeft = new MetroFramework.Controls.MetroLabel();
 			this.FileCompareToolbox = new MetroFramework.Controls.MetroButton();
-			this.TextBoxLeft = new cs511_g11.RichTextBoxAdvanced();
-			this.TextBoxRight = new cs511_g11.RichTextBoxAdvanced();
-			this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
-			this.treeView2 = new System.Windows.Forms.TreeView();
-			this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
-			this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-			this.treeView1 = new System.Windows.Forms.TreeView();
-			this.metroButton2 = new MetroFramework.Controls.MetroButton();
-			this.metroTabPage4 = new MetroFramework.Controls.MetroTabPage();
+			this.tab_folderCompare = new MetroFramework.Controls.MetroTabPage();
+			this.TreeViewRight = new System.Windows.Forms.TreeView();
+			this.lbl_pathRight = new MetroFramework.Controls.MetroLabel();
+			this.lbl_pathLeft = new MetroFramework.Controls.MetroLabel();
+			this.TreeViewLeft = new System.Windows.Forms.TreeView();
+			this.FolderCompareToolbox = new MetroFramework.Controls.MetroButton();
+			this.tab_theme = new MetroFramework.Controls.MetroTabPage();
 			this.metroRadioButton2 = new MetroFramework.Controls.MetroRadioButton();
 			this.White = new MetroFramework.Controls.MetroRadioButton();
 			this.metroTrackBar2 = new MetroFramework.Controls.MetroTrackBar();
 			this.metroButton4 = new MetroFramework.Controls.MetroButton();
 			this.metroButton3 = new MetroFramework.Controls.MetroButton();
-			this.metroTabPage5 = new MetroFramework.Controls.MetroTabPage();
+			this.tab_information = new MetroFramework.Controls.MetroTabPage();
 			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-			this.metroTabPage6 = new MetroFramework.Controls.MetroTabPage();
+			this.tab_history = new MetroFramework.Controls.MetroTabPage();
 			this.HistoryText = new System.Windows.Forms.RichTextBox();
 			this.HistoryButton = new MetroFramework.Controls.MetroButton();
 			this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
@@ -70,62 +66,66 @@
 			this.Add_RightFile = new System.Windows.Forms.ToolStripMenuItem();
 			this.TextCompare_Save = new System.Windows.Forms.ToolStripMenuItem();
 			this.TextCompare_Compare = new System.Windows.Forms.ToolStripMenuItem();
-			this.metroContextMenu2 = new MetroFramework.Controls.MetroContextMenu(this.components);
-			this.addFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.LeftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.RightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.compareToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-			this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.metroTabControl1.SuspendLayout();
-			this.metroTabPage1.SuspendLayout();
-			this.metroTabPage2.SuspendLayout();
-			this.metroTabPage3.SuspendLayout();
-			this.metroTabPage4.SuspendLayout();
-			this.metroTabPage5.SuspendLayout();
-			this.metroTabPage6.SuspendLayout();
+			this.FolderCompareMenu = new MetroFramework.Controls.MetroContextMenu(this.components);
+			this.FolderCompare_AddFile = new System.Windows.Forms.ToolStripMenuItem();
+			this.Add_LeftFolder = new System.Windows.Forms.ToolStripMenuItem();
+			this.Add_RightFolder = new System.Windows.Forms.ToolStripMenuItem();
+			this.FolderCompare_Compare = new System.Windows.Forms.ToolStripMenuItem();
+			this.FolderCompare_Reset = new System.Windows.Forms.ToolStripMenuItem();
+			this.TextBoxLeft = new cs511_g11.RichTextBoxAdvanced();
+			this.TextBoxRight = new cs511_g11.RichTextBoxAdvanced();
+			this.btn_toLeftFile = new System.Windows.Forms.Button();
+			this.btn_toRightFile = new System.Windows.Forms.Button();
+			this.tab_controller.SuspendLayout();
+			this.tab_howToUse.SuspendLayout();
+			this.tab_textCompare.SuspendLayout();
+			this.tab_folderCompare.SuspendLayout();
+			this.tab_theme.SuspendLayout();
+			this.tab_information.SuspendLayout();
+			this.tab_history.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
 			this.TextCompareMenu.SuspendLayout();
-			this.metroContextMenu2.SuspendLayout();
+			this.FolderCompareMenu.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// metroTabControl1
+			// tab_controller
 			// 
-			this.metroTabControl1.Controls.Add(this.metroTabPage1);
-			this.metroTabControl1.Controls.Add(this.metroTabPage2);
-			this.metroTabControl1.Controls.Add(this.metroTabPage3);
-			this.metroTabControl1.Controls.Add(this.metroTabPage4);
-			this.metroTabControl1.Controls.Add(this.metroTabPage5);
-			this.metroTabControl1.Controls.Add(this.metroTabPage6);
-			this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.metroTabControl1.Location = new System.Drawing.Point(23, 60);
-			this.metroTabControl1.Name = "metroTabControl1";
-			this.metroTabControl1.SelectedIndex = 1;
-			this.metroTabControl1.Size = new System.Drawing.Size(978, 520);
-			this.metroTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
-			this.metroTabControl1.TabIndex = 0;
-			this.metroTabControl1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-			this.metroTabControl1.UseSelectable = true;
-			this.metroTabControl1.UseStyleColors = true;
+			this.tab_controller.Controls.Add(this.tab_howToUse);
+			this.tab_controller.Controls.Add(this.tab_textCompare);
+			this.tab_controller.Controls.Add(this.tab_folderCompare);
+			this.tab_controller.Controls.Add(this.tab_theme);
+			this.tab_controller.Controls.Add(this.tab_information);
+			this.tab_controller.Controls.Add(this.tab_history);
+			this.tab_controller.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tab_controller.Location = new System.Drawing.Point(23, 60);
+			this.tab_controller.Name = "tab_controller";
+			this.tab_controller.SelectedIndex = 2;
+			this.tab_controller.Size = new System.Drawing.Size(978, 520);
+			this.tab_controller.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
+			this.tab_controller.TabIndex = 0;
+			this.tab_controller.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+			this.tab_controller.UseSelectable = true;
+			this.tab_controller.UseStyleColors = true;
 			// 
-			// metroTabPage1
+			// tab_howToUse
 			// 
-			this.metroTabPage1.BackColor = System.Drawing.SystemColors.Control;
-			this.metroTabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.metroTabPage1.Controls.Add(this.metroUserControl1);
-			this.metroTabPage1.Controls.Add(this.metroTile2);
-			this.metroTabPage1.Controls.Add(this.metroLabel2);
-			this.metroTabPage1.Controls.Add(this.metroTile1);
-			this.metroTabPage1.HorizontalScrollbarBarColor = true;
-			this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
-			this.metroTabPage1.HorizontalScrollbarSize = 10;
-			this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
-			this.metroTabPage1.Name = "metroTabPage1";
-			this.metroTabPage1.Size = new System.Drawing.Size(970, 478);
-			this.metroTabPage1.TabIndex = 0;
-			this.metroTabPage1.Text = "How To Use";
-			this.metroTabPage1.VerticalScrollbarBarColor = true;
-			this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
-			this.metroTabPage1.VerticalScrollbarSize = 3;
+			this.tab_howToUse.BackColor = System.Drawing.SystemColors.Control;
+			this.tab_howToUse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.tab_howToUse.Controls.Add(this.metroUserControl1);
+			this.tab_howToUse.Controls.Add(this.metroTile2);
+			this.tab_howToUse.Controls.Add(this.metroLabel2);
+			this.tab_howToUse.Controls.Add(this.metroTile1);
+			this.tab_howToUse.HorizontalScrollbarBarColor = true;
+			this.tab_howToUse.HorizontalScrollbarHighlightOnWheel = false;
+			this.tab_howToUse.HorizontalScrollbarSize = 10;
+			this.tab_howToUse.Location = new System.Drawing.Point(4, 38);
+			this.tab_howToUse.Name = "tab_howToUse";
+			this.tab_howToUse.Size = new System.Drawing.Size(970, 478);
+			this.tab_howToUse.TabIndex = 0;
+			this.tab_howToUse.Text = "How To Use";
+			this.tab_howToUse.VerticalScrollbarBarColor = true;
+			this.tab_howToUse.VerticalScrollbarHighlightOnWheel = false;
+			this.tab_howToUse.VerticalScrollbarSize = 3;
 			// 
 			// metroUserControl1
 			// 
@@ -184,76 +184,50 @@
 			this.metroTile1.MouseLeave += new System.EventHandler(this.metroTile1_MouseLeave);
 			this.metroTile1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.metroTile1_MouseMove);
 			// 
-			// metroTabPage2
+			// tab_textCompare
 			// 
-			this.metroTabPage2.Controls.Add(this.btn_toLeft);
-			this.metroTabPage2.Controls.Add(this.btn_toRight);
-			this.metroTabPage2.Controls.Add(this.File_right);
-			this.metroTabPage2.Controls.Add(this.File_left);
-			this.metroTabPage2.Controls.Add(this.FileCompareToolbox);
-			this.metroTabPage2.Controls.Add(this.TextBoxLeft);
-			this.metroTabPage2.Controls.Add(this.TextBoxRight);
-			this.metroTabPage2.HorizontalScrollbarBarColor = true;
-			this.metroTabPage2.HorizontalScrollbarHighlightOnWheel = false;
-			this.metroTabPage2.HorizontalScrollbarSize = 10;
-			this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
-			this.metroTabPage2.Name = "metroTabPage2";
-			this.metroTabPage2.Size = new System.Drawing.Size(970, 478);
-			this.metroTabPage2.TabIndex = 1;
-			this.metroTabPage2.Text = "Text Compare";
-			this.metroTabPage2.VerticalScrollbarBarColor = true;
-			this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
-			this.metroTabPage2.VerticalScrollbarSize = 3;
+			this.tab_textCompare.Controls.Add(this.btn_toLeftFile);
+			this.tab_textCompare.Controls.Add(this.btn_toRightFile);
+			this.tab_textCompare.Controls.Add(this.lbl_fileRight);
+			this.tab_textCompare.Controls.Add(this.lbl_fileLeft);
+			this.tab_textCompare.Controls.Add(this.FileCompareToolbox);
+			this.tab_textCompare.Controls.Add(this.TextBoxLeft);
+			this.tab_textCompare.Controls.Add(this.TextBoxRight);
+			this.tab_textCompare.HorizontalScrollbarBarColor = true;
+			this.tab_textCompare.HorizontalScrollbarHighlightOnWheel = false;
+			this.tab_textCompare.HorizontalScrollbarSize = 10;
+			this.tab_textCompare.Location = new System.Drawing.Point(4, 38);
+			this.tab_textCompare.Name = "tab_textCompare";
+			this.tab_textCompare.Size = new System.Drawing.Size(970, 478);
+			this.tab_textCompare.TabIndex = 1;
+			this.tab_textCompare.Text = "Text Compare";
+			this.tab_textCompare.VerticalScrollbarBarColor = true;
+			this.tab_textCompare.VerticalScrollbarHighlightOnWheel = false;
+			this.tab_textCompare.VerticalScrollbarSize = 3;
 			// 
-			// btn_toLeft
+			// lbl_fileRight
 			// 
-			this.btn_toLeft.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.btn_toLeft.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-			this.btn_toLeft.Location = new System.Drawing.Point(468, 258);
-			this.btn_toLeft.Name = "btn_toLeft";
-			this.btn_toLeft.Size = new System.Drawing.Size(42, 44);
-			this.btn_toLeft.TabIndex = 12;
-			this.btn_toLeft.Text = "<<";
-			this.btn_toLeft.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-			this.btn_toLeft.UseVisualStyleBackColor = false;
-			this.btn_toLeft.Click += new System.EventHandler(this.btn_toLeft_Click);
+			this.lbl_fileRight.AutoSize = true;
+			this.lbl_fileRight.Location = new System.Drawing.Point(515, 37);
+			this.lbl_fileRight.Name = "lbl_fileRight";
+			this.lbl_fileRight.Size = new System.Drawing.Size(63, 19);
+			this.lbl_fileRight.TabIndex = 8;
+			this.lbl_fileRight.Text = "File Right";
+			this.lbl_fileRight.UseStyleColors = true;
 			// 
-			// btn_toRight
+			// lbl_fileLeft
 			// 
-			this.btn_toRight.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.btn_toRight.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-			this.btn_toRight.Location = new System.Drawing.Point(468, 188);
-			this.btn_toRight.Name = "btn_toRight";
-			this.btn_toRight.Size = new System.Drawing.Size(42, 44);
-			this.btn_toRight.TabIndex = 11;
-			this.btn_toRight.Text = ">>";
-			this.btn_toRight.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-			this.btn_toRight.UseVisualStyleBackColor = false;
-			this.btn_toRight.Click += new System.EventHandler(this.btn_toRight_Click);
-			// 
-			// File_right
-			// 
-			this.File_right.AutoSize = true;
-			this.File_right.Location = new System.Drawing.Point(518, 36);
-			this.File_right.Name = "File_right";
-			this.File_right.Size = new System.Drawing.Size(63, 19);
-			this.File_right.TabIndex = 8;
-			this.File_right.Text = "File Right";
-			this.File_right.UseStyleColors = true;
-			// 
-			// File_left
-			// 
-			this.File_left.AutoSize = true;
-			this.File_left.Location = new System.Drawing.Point(0, 36);
-			this.File_left.Name = "File_left";
-			this.File_left.Size = new System.Drawing.Size(54, 19);
-			this.File_left.TabIndex = 7;
-			this.File_left.Text = "File Left";
-			this.File_left.UseStyleColors = true;
+			this.lbl_fileLeft.AutoSize = true;
+			this.lbl_fileLeft.Location = new System.Drawing.Point(0, 37);
+			this.lbl_fileLeft.Name = "lbl_fileLeft";
+			this.lbl_fileLeft.Size = new System.Drawing.Size(54, 19);
+			this.lbl_fileLeft.TabIndex = 7;
+			this.lbl_fileLeft.Text = "File Left";
+			this.lbl_fileLeft.UseStyleColors = true;
 			// 
 			// FileCompareToolbox
 			// 
-			this.FileCompareToolbox.Location = new System.Drawing.Point(21, 6);
+			this.FileCompareToolbox.Location = new System.Drawing.Point(3, 3);
 			this.FileCompareToolbox.Name = "FileCompareToolbox";
 			this.FileCompareToolbox.Size = new System.Drawing.Size(77, 27);
 			this.FileCompareToolbox.TabIndex = 2;
@@ -262,125 +236,95 @@
 			this.FileCompareToolbox.UseStyleColors = true;
 			this.FileCompareToolbox.Click += new System.EventHandler(this.FileCompareToolbox_Click);
 			// 
-			// TextBoxLeft
+			// tab_folderCompare
 			// 
-			this.TextBoxLeft.AcceptsTab = true;
-			this.TextBoxLeft.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.TextBoxLeft.EnableAutoDragDrop = true;
-			this.TextBoxLeft.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.TextBoxLeft.Location = new System.Drawing.Point(0, 60);
-			this.TextBoxLeft.Margin = new System.Windows.Forms.Padding(5);
-			this.TextBoxLeft.Name = "TextBoxLeft";
-			this.TextBoxLeft.ReadOnly = true;
-			this.TextBoxLeft.Size = new System.Drawing.Size(460, 418);
-			this.TextBoxLeft.TabIndex = 9;
-			this.TextBoxLeft.Text = "";
-			this.TextBoxLeft.WordWrap = false;
-			this.TextBoxLeft.LostFocus += new System.EventHandler(this.TextBoxLeft_LostFocus);
+			this.tab_folderCompare.Controls.Add(this.TreeViewRight);
+			this.tab_folderCompare.Controls.Add(this.lbl_pathRight);
+			this.tab_folderCompare.Controls.Add(this.lbl_pathLeft);
+			this.tab_folderCompare.Controls.Add(this.TreeViewLeft);
+			this.tab_folderCompare.Controls.Add(this.FolderCompareToolbox);
+			this.tab_folderCompare.HorizontalScrollbarBarColor = true;
+			this.tab_folderCompare.HorizontalScrollbarHighlightOnWheel = false;
+			this.tab_folderCompare.HorizontalScrollbarSize = 10;
+			this.tab_folderCompare.Location = new System.Drawing.Point(4, 38);
+			this.tab_folderCompare.Name = "tab_folderCompare";
+			this.tab_folderCompare.Size = new System.Drawing.Size(970, 478);
+			this.tab_folderCompare.TabIndex = 2;
+			this.tab_folderCompare.Text = "Folder Compare";
+			this.tab_folderCompare.VerticalScrollbarBarColor = true;
+			this.tab_folderCompare.VerticalScrollbarHighlightOnWheel = false;
+			this.tab_folderCompare.VerticalScrollbarSize = 3;
 			// 
-			// TextBoxRight
+			// TreeViewRight
 			// 
-			this.TextBoxRight.AcceptsTab = true;
-			this.TextBoxRight.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.TextBoxRight.EnableAutoDragDrop = true;
-			this.TextBoxRight.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.TextBoxRight.Location = new System.Drawing.Point(518, 60);
-			this.TextBoxRight.Margin = new System.Windows.Forms.Padding(5);
-			this.TextBoxRight.Name = "TextBoxRight";
-			this.TextBoxRight.ReadOnly = true;
-			this.TextBoxRight.Size = new System.Drawing.Size(453, 418);
-			this.TextBoxRight.TabIndex = 10;
-			this.TextBoxRight.Text = "";
-			this.TextBoxRight.WordWrap = false;
-			this.TextBoxRight.LostFocus += new System.EventHandler(this.TextBoxRight_LostFocus);
+			this.TreeViewRight.ForeColor = System.Drawing.Color.Gray;
+			this.TreeViewRight.Location = new System.Drawing.Point(515, 60);
+			this.TreeViewRight.Name = "TreeViewRight";
+			this.TreeViewRight.Size = new System.Drawing.Size(455, 418);
+			this.TreeViewRight.TabIndex = 7;
+			this.TreeViewRight.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeViewRight_NodeMouseClick);
+			this.TreeViewRight.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeViewRight_NodeMouseDoubleClick);
 			// 
-			// metroTabPage3
+			// lbl_pathRight
 			// 
-			this.metroTabPage3.Controls.Add(this.treeView2);
-			this.metroTabPage3.Controls.Add(this.metroLabel4);
-			this.metroTabPage3.Controls.Add(this.metroLabel3);
-			this.metroTabPage3.Controls.Add(this.treeView1);
-			this.metroTabPage3.Controls.Add(this.metroButton2);
-			this.metroTabPage3.HorizontalScrollbarBarColor = true;
-			this.metroTabPage3.HorizontalScrollbarHighlightOnWheel = false;
-			this.metroTabPage3.HorizontalScrollbarSize = 10;
-			this.metroTabPage3.Location = new System.Drawing.Point(4, 38);
-			this.metroTabPage3.Name = "metroTabPage3";
-			this.metroTabPage3.Size = new System.Drawing.Size(970, 478);
-			this.metroTabPage3.TabIndex = 2;
-			this.metroTabPage3.Text = "Folder Compare";
-			this.metroTabPage3.VerticalScrollbarBarColor = true;
-			this.metroTabPage3.VerticalScrollbarHighlightOnWheel = false;
-			this.metroTabPage3.VerticalScrollbarSize = 3;
+			this.lbl_pathRight.AutoSize = true;
+			this.lbl_pathRight.Location = new System.Drawing.Point(515, 37);
+			this.lbl_pathRight.Name = "lbl_pathRight";
+			this.lbl_pathRight.Size = new System.Drawing.Size(68, 19);
+			this.lbl_pathRight.TabIndex = 6;
+			this.lbl_pathRight.Text = "Path Right";
+			this.lbl_pathRight.UseStyleColors = true;
 			// 
-			// treeView2
+			// lbl_pathLeft
 			// 
-			this.treeView2.ForeColor = System.Drawing.Color.Gray;
-			this.treeView2.Location = new System.Drawing.Point(444, 63);
-			this.treeView2.Name = "treeView2";
-			this.treeView2.Size = new System.Drawing.Size(378, 376);
-			this.treeView2.TabIndex = 7;
-			this.treeView2.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView2_NodeMouseClick);
+			this.lbl_pathLeft.AutoSize = true;
+			this.lbl_pathLeft.Location = new System.Drawing.Point(0, 37);
+			this.lbl_pathLeft.Name = "lbl_pathLeft";
+			this.lbl_pathLeft.Size = new System.Drawing.Size(59, 19);
+			this.lbl_pathLeft.TabIndex = 5;
+			this.lbl_pathLeft.Text = "Path Left";
+			this.lbl_pathLeft.UseStyleColors = true;
 			// 
-			// metroLabel4
+			// TreeViewLeft
 			// 
-			this.metroLabel4.AutoSize = true;
-			this.metroLabel4.Location = new System.Drawing.Point(444, 37);
-			this.metroLabel4.Name = "metroLabel4";
-			this.metroLabel4.Size = new System.Drawing.Size(68, 19);
-			this.metroLabel4.TabIndex = 6;
-			this.metroLabel4.Text = "Path Right";
-			this.metroLabel4.UseStyleColors = true;
+			this.TreeViewLeft.ForeColor = System.Drawing.Color.Gray;
+			this.TreeViewLeft.Location = new System.Drawing.Point(0, 60);
+			this.TreeViewLeft.Name = "TreeViewLeft";
+			this.TreeViewLeft.Size = new System.Drawing.Size(455, 418);
+			this.TreeViewLeft.TabIndex = 3;
+			this.TreeViewLeft.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeViewLeft_NodeMouseClick);
+			this.TreeViewLeft.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeViewLeft_NodeMouseDoubleClick);
 			// 
-			// metroLabel3
+			// FolderCompareToolbox
 			// 
-			this.metroLabel3.AutoSize = true;
-			this.metroLabel3.Location = new System.Drawing.Point(19, 37);
-			this.metroLabel3.Name = "metroLabel3";
-			this.metroLabel3.Size = new System.Drawing.Size(59, 19);
-			this.metroLabel3.TabIndex = 5;
-			this.metroLabel3.Text = "Path Left";
-			this.metroLabel3.UseStyleColors = true;
+			this.FolderCompareToolbox.Location = new System.Drawing.Point(3, 3);
+			this.FolderCompareToolbox.Name = "FolderCompareToolbox";
+			this.FolderCompareToolbox.Size = new System.Drawing.Size(77, 27);
+			this.FolderCompareToolbox.TabIndex = 2;
+			this.FolderCompareToolbox.Text = "ToolBox";
+			this.FolderCompareToolbox.UseSelectable = true;
+			this.FolderCompareToolbox.UseStyleColors = true;
+			this.FolderCompareToolbox.Click += new System.EventHandler(this.FolderCompareToolbox_Click);
 			// 
-			// treeView1
+			// tab_theme
 			// 
-			this.treeView1.ForeColor = System.Drawing.Color.Gray;
-			this.treeView1.Location = new System.Drawing.Point(19, 63);
-			this.treeView1.Name = "treeView1";
-			this.treeView1.Size = new System.Drawing.Size(378, 376);
-			this.treeView1.TabIndex = 3;
-			this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
-			// 
-			// metroButton2
-			// 
-			this.metroButton2.Location = new System.Drawing.Point(19, 7);
-			this.metroButton2.Name = "metroButton2";
-			this.metroButton2.Size = new System.Drawing.Size(77, 27);
-			this.metroButton2.TabIndex = 2;
-			this.metroButton2.Text = "ToolBox";
-			this.metroButton2.UseSelectable = true;
-			this.metroButton2.UseStyleColors = true;
-			this.metroButton2.Click += new System.EventHandler(this.metroButton2_Click);
-			// 
-			// metroTabPage4
-			// 
-			this.metroTabPage4.Controls.Add(this.metroRadioButton2);
-			this.metroTabPage4.Controls.Add(this.White);
-			this.metroTabPage4.Controls.Add(this.metroTrackBar2);
-			this.metroTabPage4.Controls.Add(this.metroButton4);
-			this.metroTabPage4.Controls.Add(this.metroButton3);
-			this.metroTabPage4.HorizontalScrollbarBarColor = true;
-			this.metroTabPage4.HorizontalScrollbarHighlightOnWheel = false;
-			this.metroTabPage4.HorizontalScrollbarSize = 10;
-			this.metroTabPage4.Location = new System.Drawing.Point(4, 38);
-			this.metroTabPage4.Name = "metroTabPage4";
-			this.metroTabPage4.Size = new System.Drawing.Size(970, 478);
-			this.metroTabPage4.TabIndex = 3;
-			this.metroTabPage4.Text = "Theme";
-			this.metroTabPage4.VerticalScrollbarBarColor = true;
-			this.metroTabPage4.VerticalScrollbarHighlightOnWheel = false;
-			this.metroTabPage4.VerticalScrollbarSize = 3;
-			this.metroTabPage4.Click += new System.EventHandler(this.metroTabPage4_Click);
+			this.tab_theme.Controls.Add(this.metroRadioButton2);
+			this.tab_theme.Controls.Add(this.White);
+			this.tab_theme.Controls.Add(this.metroTrackBar2);
+			this.tab_theme.Controls.Add(this.metroButton4);
+			this.tab_theme.Controls.Add(this.metroButton3);
+			this.tab_theme.HorizontalScrollbarBarColor = true;
+			this.tab_theme.HorizontalScrollbarHighlightOnWheel = false;
+			this.tab_theme.HorizontalScrollbarSize = 10;
+			this.tab_theme.Location = new System.Drawing.Point(4, 38);
+			this.tab_theme.Name = "tab_theme";
+			this.tab_theme.Size = new System.Drawing.Size(970, 478);
+			this.tab_theme.TabIndex = 3;
+			this.tab_theme.Text = "Theme";
+			this.tab_theme.VerticalScrollbarBarColor = true;
+			this.tab_theme.VerticalScrollbarHighlightOnWheel = false;
+			this.tab_theme.VerticalScrollbarSize = 3;
+			this.tab_theme.Click += new System.EventHandler(this.metroTabPage4_Click);
 			// 
 			// metroRadioButton2
 			// 
@@ -442,20 +386,20 @@
 			this.metroButton3.UseStyleColors = true;
 			this.metroButton3.Click += new System.EventHandler(this.metroButton3_Click);
 			// 
-			// metroTabPage5
+			// tab_information
 			// 
-			this.metroTabPage5.Controls.Add(this.metroLabel1);
-			this.metroTabPage5.HorizontalScrollbarBarColor = true;
-			this.metroTabPage5.HorizontalScrollbarHighlightOnWheel = false;
-			this.metroTabPage5.HorizontalScrollbarSize = 10;
-			this.metroTabPage5.Location = new System.Drawing.Point(4, 38);
-			this.metroTabPage5.Name = "metroTabPage5";
-			this.metroTabPage5.Size = new System.Drawing.Size(970, 478);
-			this.metroTabPage5.TabIndex = 4;
-			this.metroTabPage5.Text = "Information";
-			this.metroTabPage5.VerticalScrollbarBarColor = true;
-			this.metroTabPage5.VerticalScrollbarHighlightOnWheel = false;
-			this.metroTabPage5.VerticalScrollbarSize = 3;
+			this.tab_information.Controls.Add(this.metroLabel1);
+			this.tab_information.HorizontalScrollbarBarColor = true;
+			this.tab_information.HorizontalScrollbarHighlightOnWheel = false;
+			this.tab_information.HorizontalScrollbarSize = 10;
+			this.tab_information.Location = new System.Drawing.Point(4, 38);
+			this.tab_information.Name = "tab_information";
+			this.tab_information.Size = new System.Drawing.Size(970, 478);
+			this.tab_information.TabIndex = 4;
+			this.tab_information.Text = "Information";
+			this.tab_information.VerticalScrollbarBarColor = true;
+			this.tab_information.VerticalScrollbarHighlightOnWheel = false;
+			this.tab_information.VerticalScrollbarSize = 3;
 			// 
 			// metroLabel1
 			// 
@@ -467,21 +411,21 @@
 			this.metroLabel1.Text = "SOFTWARE DEVELOPED BY............\r\n\r\nRye Nguyen\r\nShichi Ki\r\nKen Pop\r\nKhoa Pham\r\n";
 			this.metroLabel1.UseStyleColors = true;
 			// 
-			// metroTabPage6
+			// tab_history
 			// 
-			this.metroTabPage6.Controls.Add(this.HistoryText);
-			this.metroTabPage6.Controls.Add(this.HistoryButton);
-			this.metroTabPage6.HorizontalScrollbarBarColor = true;
-			this.metroTabPage6.HorizontalScrollbarHighlightOnWheel = false;
-			this.metroTabPage6.HorizontalScrollbarSize = 10;
-			this.metroTabPage6.Location = new System.Drawing.Point(4, 38);
-			this.metroTabPage6.Name = "metroTabPage6";
-			this.metroTabPage6.Size = new System.Drawing.Size(970, 478);
-			this.metroTabPage6.TabIndex = 5;
-			this.metroTabPage6.Text = "History";
-			this.metroTabPage6.VerticalScrollbarBarColor = true;
-			this.metroTabPage6.VerticalScrollbarHighlightOnWheel = false;
-			this.metroTabPage6.VerticalScrollbarSize = 3;
+			this.tab_history.Controls.Add(this.HistoryText);
+			this.tab_history.Controls.Add(this.HistoryButton);
+			this.tab_history.HorizontalScrollbarBarColor = true;
+			this.tab_history.HorizontalScrollbarHighlightOnWheel = false;
+			this.tab_history.HorizontalScrollbarSize = 10;
+			this.tab_history.Location = new System.Drawing.Point(4, 38);
+			this.tab_history.Name = "tab_history";
+			this.tab_history.Size = new System.Drawing.Size(970, 478);
+			this.tab_history.TabIndex = 5;
+			this.tab_history.Text = "History";
+			this.tab_history.VerticalScrollbarBarColor = true;
+			this.tab_history.VerticalScrollbarHighlightOnWheel = false;
+			this.tab_history.VerticalScrollbarSize = 3;
 			// 
 			// HistoryText
 			// 
@@ -525,7 +469,6 @@
 			this.TextCompareMenu.Name = "metroContextMenu1";
 			this.TextCompareMenu.Size = new System.Drawing.Size(124, 70);
 			this.TextCompareMenu.UseStyleColors = true;
-			this.TextCompareMenu.Opening += new System.ComponentModel.CancelEventHandler(this.metroContextMenu1_Opening);
 			// 
 			// TextCompare_AddFile
 			// 
@@ -564,58 +507,116 @@
 			this.TextCompare_Compare.Text = "Compare";
 			this.TextCompare_Compare.Click += new System.EventHandler(this.TextCompare_Compare_Click);
 			// 
-			// metroContextMenu2
+			// FolderCompareMenu
 			// 
-			this.metroContextMenu2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addFolderToolStripMenuItem,
-            this.compareToolStripMenuItem1,
-            this.resetToolStripMenuItem});
-			this.metroContextMenu2.Name = "metroContextMenu2";
-			this.metroContextMenu2.Size = new System.Drawing.Size(133, 70);
+			this.FolderCompareMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FolderCompare_AddFile,
+            this.FolderCompare_Compare,
+            this.FolderCompare_Reset});
+			this.FolderCompareMenu.Name = "metroContextMenu2";
+			this.FolderCompareMenu.Size = new System.Drawing.Size(133, 70);
 			// 
-			// addFolderToolStripMenuItem
+			// FolderCompare_AddFile
 			// 
-			this.addFolderToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.LeftToolStripMenuItem,
-            this.RightToolStripMenuItem});
-			this.addFolderToolStripMenuItem.Name = "addFolderToolStripMenuItem";
-			this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-			this.addFolderToolStripMenuItem.Text = "Add Folder";
+			this.FolderCompare_AddFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Add_LeftFolder,
+            this.Add_RightFolder});
+			this.FolderCompare_AddFile.Name = "FolderCompare_AddFile";
+			this.FolderCompare_AddFile.Size = new System.Drawing.Size(132, 22);
+			this.FolderCompare_AddFile.Text = "Add Folder";
 			// 
-			// LeftToolStripMenuItem
+			// Add_LeftFolder
 			// 
-			this.LeftToolStripMenuItem.Name = "LeftToolStripMenuItem";
-			this.LeftToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
-			this.LeftToolStripMenuItem.Text = "Left Folder";
-			this.LeftToolStripMenuItem.Click += new System.EventHandler(this.LeftToolStripMenuItem_Click);
+			this.Add_LeftFolder.Name = "Add_LeftFolder";
+			this.Add_LeftFolder.Size = new System.Drawing.Size(138, 22);
+			this.Add_LeftFolder.Text = "Left Folder";
+			this.Add_LeftFolder.Click += new System.EventHandler(this.Add_LeftFolder_Click);
 			// 
-			// RightToolStripMenuItem
+			// Add_RightFolder
 			// 
-			this.RightToolStripMenuItem.Name = "RightToolStripMenuItem";
-			this.RightToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
-			this.RightToolStripMenuItem.Text = "Right Folder";
-			this.RightToolStripMenuItem.Click += new System.EventHandler(this.RightToolStripMenuItem_Click);
+			this.Add_RightFolder.Name = "Add_RightFolder";
+			this.Add_RightFolder.Size = new System.Drawing.Size(138, 22);
+			this.Add_RightFolder.Text = "Right Folder";
+			this.Add_RightFolder.Click += new System.EventHandler(this.Add_RightFolder_Click);
 			// 
-			// compareToolStripMenuItem1
+			// FolderCompare_Compare
 			// 
-			this.compareToolStripMenuItem1.Name = "compareToolStripMenuItem1";
-			this.compareToolStripMenuItem1.Size = new System.Drawing.Size(132, 22);
-			this.compareToolStripMenuItem1.Text = "Compare";
-			this.compareToolStripMenuItem1.Click += new System.EventHandler(this.compareToolStripMenuItem1_Click);
+			this.FolderCompare_Compare.Name = "FolderCompare_Compare";
+			this.FolderCompare_Compare.Size = new System.Drawing.Size(132, 22);
+			this.FolderCompare_Compare.Text = "Compare";
+			this.FolderCompare_Compare.Click += new System.EventHandler(this.FolderCompare_Compare_Click);
 			// 
-			// resetToolStripMenuItem
+			// FolderCompare_Reset
 			// 
-			this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-			this.resetToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-			this.resetToolStripMenuItem.Text = "Reset";
-			this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
+			this.FolderCompare_Reset.Name = "FolderCompare_Reset";
+			this.FolderCompare_Reset.Size = new System.Drawing.Size(132, 22);
+			this.FolderCompare_Reset.Text = "Reset";
+			this.FolderCompare_Reset.Click += new System.EventHandler(this.FolderCompare_Reset_Click);
+			// 
+			// TextBoxLeft
+			// 
+			this.TextBoxLeft.AcceptsTab = true;
+			this.TextBoxLeft.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.TextBoxLeft.EnableAutoDragDrop = true;
+			this.TextBoxLeft.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.TextBoxLeft.Location = new System.Drawing.Point(0, 60);
+			this.TextBoxLeft.Margin = new System.Windows.Forms.Padding(5);
+			this.TextBoxLeft.Name = "TextBoxLeft";
+			this.TextBoxLeft.ReadOnly = true;
+			this.TextBoxLeft.Size = new System.Drawing.Size(455, 418);
+			this.TextBoxLeft.TabIndex = 9;
+			this.TextBoxLeft.Text = "";
+			this.TextBoxLeft.WordWrap = false;
+			this.TextBoxLeft.LostFocus += new System.EventHandler(this.TextBoxLeft_LostFocus);
+			// 
+			// TextBoxRight
+			// 
+			this.TextBoxRight.AcceptsTab = true;
+			this.TextBoxRight.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.TextBoxRight.EnableAutoDragDrop = true;
+			this.TextBoxRight.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.TextBoxRight.Location = new System.Drawing.Point(516, 59);
+			this.TextBoxRight.Margin = new System.Windows.Forms.Padding(5);
+			this.TextBoxRight.Name = "TextBoxRight";
+			this.TextBoxRight.ReadOnly = true;
+			this.TextBoxRight.Size = new System.Drawing.Size(455, 418);
+			this.TextBoxRight.TabIndex = 10;
+			this.TextBoxRight.Text = "";
+			this.TextBoxRight.WordWrap = false;
+			this.TextBoxRight.LostFocus += new System.EventHandler(this.TextBoxRight_LostFocus);
+			// 
+			// btn_toLeftFile
+			// 
+			this.btn_toLeftFile.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.btn_toLeftFile.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this.btn_toLeftFile.Location = new System.Drawing.Point(465, 258);
+			this.btn_toLeftFile.Name = "btn_toLeftFile";
+			this.btn_toLeftFile.Size = new System.Drawing.Size(42, 44);
+			this.btn_toLeftFile.TabIndex = 12;
+			this.btn_toLeftFile.Text = "<<";
+			this.btn_toLeftFile.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+			this.btn_toLeftFile.UseVisualStyleBackColor = false;
+			this.btn_toLeftFile.Click += new System.EventHandler(this.btn_toLeft_Click);
+			// 
+			// btn_toRightFile
+			// 
+			this.btn_toRightFile.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.btn_toRightFile.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this.btn_toRightFile.Location = new System.Drawing.Point(465, 188);
+			this.btn_toRightFile.Name = "btn_toRightFile";
+			this.btn_toRightFile.Size = new System.Drawing.Size(42, 44);
+			this.btn_toRightFile.TabIndex = 11;
+			this.btn_toRightFile.Text = ">>";
+			this.btn_toRightFile.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+			this.btn_toRightFile.UseVisualStyleBackColor = false;
+			this.btn_toRightFile.Click += new System.EventHandler(this.btn_toRight_Click);
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1024, 600);
-			this.Controls.Add(this.metroTabControl1);
+			this.Controls.Add(this.tab_controller);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.ForeColor = System.Drawing.SystemColors.ControlLight;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -625,32 +626,32 @@
 			this.Text = "2Compare";
 			this.TextAlign = MetroFramework.Forms.MetroFormTextAlign.Center;
 			this.TransparencyKey = System.Drawing.Color.Gainsboro;
-			this.metroTabControl1.ResumeLayout(false);
-			this.metroTabPage1.ResumeLayout(false);
-			this.metroTabPage1.PerformLayout();
-			this.metroTabPage2.ResumeLayout(false);
-			this.metroTabPage2.PerformLayout();
-			this.metroTabPage3.ResumeLayout(false);
-			this.metroTabPage3.PerformLayout();
-			this.metroTabPage4.ResumeLayout(false);
-			this.metroTabPage4.PerformLayout();
-			this.metroTabPage5.ResumeLayout(false);
-			this.metroTabPage5.PerformLayout();
-			this.metroTabPage6.ResumeLayout(false);
+			this.tab_controller.ResumeLayout(false);
+			this.tab_howToUse.ResumeLayout(false);
+			this.tab_howToUse.PerformLayout();
+			this.tab_textCompare.ResumeLayout(false);
+			this.tab_textCompare.PerformLayout();
+			this.tab_folderCompare.ResumeLayout(false);
+			this.tab_folderCompare.PerformLayout();
+			this.tab_theme.ResumeLayout(false);
+			this.tab_theme.PerformLayout();
+			this.tab_information.ResumeLayout(false);
+			this.tab_information.PerformLayout();
+			this.tab_history.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
 			this.TextCompareMenu.ResumeLayout(false);
-			this.metroContextMenu2.ResumeLayout(false);
+			this.FolderCompareMenu.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		private MetroFramework.Controls.MetroTabControl metroTabControl1;
-		private MetroFramework.Controls.MetroTabPage metroTabPage1;
-		private MetroFramework.Controls.MetroTabPage metroTabPage3;
-		private MetroFramework.Controls.MetroTabPage metroTabPage4;
-		private MetroFramework.Controls.MetroTabPage metroTabPage5;
+		private MetroFramework.Controls.MetroTabControl tab_controller;
+		private MetroFramework.Controls.MetroTabPage tab_howToUse;
+		private MetroFramework.Controls.MetroTabPage tab_folderCompare;
+		private MetroFramework.Controls.MetroTabPage tab_theme;
+		private MetroFramework.Controls.MetroTabPage tab_information;
 		private MetroFramework.Controls.MetroTile metroTile1;
 		private MetroFramework.Controls.MetroLabel metroLabel2;
 		private MetroFramework.Controls.MetroTile metroTile2;
@@ -661,7 +662,7 @@
 		private MetroFramework.Controls.MetroContextMenu TextCompareMenu;
 		private System.Windows.Forms.ToolStripMenuItem TextCompare_AddFile;
 		private System.Windows.Forms.ToolStripMenuItem TextCompare_Save;
-		private MetroFramework.Controls.MetroButton metroButton2;
+		private MetroFramework.Controls.MetroButton FolderCompareToolbox;
 		private System.Windows.Forms.ToolStripMenuItem TextCompare_Compare;
 		private MetroFramework.Controls.MetroTrackBar metroTrackBar2;
 		private MetroFramework.Controls.MetroButton metroButton4;
@@ -669,29 +670,29 @@
 		private MetroFramework.Controls.MetroRadioButton metroRadioButton2;
 		private MetroFramework.Controls.MetroRadioButton White;
 		private MetroFramework.Controls.MetroLabel metroLabel1;
-		private MetroFramework.Controls.MetroContextMenu metroContextMenu2;
-		private System.Windows.Forms.ToolStripMenuItem addFolderToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem compareToolStripMenuItem1;
-		private System.Windows.Forms.TreeView treeView2;
-		private MetroFramework.Controls.MetroLabel metroLabel4;
-		private MetroFramework.Controls.MetroLabel metroLabel3;
-		private System.Windows.Forms.TreeView treeView1;
-		private MetroFramework.Controls.MetroTabPage metroTabPage2;
-		private MetroFramework.Controls.MetroLabel File_right;
-		private MetroFramework.Controls.MetroLabel File_left;
+		private MetroFramework.Controls.MetroContextMenu FolderCompareMenu;
+		private System.Windows.Forms.ToolStripMenuItem FolderCompare_AddFile;
+		private System.Windows.Forms.ToolStripMenuItem FolderCompare_Compare;
+		private System.Windows.Forms.TreeView TreeViewRight;
+		private MetroFramework.Controls.MetroLabel lbl_pathRight;
+		private MetroFramework.Controls.MetroLabel lbl_pathLeft;
+		private System.Windows.Forms.TreeView TreeViewLeft;
+		private MetroFramework.Controls.MetroTabPage tab_textCompare;
+		private MetroFramework.Controls.MetroLabel lbl_fileRight;
+		private MetroFramework.Controls.MetroLabel lbl_fileLeft;
 		private MetroFramework.Controls.MetroButton FileCompareToolbox;
 		private System.Windows.Forms.ToolStripMenuItem Add_LeftFile;
 		private System.Windows.Forms.ToolStripMenuItem Add_RightFile;
 		private RichTextBoxAdvanced TextBoxLeft;
 		private RichTextBoxAdvanced TextBoxRight;
-        private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
-        private MetroFramework.Controls.MetroTabPage metroTabPage6;
+        private System.Windows.Forms.ToolStripMenuItem FolderCompare_Reset;
+        private MetroFramework.Controls.MetroTabPage tab_history;
         private MetroFramework.Controls.MetroButton HistoryButton;
         private System.Windows.Forms.RichTextBox HistoryText;
-        private System.Windows.Forms.ToolStripMenuItem LeftToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem RightToolStripMenuItem;
-		private System.Windows.Forms.Button btn_toLeft;
-		private System.Windows.Forms.Button btn_toRight;
+        private System.Windows.Forms.ToolStripMenuItem Add_LeftFolder;
+        private System.Windows.Forms.ToolStripMenuItem Add_RightFolder;
+		private System.Windows.Forms.Button btn_toLeftFile;
+		private System.Windows.Forms.Button btn_toRightFile;
 	}
 }
 

@@ -6,6 +6,7 @@ using MetroFramework.Forms;
 using MetroFramework;
 using System.IO;
 using System.Collections;
+using System.Linq;
 
 namespace cs511_g11
 {
@@ -31,16 +32,14 @@ namespace cs511_g11
 			TextBoxRight.m_textController.Clear();
 
 			m_focusTextBox = TextBoxLeft;
+
+			tab_controller.SelectTab(2);
+
 		}
 
 		private void SetupRichTextbox()
 		{
 			TextBoxLeft.BindScroll(TextBoxRight);
-		}
-
-		private void metroTile2_Click(object sender, EventArgs e)
-		{
-			metroTabControl1.SelectTab(metroTabPage3);
 		}
 
 		private void metroTile1_MouseMove(object sender, MouseEventArgs e)
@@ -53,6 +52,11 @@ namespace cs511_g11
 			metroTile1.Style = (MetroColorStyle)0;
 		}
 
+		private void metroTile1_Click(object sender, EventArgs e)
+		{
+			tab_controller.SelectTab(tab_textCompare);
+		}
+
 		private void metroTile2_MouseLeave(object sender, EventArgs e)
 		{
 			metroTile2.Style = (MetroColorStyle)0;
@@ -63,14 +67,14 @@ namespace cs511_g11
 			metroTile2.Style = (MetroColorStyle)5;
 		}
 
-		private void metroContextMenu1_Opening(object sender, CancelEventArgs e)
+		private void metroTile2_Click(object sender, EventArgs e)
 		{
-
+			tab_controller.SelectTab(tab_folderCompare);
 		}
 
-		private void metroButton2_Click(object sender, EventArgs e)
+		private void FolderCompareToolbox_Click(object sender, EventArgs e)
 		{
-			metroContextMenu2.Show(metroButton2, new Point(0, metroButton2.Height));
+			FolderCompareMenu.Show(FolderCompareToolbox, new Point(0, FolderCompareToolbox.Height));
 		}
 
 		private void metroButton3_Click(object sender, EventArgs e)
@@ -81,8 +85,8 @@ namespace cs511_g11
 				metroStyleManager.Theme = MetroThemeStyle.Light;
 				metroUserControl1.BackColor = this.BackColor;
 				metroTrackBar2.BackColor = this.BackColor;
-				treeView1.BackColor = this.BackColor;
-				treeView2.BackColor = this.BackColor;
+				TreeViewLeft.BackColor = this.BackColor;
+				TreeViewRight.BackColor = this.BackColor;
 				HistoryText.BackColor = this.BackColor;
 
 			}
@@ -92,8 +96,8 @@ namespace cs511_g11
 				metroStyleManager.Theme = MetroThemeStyle.Dark;
 				metroUserControl1.BackColor = this.BackColor;
 				metroTrackBar2.BackColor = this.BackColor;
-				treeView1.BackColor = this.BackColor;
-				treeView2.BackColor = this.BackColor;
+				TreeViewLeft.BackColor = this.BackColor;
+				TreeViewRight.BackColor = this.BackColor;
 				HistoryText.BackColor = this.BackColor;
 
 			}
@@ -120,8 +124,6 @@ namespace cs511_g11
 		{
 
 		}
-
-
 
 		private void metroTrackBar2_ValueChanged(object sender, EventArgs e)
 		{
@@ -156,271 +158,370 @@ namespace cs511_g11
 				metroTrackBar2.BackColor = Color.Red;
 		}
 
-		private void show_folder(string path, TreeNode node)//ham liet ket dic
+		private void TreeViewLeft_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
 		{
-			DirectoryInfo direcinfo = new DirectoryInfo(path);
-			DirectoryInfo[] dics = direcinfo.GetDirectories();
-			int i = 0;
-			foreach (DirectoryInfo dic in dics)
-			{
 
-				node.Nodes.Add(dic.Name);
-				TreeNode nodes = node.Nodes[i];
-				show_folder(path + '/' + dic.Name, nodes);
-				i++;
-
-			}
-			FileInfo[] files = direcinfo.GetFiles();
-			foreach (FileInfo file in files)
-			{
-				node.Nodes.Add(file.Name);
-			}
 		}
-		private void show_treenode(TreeView x)
-		{
-			try
-			{
-				FolderBrowserDialog fd = new FolderBrowserDialog();
-				if (fd.ShowDialog() == DialogResult.OK)
-				{
-					x.Nodes.Clear();
-					if (x == treeView1)
-					{
-						metroLabel3.Text = fd.SelectedPath;
-					}
-					else { metroLabel4.Text = fd.SelectedPath; }
-					DirectoryInfo direcinfo = new DirectoryInfo(fd.SelectedPath);
-					DirectoryInfo[] dics = direcinfo.GetDirectories();
-					int i = 0;
-					foreach (DirectoryInfo dic in dics)
-					{
-						x.Nodes.Add(dic.Name);
-						TreeNode node = x.Nodes[i];
-						show_folder(fd.SelectedPath + '/' + dic.Name, node);
-						i++;
 
-					}
-					FileInfo[] files = direcinfo.GetFiles();
-					foreach (FileInfo file in files)
+		private void TreeViewRight_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+		{
+
+		}
+
+		private void TreeViewLeft_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+		{
+			if (e.Node.Nodes.Count == 0)
+			{
+				tab_controller.SelectedIndex = 1;
+				string _leftPath = lbl_pathLeft.Text + "\\" + e.Node.FullPath;
+				string _rightPath = lbl_pathRight.Text + "\\" + e.Node.FullPath;
+
+				TextBoxLeft.m_textController.Clear();
+				TextBoxRight.m_textController.Clear();
+
+				lbl_fileLeft.Text = "";
+				lbl_fileRight.Text = "";
+
+				try
+				{
+					TextBoxLeft.m_textController.Setup(File.ReadAllText(_leftPath));
+					TextBoxLeft.m_path = _leftPath;
+					lbl_fileLeft.Text = _leftPath.ToString();
+
+					TextBoxRight.m_path = _rightPath;
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+				}
+
+				if (File.Exists(_rightPath))
+				{
+					try
 					{
-						x.Nodes.Add(file.Name);
+						TextBoxRight.m_textController.Setup(File.ReadAllText(_rightPath));
+						lbl_fileRight.Text = _rightPath.ToString();
+
+						AddHistoryTracking(lbl_fileLeft.Text, lbl_fileRight.Text);
+					}
+					catch (Exception ex)
+					{
+						MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
 					}
 				}
-			}
-			catch
-			{
 
+				FileCompare();
 			}
-		}
-
-		bool checkfile(string path1, string path2)
-		{
-			string s1, s2;
-			string line;
-			using (StreamReader sr = new StreamReader(path1))
-			{
-				s1 = sr.ReadToEnd().ToString();
-				sr.Close();
-			}
-			using (StreamReader sr2 = new StreamReader(path2))
-			{
-				s2 = sr2.ReadToEnd().ToString();
-				sr2.Close();
-			}
-			if (s2.GetHashCode().CompareTo(s1.GetHashCode()) == 0)
-				return true;
 			else
-				return false;
-			long length1 = new System.IO.FileInfo(path1).Length;
-			long length2 = new System.IO.FileInfo(path2).Length;
-			if (length1 != length2)
-				return true;
-			else
-				return false;
-		}
-		private string listname(TreeNode node)
-		{
-
-			int k = 0;
-			string name = "";
-		nhaylai:
-			try
 			{
-
-				while (k != 1)
+				try
 				{
-					name = name + '\\' + node.Text;
-					node = node.NextNode;
+					TreeNode _compareNode = TreeViewRight.Nodes.Find(e.Node.Name, true).First();
 
-				}
-			}
-			catch
-			{
-				k = 1;
-				goto nhaylai;
-			}
-			return name;
-		}
-
-		private void tomau(TreeNode Node, TreeView xx)
-		{
-			string[] arrListStr = Node.FullPath.Split('\\');
-			string t = arrListStr[0];
-			TreeNode X;
-			X = xx.Nodes[0];
-			while (X.Text != t)
-			{
-				X = X.NextNode;
-			}
-			for (int i = 1; i <= arrListStr.Length - 1; i++)
-			{
-				X.ForeColor = Color.Red;
-				X = X.Nodes[0];
-				while (X.Text != arrListStr[i])
-				{
-					X = X.NextNode;
-				}
-			}
-		}
-
-		private void kiemtradisc(TreeNode Node, TreeView x, TreeView y)
-		{
-			string[] arrListStr = Node.FullPath.Split('\\');
-			string firstnode;
-			firstnode = arrListStr[0];
-
-			TreeNode Node2 = y.Nodes[0];
-			while (firstnode != Node2.Text)
-			{
-				Node2 = Node2.NextNode;
-			}
-			Node = Node.Nodes[0];
-			string nodetxt = Node.FullPath;
-
-
-			int j = 0;
-		trl:
-			try
-			{
-				while (j != 1)
-				{
-					for (int i = 0; i <= nodetxt.Length - 1; i++)
+					if(e.Node.IsExpanded == true)
 					{
-						if (nodetxt[i] == '\\')
-						{
-							Node2 = Node2.Nodes[0];
-						}
-
-					}
-				repeat:
-					string t1 = '\\' + Node.Text;
-					string t2 = Node.Text + '\\';
-					string t = listname(Node2);
-					if ((t.Contains(t1) == false) /*|| (t.Contains(t2) == false)*/)
-					{
-						tomau(Node, x);
-						Node.ForeColor = Color.Red;
+						_compareNode.Expand();
 					}
 					else
 					{
-						string te;
-						if (x == treeView1)
-							te = metroLabel3.Text;
-						else
-							te = metroLabel4.Text;
-						FileAttributes attr = File.GetAttributes(te + '\\' + Node.FullPath);
-
-						//detect whether its a directory or file
-						if (attr.HasFlag(FileAttributes.Directory))
-						{
-							kiemtradisc(Node, x, y);
-						}
-						else
-						{
-
-							if (checkfile(metroLabel3.Text + '\\' + Node.FullPath, metroLabel4.Text + '\\' + Node.FullPath) == false)
-							{
-								tomau(Node, x);
-								Node.ForeColor = Color.Red;
-							}
-						}
-
+						_compareNode.Collapse();
 					}
-					Node = Node.NextNode;
-					goto repeat;
 				}
-			}
-			catch
-			{
-				j = 1;
-				goto trl;
-			}
-
-		}
-
-		private void compare(TreeView x, TreeView y)
-		{
-			int j = 0;
-		trolai:
-			try
-			{
-				TreeNode knode;
-				knode = x.Nodes[0];
-				while (j != 1)
+				catch
 				{
 
-					TreeNode knodes = y.Nodes[0];
-					string t1 = '\\' + knode.Text;
-					string t2 = knode.Text + '\\';
-					string t = listname(knodes);
-					if ((t.Contains(t1) == false) /*|| (t.Contains(t2) == false)*/)
+				}
+			}
+		}
+
+		private void TreeViewRight_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+		{
+			if (e.Node.Nodes.Count == 0)
+			{
+				tab_controller.SelectedIndex = 1;
+				string _leftPath = lbl_pathLeft.Text + "\\" + e.Node.FullPath;
+				string _rightPath = lbl_pathRight.Text + "\\" + e.Node.FullPath;
+
+				TextBoxLeft.m_textController.Clear();
+				TextBoxRight.m_textController.Clear();
+
+				lbl_fileLeft.Text = "";
+				lbl_fileRight.Text = "";
+
+				try
+				{
+					TextBoxRight.m_textController.Setup(File.ReadAllText(_rightPath));
+					TextBoxRight.m_path = _rightPath;
+					lbl_fileRight.Text = _rightPath.ToString();
+
+					TextBoxLeft.m_path = _leftPath;
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+				}
+
+				if (File.Exists(_leftPath))
+				{
+					try
 					{
-						knode.ForeColor = Color.Red;
+						TextBoxLeft.m_textController.Setup(File.ReadAllText(_leftPath));
+						lbl_fileLeft.Text = _leftPath.ToString();
+
+						AddHistoryTracking(lbl_fileLeft.Text, lbl_fileRight.Text);
+					}
+					catch (Exception ex)
+					{
+						MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+					}
+				}
+
+				FileCompare();
+			}
+			else
+			{
+				try
+				{
+					TreeNode _compareNode = TreeViewLeft.Nodes.Find(e.Node.Name, true).First();
+
+					if (e.Node.IsExpanded == true)
+					{
+						_compareNode.Expand();
 					}
 					else
 					{
-						string te;
-						if (x == treeView1)
-							te = metroLabel3.Text;
-						else
-							te = metroLabel4.Text;
-						FileAttributes attr = File.GetAttributes(te + '\\' + knode.FullPath);
+						_compareNode.Collapse();
+					}
+				}
+				catch
+				{
 
-						//detect whether its a directory or file
-						if (attr.HasFlag(FileAttributes.Directory))
-						{
-							kiemtradisc(knode, x, y);
-						}
-						else
-						{
+				}
+			}
+		}
 
-							if (checkfile(metroLabel3.Text + '\\' + knode.FullPath, metroLabel4.Text + '\\' + knode.FullPath) == false)
-							{
-								knode.ForeColor = Color.Red;
-							}
-						}
+		private void Add_LeftFolder_Click(object sender, EventArgs e)
+		{
+			LoadTreeView(TreeViewLeft);
+
+			if (TreeViewRight.Nodes.Count != 0)
+			{
+				AddHistoryTracking(lbl_pathLeft.Text, lbl_pathRight.Text);
+			}
+		}
+
+		private void Add_RightFolder_Click(object sender, EventArgs e)
+		{
+			LoadTreeView(TreeViewRight);
+
+			if (TreeViewLeft.Nodes.Count != 0)
+			{
+				AddHistoryTracking(lbl_pathLeft.Text, lbl_pathRight.Text);
+			}
+		}
+
+		private void LoadSubDirectory(string path, TreeNode node)
+		{
+			DirectoryInfo _rootDirectory = new DirectoryInfo(path);
+			DirectoryInfo[] _directories = _rootDirectory.GetDirectories();
+			FileInfo[] _files = _rootDirectory.GetFiles();
+
+			foreach (DirectoryInfo dic in _directories)
+			{
+				LoadSubDirectory(path + '/' + dic.Name, node.Nodes.Add(dic.Name, dic.Name));
+			}
+
+			foreach (FileInfo file in _files)
+			{
+				node.Nodes.Add(file.Name, file.Name);
+			}
+		}
+		private void LoadTreeView(TreeView treeView)
+		{
+			try
+			{
+				FolderBrowserDialog _dialog = new FolderBrowserDialog();
+				if (_dialog.ShowDialog() == DialogResult.OK)
+				{
+					treeView.Nodes.Clear();
+					if (treeView == TreeViewLeft)
+					{
+						lbl_pathLeft.Text = _dialog.SelectedPath;
+					}
+					else
+					{
+						lbl_pathRight.Text = _dialog.SelectedPath;
 					}
 
-					knode = knode.NextNode;
+					DirectoryInfo _rootDirectory = new DirectoryInfo(_dialog.SelectedPath);
+					DirectoryInfo[] _directories = _rootDirectory.GetDirectories();
+					FileInfo[] _files = _rootDirectory.GetFiles();
+
+					foreach (DirectoryInfo dic in _directories)
+					{
+						LoadSubDirectory(_dialog.SelectedPath + '/' + dic.Name, treeView.Nodes.Add(dic.Name, dic.Name));
+					}
+
+					foreach (FileInfo file in _files)
+					{
+						treeView.Nodes.Add(file.Name, file.Name);
+					}
 				}
 			}
 			catch
 			{
-				j = 1;
-				goto trolai;
+
 			}
 		}
-		private void compareToolStripMenuItem1_Click(object sender, EventArgs e)
+
+		bool CompareFile(string path1, string path2)
 		{
-			if ((treeView1.Nodes.Count == 0) || (treeView2.Nodes.Count == 0))
+			//string s1, s2;
+			//string line;
+			//using (StreamReader sr = new StreamReader(path1))
+			//{
+			//	s1 = sr.ReadToEnd().ToString();
+			//	sr.Close();
+			//}
+			//using (StreamReader sr2 = new StreamReader(path2))
+			//{
+			//	s2 = sr2.ReadToEnd().ToString();
+			//	sr2.Close();
+			//}
+			//if (s2.GetHashCode().CompareTo(s1.GetHashCode()) == 0)
+			//	return true;
+			//else
+			//	return false;
+			//long length1 = new System.IO.FileInfo(path1).Length;
+			//long length2 = new System.IO.FileInfo(path2).Length;
+			//if (length1 != length2)
+			//	return true;
+			//else
+			//	return false;
+
+			FileInfo _left = new FileInfo(path1);
+			FileInfo _right = new FileInfo(path2);
+
+			if (_left.Length != _right.Length)
+				return false;
+			return true;
+		}
+
+		private bool Analyze(TreeNode source, TreeNode element, string sourceRootDirectory, string elementRootDirectory)
+		{
+			try
+			{
+				TreeNode _compareNode = source.Nodes
+									.Cast<TreeNode>()
+									.Where(r => r.Text == element.Text)
+									.First();
+
+				TreeNodeCollection _nodes = element.Nodes;
+
+				if (_nodes.Count > 0)
+				{
+					bool _isSame = true;
+					foreach (TreeNode _node in _nodes)
+					{
+						if(Analyze(_compareNode, _node, sourceRootDirectory, elementRootDirectory) == false)
+							_isSame = false;
+					}
+
+					if (_isSame == false)
+					{
+						element.ForeColor = Color.Red;
+						_compareNode.ForeColor = Color.Red;
+
+						return false;
+					}
+				}
+				else if (_compareNode.Nodes.Count == 0)
+				{
+					if (CompareFile(sourceRootDirectory + "\\" + element.FullPath, elementRootDirectory + "\\" + _compareNode.FullPath) == false)
+					{
+						element.ForeColor = Color.Red;
+						_compareNode.ForeColor = Color.Red;
+
+						return false;
+					}
+				}
+
+				return true;
+			}
+			catch
+			{
+				element.ForeColor = Color.Red;
+				return false;
+			}
+		}
+
+		private void TreeViewCompare(TreeView firstTreeView, TreeView secondTreeView, string firstRootDirectory, string secondRootDirectory)
+		{
+			TreeNodeCollection _nodes = firstTreeView.Nodes;
+			foreach (TreeNode _node in _nodes)
+			{
+				try
+				{
+					TreeNode _compareNode = secondTreeView.Nodes
+									.Cast<TreeNode>()
+									.Where(r => r.Text == _node.Text)
+									.First();
+
+					TreeNodeCollection _subNodes = _node.Nodes;
+
+					if (_subNodes.Count > 0)
+					{
+						bool _isSame = true;
+						foreach (TreeNode _subNode in _subNodes)
+						{
+							if(Analyze(_compareNode, _subNode, firstRootDirectory, secondRootDirectory) == false)
+								_isSame = false;
+						}
+
+						if (_isSame == false)
+						{
+							_node.ForeColor = Color.Red;
+							_compareNode.ForeColor = Color.Red;
+						}
+					}
+					else if (_compareNode.Nodes.Count == 0)
+					{
+						if (CompareFile(firstRootDirectory + "\\" + _node.FullPath, secondRootDirectory + "\\" + _compareNode.FullPath) == false)
+						{
+							_node.ForeColor = Color.Red;
+							_compareNode.ForeColor = Color.Red;
+						}
+					}
+				}
+				catch
+				{
+					_node.ForeColor = Color.Red;
+				}
+			}
+		}
+
+		private void FolderCompare_Compare_Click(object sender, EventArgs e)
+		{
+			if ((TreeViewLeft.Nodes.Count == 0) || (TreeViewRight.Nodes.Count == 0))
 			{
 				MetroMessageBox.Show(this, "Please Add Folder first.", "Folder Not Found", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
 			}
 			else
 			{
-				compare(treeView1, treeView2);
-				compare(treeView2, treeView1);
+				//compare(TreeViewLeft, TreeViewRight);
+				//compare(TreeViewRight, TreeViewLeft);
+
+				TreeViewCompare(TreeViewLeft, TreeViewRight, lbl_pathLeft.Text, lbl_pathRight.Text);
+				TreeViewCompare(TreeViewRight, TreeViewLeft, lbl_pathRight.Text, lbl_pathLeft.Text);
 			}
+		}
+
+		private void FolderCompare_Reset_Click(object sender, EventArgs e)
+		{
+			TreeViewLeft.Nodes.Clear();
+			TreeViewRight.Nodes.Clear();
+			lbl_pathLeft.Text = " ";
+			lbl_pathRight.Text = " ";
 		}
 
 		///////////////////////////////////////////////////////////////////////////////
@@ -567,11 +668,11 @@ namespace cs511_g11
 							TextBoxLeft.m_textController.Clear();
 							TextBoxLeft.m_textController.Setup(File.ReadAllText(_dialog.FileName));
 							TextBoxLeft.m_path = _dialog.FileName;
-							File_left.Text = _dialog.FileName.ToString();
+							lbl_fileLeft.Text = _dialog.FileName.ToString();
 
 							if (TextBoxRight.m_textController.Lines.Count != 0)
 							{
-								AddHistoryTracking(File_left.Text, File_right.Text);
+								AddHistoryTracking(lbl_fileLeft.Text, lbl_fileRight.Text);
 							}
 
 							FileCompare();
@@ -601,11 +702,11 @@ namespace cs511_g11
 							TextBoxRight.m_textController.Clear();
 							TextBoxRight.m_textController.Setup(File.ReadAllText(_dialog.FileName));
 							TextBoxRight.m_path = _dialog.FileName;
-							File_right.Text = _dialog.FileName.ToString();
+							lbl_fileRight.Text = _dialog.FileName.ToString();
 
 							if (TextBoxLeft.m_textController.Lines.Count != 0)
 							{
-								AddHistoryTracking(File_left.Text, File_right.Text);
+								AddHistoryTracking(lbl_fileLeft.Text, lbl_fileRight.Text);
 							}
 
 							FileCompare();
@@ -637,174 +738,6 @@ namespace cs511_g11
 		private void TextBoxRight_LostFocus(object sender, EventArgs e)
 		{
 			m_focusTextBox = TextBoxRight;
-		}
-
-
-		private void resetToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			treeView1.Nodes.Clear();
-			treeView2.Nodes.Clear();
-			metroLabel3.Text = " ";
-			metroLabel4.Text = " ";
-		}
-
-		private void HistoryButton_Click(object sender, EventArgs e)
-		{
-			string path = Environment.GetEnvironmentVariable("userprofile") + "\\AppData\\Local\\2Compare\\History.cs511";
-			StreamReader a = new StreamReader(path);
-			HistoryText.Text = a.ReadToEnd();
-			a.Close();
-		}
-
-		private void metroTile1_Click(object sender, EventArgs e)
-		{
-			metroTabControl1.SelectTab(metroTabPage2);
-		}
-
-		private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-		{
-			if (e.Node.IsExpanded == true)
-			{
-				try
-				{
-					string[] arrListStr = e.Node.FullPath.Split('\\');
-					string t = arrListStr[0];
-					TreeNode X;
-					X = treeView2.Nodes[0];
-					while (X.Text != t)
-					{
-						X = X.NextNode;
-					}
-					X.Expand();
-					for (int i = 1; i <= arrListStr.Length - 1; i++)
-					{
-						//X.ForeColor = Color.Red;
-						X = X.Nodes[0];
-						while (X.Text != arrListStr[i])
-						{
-							X = X.NextNode;
-						}
-						X.Expand();
-					}
-				}
-				catch
-				{ }
-			}
-			else
-			{
-				try
-				{
-					string[] arrListStr = e.Node.FullPath.Split('\\');
-					string t = arrListStr[0];
-					TreeNode X;
-					X = treeView2.Nodes[0];
-					while (X.Text != t)
-					{
-						X = X.NextNode;
-					}
-					X.Collapse();
-					for (int i = 1; i <= arrListStr.Length - 1; i++)
-					{
-						//X.ForeColor = Color.Red;
-						X = X.Nodes[0];
-						while (X.Text != arrListStr[i])
-						{
-							X = X.NextNode;
-						}
-						X.Collapse();
-					}
-				}
-				catch
-				{ }
-			}
-		}
-
-		private void treeView2_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-		{
-			if (e.Node.IsExpanded == true)
-			{
-				try
-				{
-					string[] arrListStr = e.Node.FullPath.Split('\\');
-					string t = arrListStr[0];
-					TreeNode X;
-					X = treeView1.Nodes[0];
-					while (X.Text != t)
-					{
-						X = X.NextNode;
-					}
-					X.Expand();
-					for (int i = 1; i <= arrListStr.Length - 1; i++)
-					{
-						//X.ForeColor = Color.Red;
-						X = X.Nodes[0];
-						while (X.Text != arrListStr[i])
-						{
-							X = X.NextNode;
-						}
-						X.Expand();
-					}
-				}
-				catch
-				{ }
-			}
-			else
-			{
-				try
-				{
-					string[] arrListStr = e.Node.FullPath.Split('\\');
-					string t = arrListStr[0];
-					TreeNode X;
-					X = treeView1.Nodes[0];
-					while (X.Text != t)
-					{
-						X = X.NextNode;
-					}
-					X.Collapse();
-					for (int i = 1; i <= arrListStr.Length - 1; i++)
-					{
-						//X.ForeColor = Color.Red;
-						X = X.Nodes[0];
-						while (X.Text != arrListStr[i])
-						{
-							X = X.NextNode;
-						}
-						X.Collapse();
-					}
-				}
-				catch
-				{ }
-			}
-		}
-
-		private void LeftToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			show_treenode(treeView1);
-
-			if (treeView2.Nodes.Count != 0)
-			{
-				AddHistoryTracking(metroLabel3.Text, metroLabel4.Text);
-			}
-		}
-
-		private void RightToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			show_treenode(treeView2);
-
-			if (treeView1.Nodes.Count != 0)
-			{
-				AddHistoryTracking(metroLabel3.Text, metroLabel4.Text);
-			}
-		}
-
-		private void AddHistoryTracking(string leftPath, string rightPath)
-		{
-			DateTime _currentTime = DateTime.Now;
-			string result = leftPath + "<=>" + rightPath + " | " + _currentTime.ToShortDateString() + " " + _currentTime.ToLongTimeString();
-
-			StreamWriter sw = new StreamWriter(Environment.GetEnvironmentVariable("userprofile") + "\\AppData\\Local\\2Compare\\History.cs511", true);
-			sw.WriteLine(result);
-			sw.Close();
 		}
 
 		private void btn_toRight_Click(object sender, EventArgs e)
@@ -839,6 +772,27 @@ namespace cs511_g11
 			}
 
 			FileCompare();
+		}
+
+
+		//////////////////////////////////////////////////////////////
+		// History
+		private void HistoryButton_Click(object sender, EventArgs e)
+		{
+			string path = Environment.GetEnvironmentVariable("userprofile") + "\\AppData\\Local\\2Compare\\History.cs511";
+			StreamReader a = new StreamReader(path);
+			HistoryText.Text = a.ReadToEnd();
+			a.Close();
+		}
+
+		private void AddHistoryTracking(string leftPath, string rightPath)
+		{
+			DateTime _currentTime = DateTime.Now;
+			string result = leftPath + "<=>" + rightPath + " | " + _currentTime.ToShortDateString() + " " + _currentTime.ToLongTimeString();
+
+			StreamWriter sw = new StreamWriter(Environment.GetEnvironmentVariable("userprofile") + "\\AppData\\Local\\2Compare\\History.cs511", true);
+			sw.WriteLine(result);
+			sw.Close();
 		}
 	}
 }
