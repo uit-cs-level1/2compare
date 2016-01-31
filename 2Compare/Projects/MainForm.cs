@@ -32,9 +32,6 @@ namespace cs511_g11
 			TextBoxRight.m_textController.Clear();
 
 			m_focusTextBox = TextBoxLeft;
-
-			tab_controller.SelectTab(2);
-
 		}
 
 		private void SetupRichTextbox()
@@ -212,26 +209,6 @@ namespace cs511_g11
 
 				FileCompare();
 			}
-			else
-			{
-				try
-				{
-					TreeNode _compareNode = TreeViewRight.Nodes.Find(e.Node.Name, true).First();
-
-					if(e.Node.IsExpanded == true)
-					{
-						_compareNode.Expand();
-					}
-					else
-					{
-						_compareNode.Collapse();
-					}
-				}
-				catch
-				{
-
-				}
-			}
 		}
 
 		private void TreeViewRight_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -278,25 +255,57 @@ namespace cs511_g11
 
 				FileCompare();
 			}
-			else
+		}
+
+		private void TreeViewLeft_AfterExpand(object sender, TreeViewEventArgs e)
+		{
+			try
 			{
-				try
-				{
-					TreeNode _compareNode = TreeViewLeft.Nodes.Find(e.Node.Name, true).First();
+				TreeNode _compareNode = TreeViewRight.Nodes.Find(e.Node.Name, true).First();
+				_compareNode.Expand();
+			}
+			catch
+			{
 
-					if (e.Node.IsExpanded == true)
-					{
-						_compareNode.Expand();
-					}
-					else
-					{
-						_compareNode.Collapse();
-					}
-				}
-				catch
-				{
+			}
+		}
 
-				}
+		private void TreeViewLeft_AfterCollapse(object sender, TreeViewEventArgs e)
+		{
+			try
+			{
+				TreeNode _compareNode = TreeViewRight.Nodes.Find(e.Node.Name, true).First();
+				_compareNode.Collapse(false);
+			}
+			catch
+			{
+
+			}
+		}
+
+		private void TreeViewRight_AfterExpand(object sender, TreeViewEventArgs e)
+		{
+			try
+			{
+				TreeNode _compareNode = TreeViewLeft.Nodes.Find(e.Node.Name, true).First();
+				_compareNode.Expand();
+			}
+			catch
+			{
+
+			}
+		}
+
+		private void TreeViewRight_AfterCollapse(object sender, TreeViewEventArgs e)
+		{
+			try
+			{
+				TreeNode _compareNode = TreeViewLeft.Nodes.Find(e.Node.Name, true).First();
+				_compareNode.Collapse(false);
+			}
+			catch
+			{
+
 			}
 		}
 
@@ -376,29 +385,6 @@ namespace cs511_g11
 
 		bool CompareFile(string path1, string path2)
 		{
-			//string s1, s2;
-			//string line;
-			//using (StreamReader sr = new StreamReader(path1))
-			//{
-			//	s1 = sr.ReadToEnd().ToString();
-			//	sr.Close();
-			//}
-			//using (StreamReader sr2 = new StreamReader(path2))
-			//{
-			//	s2 = sr2.ReadToEnd().ToString();
-			//	sr2.Close();
-			//}
-			//if (s2.GetHashCode().CompareTo(s1.GetHashCode()) == 0)
-			//	return true;
-			//else
-			//	return false;
-			//long length1 = new System.IO.FileInfo(path1).Length;
-			//long length2 = new System.IO.FileInfo(path2).Length;
-			//if (length1 != length2)
-			//	return true;
-			//else
-			//	return false;
-
 			FileInfo _left = new FileInfo(path1);
 			FileInfo _right = new FileInfo(path2);
 
@@ -540,9 +526,6 @@ namespace cs511_g11
 
 			TextBoxLeft.Clear();
 			TextBoxRight.Clear();
-			// get history when compare
-
-
 
 			for (int i = 0; i < _result.Count; i++)
 			{

@@ -37,9 +37,13 @@
 			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			this.metroTile1 = new MetroFramework.Controls.MetroTile();
 			this.tab_textCompare = new MetroFramework.Controls.MetroTabPage();
+			this.btn_toLeftFile = new System.Windows.Forms.Button();
+			this.btn_toRightFile = new System.Windows.Forms.Button();
 			this.lbl_fileRight = new MetroFramework.Controls.MetroLabel();
 			this.lbl_fileLeft = new MetroFramework.Controls.MetroLabel();
 			this.FileCompareToolbox = new MetroFramework.Controls.MetroButton();
+			this.TextBoxLeft = new cs511_g11.RichTextBoxAdvanced();
+			this.TextBoxRight = new cs511_g11.RichTextBoxAdvanced();
 			this.tab_folderCompare = new MetroFramework.Controls.MetroTabPage();
 			this.TreeViewRight = new System.Windows.Forms.TreeView();
 			this.lbl_pathRight = new MetroFramework.Controls.MetroLabel();
@@ -72,10 +76,6 @@
 			this.Add_RightFolder = new System.Windows.Forms.ToolStripMenuItem();
 			this.FolderCompare_Compare = new System.Windows.Forms.ToolStripMenuItem();
 			this.FolderCompare_Reset = new System.Windows.Forms.ToolStripMenuItem();
-			this.TextBoxLeft = new cs511_g11.RichTextBoxAdvanced();
-			this.TextBoxRight = new cs511_g11.RichTextBoxAdvanced();
-			this.btn_toLeftFile = new System.Windows.Forms.Button();
-			this.btn_toRightFile = new System.Windows.Forms.Button();
 			this.tab_controller.SuspendLayout();
 			this.tab_howToUse.SuspendLayout();
 			this.tab_textCompare.SuspendLayout();
@@ -99,7 +99,7 @@
 			this.tab_controller.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tab_controller.Location = new System.Drawing.Point(23, 60);
 			this.tab_controller.Name = "tab_controller";
-			this.tab_controller.SelectedIndex = 2;
+			this.tab_controller.SelectedIndex = 5;
 			this.tab_controller.Size = new System.Drawing.Size(978, 520);
 			this.tab_controller.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
 			this.tab_controller.TabIndex = 0;
@@ -205,6 +205,32 @@
 			this.tab_textCompare.VerticalScrollbarHighlightOnWheel = false;
 			this.tab_textCompare.VerticalScrollbarSize = 3;
 			// 
+			// btn_toLeftFile
+			// 
+			this.btn_toLeftFile.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.btn_toLeftFile.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this.btn_toLeftFile.Location = new System.Drawing.Point(465, 258);
+			this.btn_toLeftFile.Name = "btn_toLeftFile";
+			this.btn_toLeftFile.Size = new System.Drawing.Size(42, 44);
+			this.btn_toLeftFile.TabIndex = 12;
+			this.btn_toLeftFile.Text = "<<";
+			this.btn_toLeftFile.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+			this.btn_toLeftFile.UseVisualStyleBackColor = false;
+			this.btn_toLeftFile.Click += new System.EventHandler(this.btn_toLeft_Click);
+			// 
+			// btn_toRightFile
+			// 
+			this.btn_toRightFile.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.btn_toRightFile.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this.btn_toRightFile.Location = new System.Drawing.Point(465, 188);
+			this.btn_toRightFile.Name = "btn_toRightFile";
+			this.btn_toRightFile.Size = new System.Drawing.Size(42, 44);
+			this.btn_toRightFile.TabIndex = 11;
+			this.btn_toRightFile.Text = ">>";
+			this.btn_toRightFile.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+			this.btn_toRightFile.UseVisualStyleBackColor = false;
+			this.btn_toRightFile.Click += new System.EventHandler(this.btn_toRight_Click);
+			// 
 			// lbl_fileRight
 			// 
 			this.lbl_fileRight.AutoSize = true;
@@ -236,6 +262,38 @@
 			this.FileCompareToolbox.UseStyleColors = true;
 			this.FileCompareToolbox.Click += new System.EventHandler(this.FileCompareToolbox_Click);
 			// 
+			// TextBoxLeft
+			// 
+			this.TextBoxLeft.AcceptsTab = true;
+			this.TextBoxLeft.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.TextBoxLeft.EnableAutoDragDrop = true;
+			this.TextBoxLeft.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.TextBoxLeft.Location = new System.Drawing.Point(0, 60);
+			this.TextBoxLeft.Margin = new System.Windows.Forms.Padding(5);
+			this.TextBoxLeft.Name = "TextBoxLeft";
+			this.TextBoxLeft.ReadOnly = true;
+			this.TextBoxLeft.Size = new System.Drawing.Size(455, 418);
+			this.TextBoxLeft.TabIndex = 9;
+			this.TextBoxLeft.Text = "";
+			this.TextBoxLeft.WordWrap = false;
+			this.TextBoxLeft.LostFocus += new System.EventHandler(this.TextBoxLeft_LostFocus);
+			// 
+			// TextBoxRight
+			// 
+			this.TextBoxRight.AcceptsTab = true;
+			this.TextBoxRight.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.TextBoxRight.EnableAutoDragDrop = true;
+			this.TextBoxRight.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.TextBoxRight.Location = new System.Drawing.Point(516, 59);
+			this.TextBoxRight.Margin = new System.Windows.Forms.Padding(5);
+			this.TextBoxRight.Name = "TextBoxRight";
+			this.TextBoxRight.ReadOnly = true;
+			this.TextBoxRight.Size = new System.Drawing.Size(455, 418);
+			this.TextBoxRight.TabIndex = 10;
+			this.TextBoxRight.Text = "";
+			this.TextBoxRight.WordWrap = false;
+			this.TextBoxRight.LostFocus += new System.EventHandler(this.TextBoxRight_LostFocus);
+			// 
 			// tab_folderCompare
 			// 
 			this.tab_folderCompare.Controls.Add(this.TreeViewRight);
@@ -262,6 +320,8 @@
 			this.TreeViewRight.Name = "TreeViewRight";
 			this.TreeViewRight.Size = new System.Drawing.Size(455, 418);
 			this.TreeViewRight.TabIndex = 7;
+			this.TreeViewRight.AfterCollapse += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewRight_AfterCollapse);
+			this.TreeViewRight.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewRight_AfterExpand);
 			this.TreeViewRight.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeViewRight_NodeMouseClick);
 			this.TreeViewRight.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeViewRight_NodeMouseDoubleClick);
 			// 
@@ -292,6 +352,8 @@
 			this.TreeViewLeft.Name = "TreeViewLeft";
 			this.TreeViewLeft.Size = new System.Drawing.Size(455, 418);
 			this.TreeViewLeft.TabIndex = 3;
+			this.TreeViewLeft.AfterCollapse += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewLeft_AfterCollapse);
+			this.TreeViewLeft.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewLeft_AfterExpand);
 			this.TreeViewLeft.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeViewLeft_NodeMouseClick);
 			this.TreeViewLeft.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeViewLeft_NodeMouseDoubleClick);
 			// 
@@ -429,6 +491,7 @@
 			// 
 			// HistoryText
 			// 
+			this.HistoryText.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.HistoryText.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.HistoryText.ForeColor = System.Drawing.SystemColors.MenuHighlight;
 			this.HistoryText.Location = new System.Drawing.Point(338, 20);
@@ -552,64 +615,6 @@
 			this.FolderCompare_Reset.Size = new System.Drawing.Size(132, 22);
 			this.FolderCompare_Reset.Text = "Reset";
 			this.FolderCompare_Reset.Click += new System.EventHandler(this.FolderCompare_Reset_Click);
-			// 
-			// TextBoxLeft
-			// 
-			this.TextBoxLeft.AcceptsTab = true;
-			this.TextBoxLeft.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.TextBoxLeft.EnableAutoDragDrop = true;
-			this.TextBoxLeft.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.TextBoxLeft.Location = new System.Drawing.Point(0, 60);
-			this.TextBoxLeft.Margin = new System.Windows.Forms.Padding(5);
-			this.TextBoxLeft.Name = "TextBoxLeft";
-			this.TextBoxLeft.ReadOnly = true;
-			this.TextBoxLeft.Size = new System.Drawing.Size(455, 418);
-			this.TextBoxLeft.TabIndex = 9;
-			this.TextBoxLeft.Text = "";
-			this.TextBoxLeft.WordWrap = false;
-			this.TextBoxLeft.LostFocus += new System.EventHandler(this.TextBoxLeft_LostFocus);
-			// 
-			// TextBoxRight
-			// 
-			this.TextBoxRight.AcceptsTab = true;
-			this.TextBoxRight.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.TextBoxRight.EnableAutoDragDrop = true;
-			this.TextBoxRight.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.TextBoxRight.Location = new System.Drawing.Point(516, 59);
-			this.TextBoxRight.Margin = new System.Windows.Forms.Padding(5);
-			this.TextBoxRight.Name = "TextBoxRight";
-			this.TextBoxRight.ReadOnly = true;
-			this.TextBoxRight.Size = new System.Drawing.Size(455, 418);
-			this.TextBoxRight.TabIndex = 10;
-			this.TextBoxRight.Text = "";
-			this.TextBoxRight.WordWrap = false;
-			this.TextBoxRight.LostFocus += new System.EventHandler(this.TextBoxRight_LostFocus);
-			// 
-			// btn_toLeftFile
-			// 
-			this.btn_toLeftFile.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.btn_toLeftFile.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-			this.btn_toLeftFile.Location = new System.Drawing.Point(465, 258);
-			this.btn_toLeftFile.Name = "btn_toLeftFile";
-			this.btn_toLeftFile.Size = new System.Drawing.Size(42, 44);
-			this.btn_toLeftFile.TabIndex = 12;
-			this.btn_toLeftFile.Text = "<<";
-			this.btn_toLeftFile.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-			this.btn_toLeftFile.UseVisualStyleBackColor = false;
-			this.btn_toLeftFile.Click += new System.EventHandler(this.btn_toLeft_Click);
-			// 
-			// btn_toRightFile
-			// 
-			this.btn_toRightFile.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.btn_toRightFile.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-			this.btn_toRightFile.Location = new System.Drawing.Point(465, 188);
-			this.btn_toRightFile.Name = "btn_toRightFile";
-			this.btn_toRightFile.Size = new System.Drawing.Size(42, 44);
-			this.btn_toRightFile.TabIndex = 11;
-			this.btn_toRightFile.Text = ">>";
-			this.btn_toRightFile.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-			this.btn_toRightFile.UseVisualStyleBackColor = false;
-			this.btn_toRightFile.Click += new System.EventHandler(this.btn_toRight_Click);
 			// 
 			// MainForm
 			// 
