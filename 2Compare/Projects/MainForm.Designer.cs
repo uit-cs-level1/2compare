@@ -37,14 +37,16 @@
 			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			this.metroTile1 = new MetroFramework.Controls.MetroTile();
 			this.tab_textCompare = new MetroFramework.Controls.MetroTabPage();
-			this.btn_toLeftFile = new System.Windows.Forms.Button();
-			this.btn_toRightFile = new System.Windows.Forms.Button();
+			this.btn_fileToLeft = new System.Windows.Forms.Button();
+			this.btn_fileToRight = new System.Windows.Forms.Button();
 			this.lbl_fileRight = new MetroFramework.Controls.MetroLabel();
 			this.lbl_fileLeft = new MetroFramework.Controls.MetroLabel();
 			this.FileCompareToolbox = new MetroFramework.Controls.MetroButton();
 			this.TextBoxLeft = new cs511_g11.RichTextBoxAdvanced();
 			this.TextBoxRight = new cs511_g11.RichTextBoxAdvanced();
 			this.tab_folderCompare = new MetroFramework.Controls.MetroTabPage();
+			this.btn_folderToLeft = new System.Windows.Forms.Button();
+			this.btn_folderToRight = new System.Windows.Forms.Button();
 			this.TreeViewRight = new System.Windows.Forms.TreeView();
 			this.lbl_pathRight = new MetroFramework.Controls.MetroLabel();
 			this.lbl_pathLeft = new MetroFramework.Controls.MetroLabel();
@@ -99,7 +101,7 @@
 			this.tab_controller.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tab_controller.Location = new System.Drawing.Point(23, 60);
 			this.tab_controller.Name = "tab_controller";
-			this.tab_controller.SelectedIndex = 5;
+			this.tab_controller.SelectedIndex = 2;
 			this.tab_controller.Size = new System.Drawing.Size(978, 520);
 			this.tab_controller.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
 			this.tab_controller.TabIndex = 0;
@@ -186,8 +188,8 @@
 			// 
 			// tab_textCompare
 			// 
-			this.tab_textCompare.Controls.Add(this.btn_toLeftFile);
-			this.tab_textCompare.Controls.Add(this.btn_toRightFile);
+			this.tab_textCompare.Controls.Add(this.btn_fileToLeft);
+			this.tab_textCompare.Controls.Add(this.btn_fileToRight);
 			this.tab_textCompare.Controls.Add(this.lbl_fileRight);
 			this.tab_textCompare.Controls.Add(this.lbl_fileLeft);
 			this.tab_textCompare.Controls.Add(this.FileCompareToolbox);
@@ -205,31 +207,31 @@
 			this.tab_textCompare.VerticalScrollbarHighlightOnWheel = false;
 			this.tab_textCompare.VerticalScrollbarSize = 3;
 			// 
-			// btn_toLeftFile
+			// btn_fileToLeft
 			// 
-			this.btn_toLeftFile.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.btn_toLeftFile.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-			this.btn_toLeftFile.Location = new System.Drawing.Point(465, 258);
-			this.btn_toLeftFile.Name = "btn_toLeftFile";
-			this.btn_toLeftFile.Size = new System.Drawing.Size(42, 44);
-			this.btn_toLeftFile.TabIndex = 12;
-			this.btn_toLeftFile.Text = "<<";
-			this.btn_toLeftFile.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-			this.btn_toLeftFile.UseVisualStyleBackColor = false;
-			this.btn_toLeftFile.Click += new System.EventHandler(this.btn_toLeft_Click);
+			this.btn_fileToLeft.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.btn_fileToLeft.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this.btn_fileToLeft.Location = new System.Drawing.Point(465, 258);
+			this.btn_fileToLeft.Name = "btn_fileToLeft";
+			this.btn_fileToLeft.Size = new System.Drawing.Size(42, 44);
+			this.btn_fileToLeft.TabIndex = 12;
+			this.btn_fileToLeft.Text = "<<";
+			this.btn_fileToLeft.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+			this.btn_fileToLeft.UseVisualStyleBackColor = false;
+			this.btn_fileToLeft.Click += new System.EventHandler(this.btn_fileToLeft_Click);
 			// 
-			// btn_toRightFile
+			// btn_fileToRight
 			// 
-			this.btn_toRightFile.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.btn_toRightFile.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-			this.btn_toRightFile.Location = new System.Drawing.Point(465, 188);
-			this.btn_toRightFile.Name = "btn_toRightFile";
-			this.btn_toRightFile.Size = new System.Drawing.Size(42, 44);
-			this.btn_toRightFile.TabIndex = 11;
-			this.btn_toRightFile.Text = ">>";
-			this.btn_toRightFile.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-			this.btn_toRightFile.UseVisualStyleBackColor = false;
-			this.btn_toRightFile.Click += new System.EventHandler(this.btn_toRight_Click);
+			this.btn_fileToRight.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.btn_fileToRight.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this.btn_fileToRight.Location = new System.Drawing.Point(465, 188);
+			this.btn_fileToRight.Name = "btn_fileToRight";
+			this.btn_fileToRight.Size = new System.Drawing.Size(42, 44);
+			this.btn_fileToRight.TabIndex = 11;
+			this.btn_fileToRight.Text = ">>";
+			this.btn_fileToRight.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+			this.btn_fileToRight.UseVisualStyleBackColor = false;
+			this.btn_fileToRight.Click += new System.EventHandler(this.btn_fileToRight_Click);
 			// 
 			// lbl_fileRight
 			// 
@@ -296,6 +298,8 @@
 			// 
 			// tab_folderCompare
 			// 
+			this.tab_folderCompare.Controls.Add(this.btn_folderToLeft);
+			this.tab_folderCompare.Controls.Add(this.btn_folderToRight);
 			this.tab_folderCompare.Controls.Add(this.TreeViewRight);
 			this.tab_folderCompare.Controls.Add(this.lbl_pathRight);
 			this.tab_folderCompare.Controls.Add(this.lbl_pathLeft);
@@ -312,6 +316,32 @@
 			this.tab_folderCompare.VerticalScrollbarBarColor = true;
 			this.tab_folderCompare.VerticalScrollbarHighlightOnWheel = false;
 			this.tab_folderCompare.VerticalScrollbarSize = 3;
+			// 
+			// btn_folderToLeft
+			// 
+			this.btn_folderToLeft.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.btn_folderToLeft.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this.btn_folderToLeft.Location = new System.Drawing.Point(465, 258);
+			this.btn_folderToLeft.Name = "btn_folderToLeft";
+			this.btn_folderToLeft.Size = new System.Drawing.Size(42, 44);
+			this.btn_folderToLeft.TabIndex = 14;
+			this.btn_folderToLeft.Text = "<<";
+			this.btn_folderToLeft.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+			this.btn_folderToLeft.UseVisualStyleBackColor = false;
+			this.btn_folderToLeft.Click += new System.EventHandler(this.btn_folderToLeft_Click);
+			// 
+			// btn_folderToRight
+			// 
+			this.btn_folderToRight.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.btn_folderToRight.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this.btn_folderToRight.Location = new System.Drawing.Point(465, 188);
+			this.btn_folderToRight.Name = "btn_folderToRight";
+			this.btn_folderToRight.Size = new System.Drawing.Size(42, 44);
+			this.btn_folderToRight.TabIndex = 13;
+			this.btn_folderToRight.Text = ">>";
+			this.btn_folderToRight.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+			this.btn_folderToRight.UseVisualStyleBackColor = false;
+			this.btn_folderToRight.Click += new System.EventHandler(this.btn_folderToRight_Click);
 			// 
 			// TreeViewRight
 			// 
@@ -696,8 +726,10 @@
         private System.Windows.Forms.RichTextBox HistoryText;
         private System.Windows.Forms.ToolStripMenuItem Add_LeftFolder;
         private System.Windows.Forms.ToolStripMenuItem Add_RightFolder;
-		private System.Windows.Forms.Button btn_toLeftFile;
-		private System.Windows.Forms.Button btn_toRightFile;
+		private System.Windows.Forms.Button btn_fileToLeft;
+		private System.Windows.Forms.Button btn_fileToRight;
+		private System.Windows.Forms.Button btn_folderToLeft;
+		private System.Windows.Forms.Button btn_folderToRight;
 	}
 }
 

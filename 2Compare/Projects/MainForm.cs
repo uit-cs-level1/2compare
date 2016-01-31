@@ -32,6 +32,18 @@ namespace cs511_g11
 			TextBoxRight.m_textController.Clear();
 
 			m_focusTextBox = TextBoxLeft;
+
+
+			lbl_pathLeft.Text = @"E:\DongDu";
+			TreeViewLeft.Nodes.Clear();
+			LoadTreeView(TreeViewLeft, lbl_pathLeft.Text);
+
+			lbl_pathRight.Text = @"E:\ABC";
+			TreeViewRight.Nodes.Clear();
+			LoadTreeView(TreeViewRight, lbl_pathRight.Text);
+
+			TreeViewCompare(TreeViewLeft, TreeViewRight, lbl_pathLeft.Text, lbl_pathRight.Text);
+			TreeViewCompare(TreeViewRight, TreeViewLeft, lbl_pathRight.Text, lbl_pathLeft.Text);
 		}
 
 		private void SetupRichTextbox()
@@ -311,7 +323,14 @@ namespace cs511_g11
 
 		private void Add_LeftFolder_Click(object sender, EventArgs e)
 		{
-			LoadTreeView(TreeViewLeft);
+			FolderBrowserDialog _dialog = new FolderBrowserDialog();
+			if (_dialog.ShowDialog() == DialogResult.OK)
+			{
+				lbl_pathLeft.Text = _dialog.SelectedPath;
+			}
+
+			TreeViewLeft.Nodes.Clear();
+			LoadTreeView(TreeViewLeft, lbl_pathLeft.Text);
 
 			if (TreeViewRight.Nodes.Count != 0)
 			{
@@ -321,7 +340,14 @@ namespace cs511_g11
 
 		private void Add_RightFolder_Click(object sender, EventArgs e)
 		{
-			LoadTreeView(TreeViewRight);
+			FolderBrowserDialog _dialog = new FolderBrowserDialog();
+			if (_dialog.ShowDialog() == DialogResult.OK)
+			{
+				lbl_pathRight.Text = _dialog.SelectedPath;
+			}
+
+			TreeViewRight.Nodes.Clear();
+			LoadTreeView(TreeViewRight, lbl_pathRight.Text);
 
 			if (TreeViewLeft.Nodes.Count != 0)
 			{
@@ -345,36 +371,22 @@ namespace cs511_g11
 				node.Nodes.Add(file.Name, file.Name);
 			}
 		}
-		private void LoadTreeView(TreeView treeView)
+		private void LoadTreeView(TreeView treeView, string path)
 		{
 			try
 			{
-				FolderBrowserDialog _dialog = new FolderBrowserDialog();
-				if (_dialog.ShowDialog() == DialogResult.OK)
+				DirectoryInfo _rootDirectory = new DirectoryInfo(path);
+				DirectoryInfo[] _directories = _rootDirectory.GetDirectories();
+				FileInfo[] _files = _rootDirectory.GetFiles();
+
+				foreach (DirectoryInfo dic in _directories)
 				{
-					treeView.Nodes.Clear();
-					if (treeView == TreeViewLeft)
-					{
-						lbl_pathLeft.Text = _dialog.SelectedPath;
-					}
-					else
-					{
-						lbl_pathRight.Text = _dialog.SelectedPath;
-					}
+					LoadSubDirectory(path + '/' + dic.Name, treeView.Nodes.Add(dic.Name, dic.Name));
+				}
 
-					DirectoryInfo _rootDirectory = new DirectoryInfo(_dialog.SelectedPath);
-					DirectoryInfo[] _directories = _rootDirectory.GetDirectories();
-					FileInfo[] _files = _rootDirectory.GetFiles();
-
-					foreach (DirectoryInfo dic in _directories)
-					{
-						LoadSubDirectory(_dialog.SelectedPath + '/' + dic.Name, treeView.Nodes.Add(dic.Name, dic.Name));
-					}
-
-					foreach (FileInfo file in _files)
-					{
-						treeView.Nodes.Add(file.Name, file.Name);
-					}
+				foreach (FileInfo file in _files)
+				{
+					treeView.Nodes.Add(file.Name, file.Name);
 				}
 			}
 			catch
@@ -494,9 +506,6 @@ namespace cs511_g11
 			}
 			else
 			{
-				//compare(TreeViewLeft, TreeViewRight);
-				//compare(TreeViewRight, TreeViewLeft);
-
 				TreeViewCompare(TreeViewLeft, TreeViewRight, lbl_pathLeft.Text, lbl_pathRight.Text);
 				TreeViewCompare(TreeViewRight, TreeViewLeft, lbl_pathRight.Text, lbl_pathLeft.Text);
 			}
@@ -506,9 +515,64 @@ namespace cs511_g11
 		{
 			TreeViewLeft.Nodes.Clear();
 			TreeViewRight.Nodes.Clear();
-			lbl_pathLeft.Text = " ";
-			lbl_pathRight.Text = " ";
+			lbl_pathLeft.Text = "PathLeft";
+			lbl_pathRight.Text = "PathRight";
 		}
+
+		private void SyncNodeToTreeView(TreeView treeView, TreeNode treeNode, string soureRootDirectory, string destRootDirectory)
+		{
+			if (Directory.Exists(soureRootDirectory + "\\" + treeNode.FullPath))
+			{
+				if (!Directory.Exists(destRootDirectory + "\\" + treeNode.FullPath))
+					Directory.CreateDirectory(destRootDirectory + "\\" + treeNode.FullPath);
+			}
+
+			foreach (TreeNode _node in treeNode.Nodes)
+			{
+				SyncNodeToTreeView(treeView, _node, soureRootDirectory, destRootDirectory);
+			}
+
+			if (treeNode.Nodes.Count == 0)
+			{
+				if(File.Exists(soureRootDirectory + "\\" + treeNode.FullPath))
+					File.Copy(soureRootDirectory + "\\" + treeNode.FullPath, destRootDirectory + "\\" + treeNode.FullPath, true);
+			}
+		}
+
+		private void btn_folderToRight_Click(object sender, EventArgs e)
+		{
+			foreach (TreeNode _node in TreeViewLeft.Nodes)
+			{
+				SyncNodeToTreeView(TreeViewRight, _node, lbl_pathLeft.Text, lbl_pathRight.Text);
+			}
+
+			TreeViewLeft.Nodes.Clear();
+			LoadTreeView(TreeViewLeft, lbl_pathLeft.Text);
+
+			TreeViewRight.Nodes.Clear();
+			LoadTreeView(TreeViewRight, lbl_pathRight.Text);
+
+			TreeViewCompare(TreeViewLeft, TreeViewRight, lbl_pathLeft.Text, lbl_pathRight.Text);
+			TreeViewCompare(TreeViewRight, TreeViewLeft, lbl_pathRight.Text, lbl_pathLeft.Text);
+		}
+
+		private void btn_folderToLeft_Click(object sender, EventArgs e)
+		{
+			foreach (TreeNode _node in TreeViewRight.Nodes)
+			{
+				SyncNodeToTreeView(TreeViewLeft, _node, lbl_pathRight.Text, lbl_pathLeft.Text);
+			}
+
+			TreeViewLeft.Nodes.Clear();
+			LoadTreeView(TreeViewLeft, lbl_pathLeft.Text);
+
+			TreeViewRight.Nodes.Clear();
+			LoadTreeView(TreeViewRight, lbl_pathRight.Text);
+
+			TreeViewCompare(TreeViewLeft, TreeViewRight, lbl_pathLeft.Text, lbl_pathRight.Text);
+			TreeViewCompare(TreeViewRight, TreeViewLeft, lbl_pathRight.Text, lbl_pathLeft.Text);
+		}
+
 
 		///////////////////////////////////////////////////////////////////////////////
 		// File Compare
@@ -723,7 +787,7 @@ namespace cs511_g11
 			m_focusTextBox = TextBoxRight;
 		}
 
-		private void btn_toRight_Click(object sender, EventArgs e)
+		private void btn_fileToRight_Click(object sender, EventArgs e)
 		{
 			TextBoxRight.Clear();
 			TextBoxRight.m_textController.Clear();
@@ -740,7 +804,7 @@ namespace cs511_g11
 			FileCompare();
 		}
 
-		private void btn_toLeft_Click(object sender, EventArgs e)
+		private void btn_fileToLeft_Click(object sender, EventArgs e)
 		{
 			TextBoxLeft.Clear();
 			TextBoxLeft.m_textController.Clear();
