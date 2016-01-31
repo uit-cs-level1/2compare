@@ -350,8 +350,6 @@
 			this.TreeViewRight.Name = "TreeViewRight";
 			this.TreeViewRight.Size = new System.Drawing.Size(455, 418);
 			this.TreeViewRight.TabIndex = 7;
-			this.TreeViewRight.AfterCollapse += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewRight_AfterCollapse);
-			this.TreeViewRight.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewRight_AfterExpand);
 			this.TreeViewRight.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeViewRight_NodeMouseClick);
 			this.TreeViewRight.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeViewRight_NodeMouseDoubleClick);
 			// 
@@ -382,8 +380,6 @@
 			this.TreeViewLeft.Name = "TreeViewLeft";
 			this.TreeViewLeft.Size = new System.Drawing.Size(455, 418);
 			this.TreeViewLeft.TabIndex = 3;
-			this.TreeViewLeft.AfterCollapse += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewLeft_AfterCollapse);
-			this.TreeViewLeft.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewLeft_AfterExpand);
 			this.TreeViewLeft.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeViewLeft_NodeMouseClick);
 			this.TreeViewLeft.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeViewLeft_NodeMouseDoubleClick);
 			// 

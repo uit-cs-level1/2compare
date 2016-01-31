@@ -169,17 +169,49 @@ namespace cs511_g11
 
 		private void TreeViewLeft_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
 		{
+			if (TreeViewLeft.HitTest(e.Location).Location == TreeViewHitTestLocations.PlusMinus)
+			{
+				TreeNode[] _compareNodes = TreeViewRight.Nodes.Find(e.Node.Name, true);
 
+				foreach (TreeNode _node in _compareNodes)
+				{
+					if (_node.FullPath.CompareTo(e.Node.FullPath) == 0)
+					{
+						if (e.Node.IsExpanded)
+							_node.Expand();
+						else
+							_node.Collapse(false);
+
+						break;
+					}
+				}
+			}
 		}
 
 		private void TreeViewRight_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
 		{
+			if (TreeViewRight.HitTest(e.Location).Location == TreeViewHitTestLocations.PlusMinus)
+			{
+				TreeNode[] _compareNodes = TreeViewLeft.Nodes.Find(e.Node.Name, true);
 
+				foreach (TreeNode _node in _compareNodes)
+				{
+					if (_node.FullPath.CompareTo(e.Node.FullPath) == 0)
+					{
+						if (e.Node.IsExpanded)
+							_node.Expand();
+						else
+							_node.Collapse(false);
+
+						break;
+					}
+				}
+			}
 		}
 
 		private void TreeViewLeft_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
 		{
-			if (e.Node.Nodes.Count == 0)
+			if(File.Exists(lbl_pathLeft.Text + "\\" + e.Node.FullPath))
 			{
 				tab_controller.SelectedIndex = 1;
 				string _leftPath = lbl_pathLeft.Text + "\\" + e.Node.FullPath;
@@ -219,13 +251,30 @@ namespace cs511_g11
 					}
 				}
 
-				FileCompare();
+				CompareFileAndPresentation();
+			}
+			else if(Directory.Exists(lbl_pathLeft.Text + "\\" + e.Node.FullPath))
+			{
+				TreeNode[] _compareNodes = TreeViewRight.Nodes.Find(e.Node.Name, true);
+
+				foreach (TreeNode _node in _compareNodes)
+				{
+					if (_node.FullPath.CompareTo(e.Node.FullPath) == 0)
+					{
+						if(e.Node.IsExpanded)
+							_node.Expand();
+						else
+							_node.Collapse(false);
+
+						break;
+					}
+				}
 			}
 		}
 
 		private void TreeViewRight_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
 		{
-			if (e.Node.Nodes.Count == 0)
+			if (File.Exists(lbl_pathRight.Text + "\\" + e.Node.FullPath))
 			{
 				tab_controller.SelectedIndex = 1;
 				string _leftPath = lbl_pathLeft.Text + "\\" + e.Node.FullPath;
@@ -265,59 +314,24 @@ namespace cs511_g11
 					}
 				}
 
-				FileCompare();
+				CompareFileAndPresentation();
 			}
-		}
-
-		private void TreeViewLeft_AfterExpand(object sender, TreeViewEventArgs e)
-		{
-			try
+			else if (Directory.Exists(lbl_pathRight.Text + "\\" + e.Node.FullPath))
 			{
-				TreeNode _compareNode = TreeViewRight.Nodes.Find(e.Node.Name, true).First();
-				_compareNode.Expand();
-			}
-			catch
-			{
+				TreeNode[] _compareNodes = TreeViewLeft.Nodes.Find(e.Node.Name, true);
 
-			}
-		}
+				foreach (TreeNode _node in _compareNodes)
+				{
+					if (_node.FullPath.CompareTo(e.Node.FullPath) == 0)
+					{
+						if (e.Node.IsExpanded)
+							_node.Expand();
+						else
+							_node.Collapse(false);
 
-		private void TreeViewLeft_AfterCollapse(object sender, TreeViewEventArgs e)
-		{
-			try
-			{
-				TreeNode _compareNode = TreeViewRight.Nodes.Find(e.Node.Name, true).First();
-				_compareNode.Collapse(false);
-			}
-			catch
-			{
-
-			}
-		}
-
-		private void TreeViewRight_AfterExpand(object sender, TreeViewEventArgs e)
-		{
-			try
-			{
-				TreeNode _compareNode = TreeViewLeft.Nodes.Find(e.Node.Name, true).First();
-				_compareNode.Expand();
-			}
-			catch
-			{
-
-			}
-		}
-
-		private void TreeViewRight_AfterCollapse(object sender, TreeViewEventArgs e)
-		{
-			try
-			{
-				TreeNode _compareNode = TreeViewLeft.Nodes.Find(e.Node.Name, true).First();
-				_compareNode.Collapse(false);
-			}
-			catch
-			{
-
+						break;
+					}
+				}
 			}
 		}
 
@@ -409,38 +423,39 @@ namespace cs511_g11
 		{
 			try
 			{
-				TreeNode _compareNode = source.Nodes
-									.Cast<TreeNode>()
-									.Where(r => r.Text == element.Text)
-									.First();
+				TreeNode[] _compareNodes = source.Nodes.Find(element.Name, true);
 
-				TreeNodeCollection _nodes = element.Nodes;
-
-				if (_nodes.Count > 0)
+				foreach (TreeNode _node in _compareNodes)
 				{
-					bool _isSame = true;
-					foreach (TreeNode _node in _nodes)
+					if (_node.FullPath.CompareTo(element.FullPath) == 0)
 					{
-						if(Analyze(_compareNode, _node, sourceRootDirectory, elementRootDirectory) == false)
-							_isSame = false;
-					}
+						TreeNodeCollection _nodes = _node.Nodes;
 
-					if (_isSame == false)
-					{
-						element.ForeColor = Color.Red;
-						_compareNode.ForeColor = Color.Red;
+						if (_nodes.Count > 0)
+						{
+							bool _isSame = true;
+							foreach (TreeNode _subNode in _nodes)
+							{
+								if (Analyze(_node, _subNode, sourceRootDirectory, elementRootDirectory) == false)
+									_isSame = false;
+							}
 
-						return false;
-					}
-				}
-				else if (_compareNode.Nodes.Count == 0)
-				{
-					if (CompareFile(sourceRootDirectory + "\\" + element.FullPath, elementRootDirectory + "\\" + _compareNode.FullPath) == false)
-					{
-						element.ForeColor = Color.Red;
-						_compareNode.ForeColor = Color.Red;
+							if (_isSame == false)
+							{
+								element.ForeColor = Color.Red;
+								_node.ForeColor = Color.Red;
 
-						return false;
+								return false;
+							}
+						}
+						else if (File.Exists(elementRootDirectory + "\\" + _node.FullPath) &&
+							CompareFile(sourceRootDirectory + "\\" + element.FullPath, elementRootDirectory + "\\" + _node.FullPath) == false)
+						{
+							element.ForeColor = Color.Red;
+							_node.ForeColor = Color.Red;
+
+							return false;
+						}
 					}
 				}
 
@@ -460,34 +475,34 @@ namespace cs511_g11
 			{
 				try
 				{
-					TreeNode _compareNode = secondTreeView.Nodes
-									.Cast<TreeNode>()
-									.Where(r => r.Text == _node.Text)
-									.First();
+					TreeNode[] _compareNodes = secondTreeView.Nodes.Find(_node.Name, true);
 
-					TreeNodeCollection _subNodes = _node.Nodes;
-
-					if (_subNodes.Count > 0)
+					foreach (TreeNode _node2 in _compareNodes)
 					{
-						bool _isSame = true;
-						foreach (TreeNode _subNode in _subNodes)
+						if (_node2.FullPath.CompareTo(_node.FullPath) == 0)
 						{
-							if(Analyze(_compareNode, _subNode, firstRootDirectory, secondRootDirectory) == false)
-								_isSame = false;
-						}
+							TreeNodeCollection _subNodes = _node2.Nodes;
 
-						if (_isSame == false)
-						{
-							_node.ForeColor = Color.Red;
-							_compareNode.ForeColor = Color.Red;
-						}
-					}
-					else if (_compareNode.Nodes.Count == 0)
-					{
-						if (CompareFile(firstRootDirectory + "\\" + _node.FullPath, secondRootDirectory + "\\" + _compareNode.FullPath) == false)
-						{
-							_node.ForeColor = Color.Red;
-							_compareNode.ForeColor = Color.Red;
+							if (_subNodes.Count > 0)
+							{
+								bool _isSame = true;
+								foreach (TreeNode _subNode in _subNodes)
+								{
+									if (Analyze(_node2, _subNode, firstRootDirectory, secondRootDirectory) == false)
+										_isSame = false;
+								}
+
+								if (_isSame == false)
+								{
+									_node.ForeColor = Color.Red;
+									_node2.ForeColor = Color.Red;
+								}
+							}
+							else if (CompareFile(firstRootDirectory + "\\" + _node.FullPath, secondRootDirectory + "\\" + _node2.FullPath) == false)
+							{
+								_node.ForeColor = Color.Red;
+								_node2.ForeColor = Color.Red;
+							}
 						}
 					}
 				}
@@ -515,6 +530,7 @@ namespace cs511_g11
 		{
 			TreeViewLeft.Nodes.Clear();
 			TreeViewRight.Nodes.Clear();
+
 			lbl_pathLeft.Text = "PathLeft";
 			lbl_pathRight.Text = "PathRight";
 		}
@@ -532,7 +548,7 @@ namespace cs511_g11
 				SyncNodeToTreeView(treeView, _node, soureRootDirectory, destRootDirectory);
 			}
 
-			if (treeNode.Nodes.Count == 0)
+			if (treeNode.Nodes.Count == 0 && treeNode.ForeColor == Color.Red)
 			{
 				if(File.Exists(soureRootDirectory + "\\" + treeNode.FullPath))
 					File.Copy(soureRootDirectory + "\\" + treeNode.FullPath, destRootDirectory + "\\" + treeNode.FullPath, true);
@@ -581,7 +597,7 @@ namespace cs511_g11
 			TextCompareMenu.Show(FileCompareToolbox, new Point(0, FileCompareToolbox.Height));
 		}
 
-		private void FileCompare()
+		private void CompareFileAndPresentation()
 		{
 			ArrayList _result = FileCompareUtils.CompareFile(TextBoxLeft.m_textController, TextBoxRight.m_textController);
 
@@ -722,7 +738,7 @@ namespace cs511_g11
 								AddHistoryTracking(lbl_fileLeft.Text, lbl_fileRight.Text);
 							}
 
-							FileCompare();
+							CompareFileAndPresentation();
 						}
 					}
 				}
@@ -756,7 +772,7 @@ namespace cs511_g11
 								AddHistoryTracking(lbl_fileLeft.Text, lbl_fileRight.Text);
 							}
 
-							FileCompare();
+							CompareFileAndPresentation();
 						}
 					}
 				}
@@ -774,7 +790,7 @@ namespace cs511_g11
 
 		private void TextCompare_Compare_Click(object sender, EventArgs e)
 		{
-			FileCompare();
+			CompareFileAndPresentation();
 		}
 
 		private void TextBoxLeft_LostFocus(object sender, EventArgs e)
@@ -801,7 +817,7 @@ namespace cs511_g11
 				TextBoxRight.m_textController.AddLine(_content);
 			}
 
-			FileCompare();
+			CompareFileAndPresentation();
 		}
 
 		private void btn_fileToLeft_Click(object sender, EventArgs e)
@@ -818,7 +834,7 @@ namespace cs511_g11
 				TextBoxLeft.m_textController.AddLine(_content);
 			}
 
-			FileCompare();
+			CompareFileAndPresentation();
 		}
 
 
