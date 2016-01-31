@@ -411,12 +411,22 @@ namespace cs511_g11
 
 		bool CompareFile(string path1, string path2)
 		{
-			FileInfo _left = new FileInfo(path1);
-			FileInfo _right = new FileInfo(path2);
+			byte[] file1 = File.ReadAllBytes(path1);
+			byte[] file2 = File.ReadAllBytes(path2);
+			if (file1.Length == file2.Length)
+			{
+				for (int i = 0; i < file1.Length; i++)
+				{
+					if (file1[i] != file2[i])
+					{
+						return false;
+					}
+				}
 
-			if (_left.Length != _right.Length)
-				return false;
-			return true;
+				return true;
+			}
+
+			return false;
 		}
 
 		private bool Analyze(TreeNode source, TreeNode element, string sourceRootDirectory, string elementRootDirectory)
@@ -429,6 +439,9 @@ namespace cs511_g11
 				{
 					if (_node.FullPath.CompareTo(element.FullPath) == 0)
 					{
+						element.ForeColor = Color.Gray;
+						_node.ForeColor = Color.Gray;
+
 						TreeNodeCollection _nodes = _node.Nodes;
 
 						if (_nodes.Count > 0)
@@ -481,6 +494,9 @@ namespace cs511_g11
 					{
 						if (_node2.FullPath.CompareTo(_node.FullPath) == 0)
 						{
+							_node.ForeColor = Color.Gray;
+							_node2.ForeColor = Color.Gray;
+
 							TreeNodeCollection _subNodes = _node2.Nodes;
 
 							if (_subNodes.Count > 0)
